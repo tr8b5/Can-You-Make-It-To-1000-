@@ -11,6 +11,7 @@
 		0B55BDE823FE130700AFB383 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */; };
 		0B55BDF423FF1C9600AFB383 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B55BDF323FF1C9600AFB383 /* Wall.swift */; };
 		0B5E12A92403605800B6B4EE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5E12A82403605700B6B4EE /* Icon.swift */; };
+		0B7E4272253CAE8B00282A23 /* Background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0B7E4270253CABE000282A23 /* Background.mp4 */; };
 		0B8BD17B249E568D0044C0B4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */; };
 		0B8BD17D249E81170044C0B4 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8BD17C249E81170044C0B4 /* Tutorial.swift */; };
 		0B93A7BC240ACB4100AAFF0B /* impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B93A7BB240ACA0700AAFF0B /* impact.ttf */; };
@@ -35,6 +36,7 @@
 		0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Can You Make It To 1000?/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		0B55BDF323FF1C9600AFB383 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		0B5E12A82403605700B6B4EE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		0B7E4270253CABE000282A23 /* Background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Background.mp4; sourceTree = "<group>"; };
 		0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		0B8BD17C249E81170044C0B4 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
 		0B93A7B9240ACA0700AAFF0B /* Impacted.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impacted.ttf; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		0BDD39A723F4909000BD40EB = {
 			isa = PBXGroup;
 			children = (
+				0B7E4270253CABE000282A23 /* Background.mp4 */,
 				0BDD39B223F4909100BD40EB /* Can You Make It To 1000? */,
 				0BDD39B123F4909100BD40EB /* Products */,
 			);
@@ -204,6 +207,7 @@
 			files = (
 				0B93A7BC240ACB4100AAFF0B /* impact.ttf in Resources */,
 				0B93A7BD240ACB4100AAFF0B /* Impacted.ttf in Resources */,
+				0B7E4272253CAE8B00282A23 /* Background.mp4 in Resources */,
 				0B93A7BE240ACB4100AAFF0B /* unicode.impact.ttf in Resources */,
 				0BBB319A2490B11C006734E0 /* Dook.mp3 in Resources */,
 				0BF1F04623FCB2A000EDC9CC /* Can You Make It To 1000 - Game.jpg in Resources */,
