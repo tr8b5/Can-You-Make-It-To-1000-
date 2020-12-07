@@ -10,8 +10,8 @@ import UIKit
 
 struct Shape {
     
-    var image: UIImage
-    var correctImage: Int
+    var image: UIImage //Image
+    var correctImage: Int //Correct Value
     
     init(image: UIImage, correctImage: Int) {
         

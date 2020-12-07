@@ -44,9 +44,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //image = UIImage(named: imageName)
-        
+        //Creates Score Label
         scoreLabel.text = String(game.score)
+        //Defines Colors and
         game.selectColors(repetitions: 3, maxValue: 8)
         
         circleIcon.image = game.sprites[0].icon[game.colorArray[0]]

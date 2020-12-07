@@ -53,15 +53,15 @@ struct GameLogic {
     ]
     
     
-    
+    //Selects 3 unique colors out of the 9 available colors
     mutating func selectColors(repetitions: Int, maxValue: Int) -> [Int] {
         
         guard maxValue >= repetitions else {
                 fatalError("maxValue must be >= repetitions for the colors to be unique")
             }
-
+            //Empties color array
             colorArray = []
-
+            //Creates the array of colors, while not repeating previously picked colors
             for _ in 1...repetitions {
                 var n: Int
                 repeat {
@@ -74,20 +74,24 @@ struct GameLogic {
         
             return colorArray
         }
-        
+        //Randomly selects value out of the 8 colors
         private func random(maxValue: Int) -> Int {
             return Int(arc4random_uniform(UInt32(maxValue + 1)))
         }
         
     
-    
+    //Creates Diamonds
      mutating func selectDiamonds() {
-        
+        //Selects a correct Diamond Value out of 3
         correctDiamondValue = Int.random(in: 0...2)
+        //Selects left diamond color out of the 3 color array values
         leftDiamondValue = colorArray[Int.random(in: 0...2)]
+        //Selects right diamond color out of the 3 color array values
         rightDiamondValue = colorArray[Int.random(in: 0...2)]
+        //Selects bottom diamond color out of the 3 color array values
         bottomDiamondValue = colorArray[Int.random(in: 0...2)]
         
+        //Picks which diamond will be the correct diamond value based off of the random values created above
         if correctDiamondValue == 0 {
             leftDiamondValue = correctValue
         }
@@ -100,37 +104,36 @@ struct GameLogic {
         
     }
     
+    //Picks a shape as the main item
     mutating func pickShape() -> UIImage {
+        //Picks a random shape and random color
         color = colorArray.randomElement()!
         shapeValue = Int.random(in: 0...2)
         correctValue = colorArray[shapeValue]
+        //Selects Shape based on Values selected
         let shape: UIImage = (sprites[shapeValue].shape[color])
         return shape
     }
-    
-    mutating func pickWalls() -> [UIImage] { //Make interger set and  assign it to an array then assign those array values to wallArray in order. Use those values to determine color for shatter animation
+    //Make interger set and assign it to an array then assign those array values to wallArray in order. Use those values to determine color for shatter animation
+    mutating func pickWalls() -> [UIImage] {
         
        while wallColorSet.count < 3 {
          randomIndex = colorArray.randomElement()!
             wallColorSet.insert(sprites[0].correctValue[randomIndex])
-        //print(randomIndex)
         }
         
         wallColorArray = Array(wallColorSet)
         wallArray = [sprites[0].wall[wallColorArray[0]], sprites[0].wall[wallColorArray[1]], sprites[0].bottomWall[wallColorArray[2]]]
-        //print("wallColorArray: ", wallColorArray)
-        //wallArray = Array(wallSet)
-        //wallArray[2] = sprites[0].bottomWall[randomIndex]
         
         return wallArray
     }
-    
+    //Resets wall set
     mutating func resetwallcount() -> Set<Int> {
         wallColorSet = Set<Int>()
         return wallColorSet
     }
     
-    
+    //Changes the timer speed per level
     mutating func difficulty() {
         if score < 50 {
             time = 0.007
@@ -157,6 +160,7 @@ struct GameLogic {
             time = 0.001
         }
     }
+    //updaes score
     mutating func updateScore() {
         score += 5
     }

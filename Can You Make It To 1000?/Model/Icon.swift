@@ -13,7 +13,9 @@ struct Icon {
     var icon: UIImage
     
     init(icon: UIImage) {
+        
         self.icon = icon
+        
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 struct Sprite {
     
-    var shape: [UIImage]
+    var shape: [UIImage] 
     var diamond: [UIImage]
     var wall: [UIImage]
     var bottomWall: [UIImage]
@@ -19,6 +19,7 @@ struct Sprite {
     var color: [String]
     
     init(shape: [UIImage], diamond: [UIImage], wall: [UIImage], bottomWall: [UIImage], icon: [UIImage], correctValue: [Int], color: [String]) {
+        
         self.shape = shape
         self.diamond = diamond
         self.wall = wall
@@ -26,6 +27,7 @@ struct Sprite {
         self.icon = icon
         self.correctValue = correctValue
         self.color = color
+        
     }
     
 }
