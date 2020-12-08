@@ -38,11 +38,16 @@ class GameViewController: UIViewController {
     @IBOutlet weak var wallView: UIView!
     @IBOutlet weak var bottomWallView: UIView!
     
+    @IBOutlet var videoLayer: UIView!
+    var player: AVPlayer!
+    
     var timer = Timer()
     var randomNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playVideo()
         
         //Creates Score Label
         scoreLabel.text = String(game.score)
@@ -72,6 +77,33 @@ class GameViewController: UIViewController {
         
         
     }
+    
+    func playVideo() {
+        
+        guard let path = Bundle.main.path(forResource:"Background", ofType: "mp4") else {
+                return
+        }
+        
+        player = AVPlayer(url: URL(fileURLWithPath: path))
+        player.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.zPosition = -1
+        self.videoLayer.layer.addSublayer(playerLayer)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        player.seek(to: CMTime.zero)
+        
+        player.play()
+        
+        
+    }
+    
+    
+    @objc func playerItemDidReachEnd() {
+        player.seek(to: CMTime.zero)
+    }
+    
     
     @objc func updateScene() {
         
