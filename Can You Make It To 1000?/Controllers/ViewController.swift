@@ -25,6 +25,17 @@ class ViewController: UIViewController {
         playVideo()
         
         // Do any additional setup after loading the view.
+        let attrString = NSAttributedString(
+            string: titleLabel.text!,
+            attributes: [
+                NSAttributedString.Key.strokeColor: UIColor.white,
+                //NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.strokeWidth: -2.0,
+                //NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17.0)
+            ]
+        )
+        titleLabel.attributedText = attrString
+        
     }
     
     func playVideo() {
@@ -55,7 +66,7 @@ class ViewController: UIViewController {
     func removeTitleMenu() {
         titleLabel.removeFromSuperview()
         playButton.removeFromSuperview()
-        tutorialButton.removeFromSuperview()
+        //tutorialButton.removeFromSuperview()
         rankGameButton.removeFromSuperview()
     }
     
