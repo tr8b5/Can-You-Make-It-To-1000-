@@ -29,10 +29,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CAN YOU MAKE IT TO 1000?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oph-NE-hvg">
-                                                <rect key="frame" x="-7" y="0.0" width="414" height="284"/>
+                                                <rect key="frame" x="-17" y="0.0" width="414" height="284"/>
                                                 <color key="tintColor" red="0.14539724684224123" green="0.21239100361029825" blue="0.57647058823529407" alpha="0.29933136188431292" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="60"/>
-                                                <color key="textColor" red="0.11826644090000001" green="0.20851776" blue="0.2242169976" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="57"/>
+                                                <color key="textColor" red="0.10588235294117647" green="0.14901960784313725" blue="0.17254901960784313" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -122,9 +122,9 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiM-OS-vPP">
                                                 <rect key="frame" x="0.0" y="0.0" width="430" height="45"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="45"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -553,7 +553,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bko-dO-pf5"/>
+        <segue reference="cwc-Ik-aov"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Background" width="1242" height="2688"/>
