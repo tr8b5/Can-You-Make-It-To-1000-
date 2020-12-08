@@ -28,8 +28,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-4q-tkb">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CAN YOU MAKE IT TO 1000?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oph-NE-hvg">
-                                                <rect key="frame" x="-17" y="0.0" width="414" height="284"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAN YOU MAKE IT TO 1000?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oph-NE-hvg">
+                                                <rect key="frame" x="-18" y="0.0" width="414" height="284"/>
                                                 <color key="tintColor" red="0.14539724684224123" green="0.21239100361029825" blue="0.57647058823529407" alpha="0.29933136188431292" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="57"/>
                                                 <color key="textColor" red="0.10588235294117647" green="0.14901960784313725" blue="0.17254901960784313" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -37,8 +37,8 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="Oph-NE-hvg" firstAttribute="leading" secondItem="boo-4q-tkb" secondAttribute="leading" id="6n8-7O-sEV"/>
-                                            <constraint firstAttribute="trailing" secondItem="Oph-NE-hvg" secondAttribute="trailing" id="dkf-gH-Okw"/>
+                                            <constraint firstItem="Oph-NE-hvg" firstAttribute="leading" secondItem="boo-4q-tkb" secondAttribute="leading" constant="-18" id="6n8-7O-sEV"/>
+                                            <constraint firstAttribute="trailing" secondItem="Oph-NE-hvg" secondAttribute="trailing" constant="18" id="dkf-gH-Okw"/>
                                             <constraint firstItem="Oph-NE-hvg" firstAttribute="top" secondItem="boo-4q-tkb" secondAttribute="top" id="oye-mz-wuS"/>
                                             <constraint firstAttribute="bottom" secondItem="Oph-NE-hvg" secondAttribute="bottom" id="xFm-Dg-hyq"/>
                                         </constraints>

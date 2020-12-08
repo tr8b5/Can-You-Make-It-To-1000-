@@ -35,7 +35,7 @@ class ViewController: UIViewController {
             attributes: [
                 //bbe1fa
                 NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -2.0,
+                NSAttributedString.Key.strokeWidth: -3.0,
             ]
         )
         titleLabel.attributedText = attrString
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
+            alpha: CGFloat(0.3)
         )
     }
 
