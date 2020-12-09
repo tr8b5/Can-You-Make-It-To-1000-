@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var rankGameButton: UIButton!
+    @IBOutlet weak var soundButton: UIButton!
+    @IBOutlet weak var Tutorial: UIButton!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
@@ -39,6 +41,9 @@ class ViewController: UIViewController {
             ]
         )
         titleLabel.attributedText = attrString
+        
+        soundButton.alpha = 0.25
+        Tutorial.alpha = 0.25
         
     }
     
