@@ -43,6 +43,9 @@
                                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qK-AO-dLz">
                                                                 <rect key="frame" x="94.333333333333329" y="78" width="18.666666666666671" height="19"/>
                                                                 <state key="normal" image="ButtonHolder"/>
+                                                                <connections>
+                                                                    <action selector="soundButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pLY-B0-qOv"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button" translatesAutoresizingMaskIntoConstraints="NO" id="nnc-fR-mTH">
                                                                 <rect key="frame" x="95.333333333333329" y="79" width="16.666666666666671" height="17"/>
@@ -74,6 +77,9 @@
                                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-0v-WrX">
                                                                 <rect key="frame" x="163.33333333333331" y="78" width="19.666666666666657" height="19"/>
                                                                 <state key="normal" image="ButtonHolder"/>
+                                                                <connections>
+                                                                    <action selector="Tutorial:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JTx-kX-9cy"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button" translatesAutoresizingMaskIntoConstraints="NO" id="e17-7l-n3p">
                                                                 <rect key="frame" x="164.66666666666669" y="79" width="17" height="17"/>
@@ -186,7 +192,9 @@
                         <outlet property="playButton" destination="eC7-Zb-fQf" id="KTt-na-mZ2"/>
                         <outlet property="rankGameButton" destination="GfA-dZ-Die" id="EbB-Uu-ECs"/>
                         <outlet property="soundButton" destination="6qK-AO-dLz" id="9Ea-pi-jWP"/>
+                        <outlet property="soundButtonOn" destination="nnc-fR-mTH" id="kqx-sO-xA5"/>
                         <outlet property="titleLabel" destination="Oph-NE-hvg" id="t6w-3T-TXs"/>
+                        <outlet property="tutorialButtonOn" destination="e17-7l-n3p" id="C8n-fi-Soy"/>
                         <outlet property="videoLayer" destination="8bC-Xf-vdC" id="Qbg-f0-duL"/>
                         <segue destination="daE-G2-XX4" kind="presentation" identifier="goToGame" modalPresentationStyle="fullScreen" id="cwc-Ik-aov"/>
                     </connections>

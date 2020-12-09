@@ -17,13 +17,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var rankGameButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
     @IBOutlet weak var Tutorial: UIButton!
+    @IBOutlet weak var soundButtonOn: UIImageView!
+    @IBOutlet weak var tutorialButtonOn: UIImageView!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
+    var gameNumber = 0
+    var tutorialOn: Bool!
+    var soundOn: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Plays background video
         playVideo()
         
         // Do any additional setup after loading the view.
@@ -42,8 +48,24 @@ class ViewController: UIViewController {
         )
         titleLabel.attributedText = attrString
         
+        //Sets transparancy on button holders
         soundButton.alpha = 0.25
         Tutorial.alpha = 0.25
+        
+        //Load game number
+        let defaults: UserDefaults = UserDefaults.standard
+        gameNumber = defaults.value(forKey: "gameNumber") as? Int ?? 0
+        //if game number = 0 make defaults tutorial on
+        if (gameNumber == 0) {
+            tutorialOn = true
+        }
+        //if game number > 0 turn tutorial off
+        if (gameNumber > 0) {
+            tutorialOn = false
+            tutorialButtonOn.removeFromSuperview()
+        }
+        print("Game number: ", gameNumber)
+        
         
     }
     
@@ -77,6 +99,22 @@ class ViewController: UIViewController {
         playButton.removeFromSuperview()
         //tutorialButton.removeFromSuperview()
         rankGameButton.removeFromSuperview()
+    }
+    
+    @IBAction func Tutorial(_ sender: Any) {
+        
+        if tutorialOn == true {
+            tutorialButtonOn.removeFromSuperview()
+        }
+        if tutorialOn == false {
+            
+        }
+        
+    }
+    
+    @IBAction func soundButton(_ sender: Any) {
+        
+        
     }
     
     @IBAction func playButtonClicked(_ sender: Any) {
