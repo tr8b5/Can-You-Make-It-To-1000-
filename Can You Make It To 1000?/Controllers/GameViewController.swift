@@ -178,9 +178,11 @@ class GameViewController: UIViewController {
         bottomGlass.alpha = 0
         bottomWallView.addSubview(bottomGlass)
         
-        shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])")/*, color: game.sprites[0].color[game.wallColorArray[0]]*/ //right
-        shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])")/*, color: game.sprites[0].color[game.wallColorArray[1]]*/ //left
-        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])")/*, color: game.sprites[0].color[game.wallColorArray[2]]*/ 
+        shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
+        
+        shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
+        
+        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
         
     
     }

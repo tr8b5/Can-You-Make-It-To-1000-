@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         
         //Plays background video
         playVideo()
+        MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL1")
         
         // Do any additional setup after loading the view.
         
