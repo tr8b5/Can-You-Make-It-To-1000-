@@ -24,7 +24,7 @@ struct Tutorial {
     var rightDiamondValue = 1
     var bottomDiamondValue = 2
     var correctDiamondValue = 1
-    var score = 0
+    var score = "Welcome to the Can You Make It To 1000?"
     var time: Float = 0.009
     
     var sprites = [
@@ -57,9 +57,10 @@ struct Tutorial {
     //Selects 3 unique colors out of the 9 available colors
     mutating func selectColors(repetitions: Int, maxValue: Int) -> [Int] {
         
-        guard maxValue >= repetitions else {
-                fatalError("maxValue must be >= repetitions for the colors to be unique")
-            }
+//        guard maxValue >= repetitions else {
+//                fatalError("maxValue must be >= repetitions for the colors to be unique")
+//            }
+        
             //Empties color array
             colorArray = []
             //Creates the array of colors, while not repeating previously picked colors
@@ -83,6 +84,12 @@ struct Tutorial {
     
     //Creates Diamonds
      mutating func selectDiamonds() {
+        
+        //Add into title text to the score label
+        
+        
+        
+        
         //Selects a correct Diamond Value out of 3
         correctDiamondValue = Int.random(in: 0...2)
         //Selects left diamond color out of the 3 color array values
@@ -134,36 +141,9 @@ struct Tutorial {
         return wallColorSet
     }
     
-    //Changes the timer speed per level
-    mutating func difficulty() {
-        if score < 50 {
-            time = 0.007
-        }
-        if score >= 50 {
-            time = 0.007
-        }
-        if score >= 100 {
-            time = 0.006
-        }
-        if score >= 150 {
-            time = 0.005
-        }
-        if score >= 200 {
-            time = 0.004
-        }
-        if score >= 300 {
-            time = 0.003
-        }
-        if score >= 400 {
-            time = 0.002
-        }
-        if score >= 500 {
-            time = 0.001
-        }
-    }
     //updaes score
-    mutating func updateScore() {
-        score += 5
+    mutating func updateLabel() {
+       
     }
     
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -119,10 +119,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-4q-tkb" customClass="TitleView">
-                                        <rect key="frame" x="0.0" y="150" width="414" height="146"/>
+                                        <rect key="frame" x="0.0" y="150" width="414" height="202"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAN YOU MAKE IT TO 1000?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oph-NE-hvg">
-                                                <rect key="frame" x="-18" y="40" width="414" height="106"/>
+                                                <rect key="frame" x="-18" y="40" width="414" height="162"/>
                                                 <color key="tintColor" red="0.14539724684224123" green="0.21239100361029825" blue="0.57647058823529407" alpha="0.29933136188431292" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="57"/>
                                                 <color key="textColor" red="0.10588235294117647" green="0.14901960784313725" blue="0.17254901960784313" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -137,13 +137,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIK-2n-xzg" customClass="GameButtonsView">
-                                        <rect key="frame" x="0.0" y="346" width="414" height="550"/>
+                                        <rect key="frame" x="0.0" y="402" width="414" height="494"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Nqq-fo-Pzx">
-                                                <rect key="frame" x="0.0" y="100" width="414" height="250"/>
+                                                <rect key="frame" x="0.0" y="100" width="414" height="194"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC7-Zb-fQf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                                         <color key="backgroundColor" red="0.7983324918486997" green="0.9900163454346822" blue="1" alpha="0.054777840115376654" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                                         <color key="tintColor" red="0.7983324918486997" green="0.9900163454346822" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,7 +155,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GfA-dZ-Die">
-                                                        <rect key="frame" x="0.0" y="150" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="122" width="414" height="72"/>
                                                         <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.05000244544831333" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                                         <state key="normal" title="Share Highscore">
@@ -372,10 +372,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="738"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR2-rb-xyC">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="173"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="142.66666666666666"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME OVER!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fv7-As-SQv">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="173"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="142.66666666666666"/>
                                                 <color key="backgroundColor" red="0.11826644090000001" green="0.20851776" blue="0.2242169976" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="76"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.018721711901257265" alpha="0.30166140928963164" colorSpace="custom" customColorSpace="sRGB"/>
@@ -390,20 +390,20 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Az-77-cXE">
-                                        <rect key="frame" x="0.0" y="227" width="414" height="108"/>
+                                        <rect key="frame" x="0.0" y="196.66666666666663" width="414" height="138.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="yfJ-XZ-d6M">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="138.33333333333334"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRe-xA-0yQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="52.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="67.666666666666671"/>
                                                         <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="45"/>
                                                         <color key="textColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIGHSCORE: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hj-YO-T7K">
-                                                        <rect key="frame" x="0.0" y="55.666666666666686" width="414" height="52.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="70.666666666666657" width="414" height="67.666666666666657"/>
                                                         <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="45"/>
                                                         <color key="textColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
@@ -492,31 +492,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="JjG-Pm-oSY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mki-I9-Ash">
                                 <rect key="frame" x="-5" y="44" width="430" height="736.66666666666663"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pny-uR-Sqv">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pny-uR-Sqv" customClass="labelView">
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iE9-wH-UFA">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Welcome to the hardest game ever..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iRq-zO-evf">
                                                 <rect key="frame" x="0.0" y="0.0" width="430" height="45"/>
-                                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="45"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.055864953049999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.246648119" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="21"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="iE9-wH-UFA" firstAttribute="leading" secondItem="pny-uR-Sqv" secondAttribute="leading" id="0Bp-2L-ieU"/>
-                                            <constraint firstItem="iE9-wH-UFA" firstAttribute="centerX" secondItem="pny-uR-Sqv" secondAttribute="centerX" id="6M2-Uu-5k5"/>
-                                            <constraint firstAttribute="bottom" secondItem="iE9-wH-UFA" secondAttribute="bottom" constant="5" id="7Bv-V0-iu6"/>
-                                            <constraint firstItem="iE9-wH-UFA" firstAttribute="top" secondItem="pny-uR-Sqv" secondAttribute="top" id="syf-Vb-bXA"/>
+                                            <constraint firstItem="iRq-zO-evf" firstAttribute="leading" secondItem="pny-uR-Sqv" secondAttribute="leading" id="4H6-lB-q4o"/>
+                                            <constraint firstAttribute="trailing" secondItem="iRq-zO-evf" secondAttribute="trailing" id="dAM-vb-yRh"/>
+                                            <constraint firstItem="iRq-zO-evf" firstAttribute="top" secondItem="pny-uR-Sqv" secondAttribute="top" id="khp-qA-roe"/>
+                                            <constraint firstAttribute="bottom" secondItem="iRq-zO-evf" secondAttribute="bottom" constant="5" id="yob-q4-msf"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyb-Rj-ewD">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyb-Rj-ewD" customClass="timerView">
                                         <rect key="frame" x="0.0" y="50" width="430" height="58"/>
                                         <subviews>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="fbu-So-8f8">
@@ -619,10 +616,6 @@
                             <constraint firstItem="mki-I9-Ash" firstAttribute="leading" secondItem="QSF-II-18j" secondAttribute="leadingMargin" constant="-25" id="3Na-jH-19u"/>
                             <constraint firstItem="tNw-nW-YEv" firstAttribute="bottom" secondItem="mki-I9-Ash" secondAttribute="bottom" constant="81.333333333333371" id="9ne-iZ-H55"/>
                             <constraint firstItem="mki-I9-Ash" firstAttribute="top" secondItem="tNw-nW-YEv" secondAttribute="top" id="A3F-zY-p3t"/>
-                            <constraint firstAttribute="bottom" secondItem="JjG-Pm-oSY" secondAttribute="bottom" id="EXw-Y6-q2W"/>
-                            <constraint firstItem="JjG-Pm-oSY" firstAttribute="leading" secondItem="tNw-nW-YEv" secondAttribute="leading" id="Fvr-Qz-9xf"/>
-                            <constraint firstItem="JjG-Pm-oSY" firstAttribute="top" secondItem="QSF-II-18j" secondAttribute="top" id="b4f-pK-woU"/>
-                            <constraint firstItem="JjG-Pm-oSY" firstAttribute="trailing" secondItem="tNw-nW-YEv" secondAttribute="trailing" id="tsL-aA-ov5"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -632,15 +625,18 @@
                         <outlet property="bottomWall" destination="5Ia-7m-ztb" id="mpb-bx-l6M"/>
                         <outlet property="bottomWallView" destination="KIy-pa-TAX" id="Apx-yL-v2x"/>
                         <outlet property="circleIcon" destination="eW8-S8-haw" id="FSl-ll-55U"/>
+                        <outlet property="labelView" destination="pny-uR-Sqv" id="2aH-p7-LkT"/>
                         <outlet property="leftDiamond" destination="cM4-N8-MlF" id="oli-1h-wBU"/>
                         <outlet property="leftWall" destination="Qch-Ot-aib" id="NgR-H7-LJc"/>
                         <outlet property="rightDiamond" destination="WxA-Hu-rew" id="i4X-Go-VPd"/>
                         <outlet property="rightWall" destination="mxu-zh-G3m" id="YSw-ga-fRh"/>
-                        <outlet property="scoreLabel" destination="iE9-wH-UFA" id="utf-JO-N3H"/>
                         <outlet property="shape" destination="EZC-Nu-voO" id="8QS-aP-dCu"/>
                         <outlet property="squareIcon" destination="HRw-Oe-sD1" id="xvB-cY-jKc"/>
                         <outlet property="timerBar" destination="fbu-So-8f8" id="dMS-3k-lN3"/>
+                        <outlet property="timerView" destination="iyb-Rj-ewD" id="JNy-fK-WjQ"/>
                         <outlet property="triangleIcon" destination="4Ze-Bo-cJ6" id="e8x-0Z-E7t"/>
+                        <outlet property="tutLabel" destination="iRq-zO-evf" id="RRr-Au-aSe"/>
+                        <outlet property="videoLayer" destination="QSF-II-18j" id="GDJ-72-yLV"/>
                         <outlet property="wallView" destination="XRq-DV-Nia" id="AiY-7I-eET"/>
                     </connections>
                 </viewController>
@@ -650,10 +646,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cwc-Ik-aov"/>
+        <segue reference="bko-dO-pf5"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Background" width="1242" height="2688"/>
         <image name="Button" width="15.666666984558105" height="15.333333015441895"/>
         <image name="ButtonHolder" width="18.666666030883789" height="18.666666030883789"/>
         <image name="Green  Circle" width="66" height="66"/>

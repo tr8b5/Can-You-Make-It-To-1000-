@@ -21,6 +21,7 @@ class MusicPlayer {
             guard let audioPlayer = audioPlayer else { return }
             audioPlayer.numberOfLoops = -1
             audioPlayer.prepareToPlay()
+            audioPlayer.rate = 2.0
             audioPlayer.play()
          } catch {
             print(error)
@@ -31,6 +32,11 @@ class MusicPlayer {
     func stopBackgroundMusic() {
         guard let audioPlayer = audioPlayer else {return}
         audioPlayer.stop()
+    }
+    
+    func speedUpBackgroundMusic() {
+        guard let audioPlayer = audioPlayer else {return}
+        audioPlayer.rate = 5.0
     }
     
 }

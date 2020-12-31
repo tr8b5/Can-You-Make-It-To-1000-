@@ -13,6 +13,7 @@ import AVFoundation
 class TutoialViewController : UIViewController {
     
     var game = GameLogic()
+    var tut = Tutorial()
         var shatterImages: [UIImage] = []
         var shatter1Images: [UIImage] = []
         var shatter2Images: [UIImage] = []
@@ -21,7 +22,7 @@ class TutoialViewController : UIViewController {
         var bottomGlass = UIImageView()
         var audioPlayer: AVAudioPlayer!
 
-        @IBOutlet weak var scoreLabel: UILabel!
+        @IBOutlet weak var tutLabel: UITextView!
         @IBOutlet weak var rightWall: UIImageView!
         @IBOutlet weak var leftWall: UIImageView!
         @IBOutlet weak var bottomWall: UIImageView!
@@ -35,6 +36,11 @@ class TutoialViewController : UIViewController {
         @IBOutlet weak var timerBar: UIProgressView!
         @IBOutlet weak var wallView: UIView!
         @IBOutlet weak var bottomWallView: UIView!
+        @IBOutlet weak var timerView: UIView!
+        @IBOutlet weak var labelView: UIView!
+    
+    @IBOutlet var videoLayer: UIView!
+    var player: AVPlayer!
         
         var timer = Timer()
         var randomNumber: Int = 0
@@ -42,48 +48,75 @@ class TutoialViewController : UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            //image = UIImage(named: imageName)
+            playVideo()
             
-            scoreLabel.text = String(game.score)
-            game.selectColors(repetitions: 3, maxValue: 8)
+            tutLabel.text = String(tut.score)
+            tut.selectColors(repetitions: 3, maxValue: 3)
             
-            circleIcon.image = game.sprites[0].icon[game.colorArray[0]]
-            squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
-            triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
+            circleIcon.image = tut.sprites[0].icon[tut.colorArray[0]]
+            squareIcon.image = tut.sprites[1].icon[tut.colorArray[1]]
+            triangleIcon.image = tut.sprites[2].icon[tut.colorArray[2]]
 
-            
-            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-            self.view.addGestureRecognizer(swipeRight)
-            
-            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-            self.view.addGestureRecognizer(swipeLeft)
-
-            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-            self.view.addGestureRecognizer(swipeDown)
-            
-            
+//            circleIcon.isHidden = true;
+//            squareIcon.isHidden = true;
+//            triangleIcon.isHidden = true;
+            timerView.isHidden = true;
+//            wallView.isHidden = true;
+//            bottomWallView.isHidden = true;
             
             updateScene()
+//
+            
+//            Activate Swipe
+//            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+//            swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+//            self.view.addGestureRecognizer(swipeRight)
+//
+//            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+//            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+//            self.view.addGestureRecognizer(swipeLeft)
+//
+//            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+//            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+//            self.view.addGestureRecognizer(swipeDown)
+            
             
             
         }
+    
+    func playVideo() {
+        
+        guard let path = Bundle.main.path(forResource:"Background", ofType: "mp4") else {
+                return
+        }
+        
+        player = AVPlayer(url: URL(fileURLWithPath: path))
+        player.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.zPosition = -1
+        self.videoLayer.layer.addSublayer(playerLayer)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        player.seek(to: CMTime.zero)
+        
+        player.play()
+        
+        
+    }
+    
+    @objc func playerItemDidReachEnd() {
+        player.seek(to: CMTime.zero)
+    }
         
         @objc func updateScene() {
             
-            if game.score == 500 {
-                circleIcon.removeFromSuperview()
-                squareIcon.removeFromSuperview()
-                triangleIcon.removeFromSuperview()
-            }
             
             timer.invalidate()
             timerBar.progress = 1.0
             
-            shape.image = game.pickShape()
-            game.selectDiamonds()
+            shape.image = tut.pickShape()
+            tut.selectDiamonds()
             
             UIView.animate(withDuration: 0) {
                 self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -113,40 +146,39 @@ class TutoialViewController : UIViewController {
                 self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
             }
             
-            game.difficulty()
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(tut.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
             
-            leftDiamond.image = game.sprites[game.shapeValue].diamond[game.leftDiamondValue]
-            rightDiamond.image = game.sprites[game.shapeValue].diamond[game.rightDiamondValue]
-            bottomDiamond.image = game.sprites[game.shapeValue].diamond[game.bottomDiamondValue]
+            leftDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.leftDiamondValue]
+            rightDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.rightDiamondValue]
+            bottomDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.bottomDiamondValue]
             
-            game.resetwallcount()
+            tut.resetwallcount()
             
-            leftWall.image = game.pickWalls()[0]
-            rightWall.image = game.pickWalls()[1]
-            bottomWall.image = game.pickWalls()[2]
+            leftWall.image = tut.pickWalls()[0]
+            rightWall.image = tut.pickWalls()[1]
+            bottomWall.image = tut.pickWalls()[2]
             
-            rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
+            rightGlass = UIImageView(image: UIImage(named: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[1]])-1.png")!)
             rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
             rightGlass.layer.zPosition = -1
             rightGlass.alpha = 0
             wallView.addSubview(rightGlass)
             
-            leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
+            leftGlass = UIImageView(image: UIImage(named: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[0]])-1.png")!)
             leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
             leftGlass.layer.zPosition = -1
             leftGlass.alpha = 0
             wallView.addSubview(leftGlass)
             
-            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
+            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(tut.sprites[0].color[tut.wallColorArray[2]])-0.png"))
             bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
             bottomGlass.layer.zPosition = -1
             bottomGlass.alpha = 0
             bottomWallView.addSubview(bottomGlass)
             
-            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])")/*, color: game.sprites[0].color[game.wallColorArray[0]]*/ //right
-            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])")/*, color: game.sprites[0].color[game.wallColorArray[1]]*/ //left
-            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])")/*, color: game.sprites[0].color[game.wallColorArray[2]]*/
+            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[1]])")/*, color: tut.sprites[0].color[tut.wallColorArray[0]]*/ //right
+            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[0]])")/*, color: tut.sprites[0].color[tut.wallColorArray[1]]*/ //left
+            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(tut.sprites[0].color[tut.wallColorArray[2]])")/*, color: tut.sprites[0].color[tut.wallColorArray[2]]*/
             
         
         }
@@ -164,11 +196,29 @@ class TutoialViewController : UIViewController {
                 gameOver()
             }
         }
+    
+    func tutorialActions () {
+        
+    }
+    
+    func playTutorial () {
+        
+        //reduce the hight of the background box
+        
+        //Add a tap to continue button
+        
+        //Add a 3 second countdown
+        
+        //Run next set of instructions in array
+        
+        
+    }
         
         func updateLabel() {
             self.updateScene()
-            game.updateScore()
-            scoreLabel.text = String(game.score)
+            tut.updateLabel()
+            tutLabel.text = String(tut.score)
+            tutLabel.font = tutLabel.font!.withSize(21)
         }
         
         func gameOver() {
@@ -209,7 +259,7 @@ class TutoialViewController : UIViewController {
                     UIView.animate(withDuration: 0.1) {
                         self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
                     }
-                    if self.game.correctValue == self.game.rightDiamondValue {
+                    if self.tut.correctValue == self.tut.rightDiamondValue {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.animate(imageView: self.rightGlass, images: self.shatter2Images)
                             self.rightGlass.alpha = 1
@@ -225,7 +275,7 @@ class TutoialViewController : UIViewController {
                         self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if self.game.correctValue == self.game.bottomDiamondValue {
+                        if self.tut.correctValue == self.tut.bottomDiamondValue {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 self.animate(imageView: self.bottomGlass, images: self.shatter1Images)
                                 self.bottomGlass.alpha = 1
@@ -242,7 +292,7 @@ class TutoialViewController : UIViewController {
                         self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if self.game.correctValue == self.game.leftDiamondValue {
+                    if self.tut.correctValue == self.tut.leftDiamondValue {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.animate(imageView: self.leftGlass, images: self.shatterImages)
                             self.leftGlass.alpha = 1
@@ -267,7 +317,7 @@ class TutoialViewController : UIViewController {
                if segue.identifier == "gotToGameOver" {
                    
                    let destinationVC = segue.destination as! GameOverViewController
-                destinationVC.score = game.score
+                //destinationVC.score = tut.score
                }
            }
     }

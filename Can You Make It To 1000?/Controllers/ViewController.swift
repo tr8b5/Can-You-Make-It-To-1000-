@@ -31,7 +31,8 @@ class ViewController: UIViewController {
         
         //Plays background video
         playVideo()
-        MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL1")
+        MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+        MusicPlayer.shared.speedUpBackgroundMusic()
         
         // Do any additional setup after loading the view.
         
@@ -130,6 +131,7 @@ class ViewController: UIViewController {
     
     @IBAction func rankGameButtonClicked(_ sender: Any) {
         removeTitleMenu()
+        self.performSegue(withIdentifier: "goToTutorial", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

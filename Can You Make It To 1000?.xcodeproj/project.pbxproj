@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B29A5D1259347FC00A92D8F /* APPSBYWILL1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B29A5CF259347F900A92D8F /* APPSBYWILL1.mp3 */; };
+		0B29A5D2259347FC00A92D8F /* APPSBYWILL2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B29A5D0259347FC00A92D8F /* APPSBYWILL2.mp3 */; };
 		0B4C05E62581D085004BA86B /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C05E52581D085004BA86B /* MusicPlayer.swift */; };
-		0B4C05EA2581D317004BA86B /* APPSBYWILL1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B4C05E82581D316004BA86B /* APPSBYWILL1.mp3 */; };
-		0B4C05EB2581D317004BA86B /* APPSBYWILL2 (PRODBY.NAJ'$).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B4C05E92581D317004BA86B /* APPSBYWILL2 (PRODBY.NAJ'$).mp3 */; };
 		0B55A984240B2A7A00A2057D /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B55A983240B2A7A00A2057D /* GameOverViewController.swift */; };
 		0B55BDE823FE130700AFB383 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */; };
 		0B55BDF423FF1C9600AFB383 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B55BDF323FF1C9600AFB383 /* Wall.swift */; };
@@ -35,9 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B29A5CF259347F900A92D8F /* APPSBYWILL1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = APPSBYWILL1.mp3; sourceTree = "<group>"; };
+		0B29A5D0259347FC00A92D8F /* APPSBYWILL2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = APPSBYWILL2.mp3; sourceTree = "<group>"; };
 		0B4C05E52581D085004BA86B /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
-		0B4C05E82581D316004BA86B /* APPSBYWILL1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = APPSBYWILL1.mp3; sourceTree = "<group>"; };
-		0B4C05E92581D317004BA86B /* APPSBYWILL2 (PRODBY.NAJ'$).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "APPSBYWILL2 (PRODBY.NAJ'$).mp3"; sourceTree = "<group>"; };
 		0B55A983240B2A7A00A2057D /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Can You Make It To 1000?/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		0B55BDF323FF1C9600AFB383 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
@@ -78,8 +78,8 @@
 		0B93A7B8240AC9F600AAFF0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0B4C05E82581D316004BA86B /* APPSBYWILL1.mp3 */,
-				0B4C05E92581D317004BA86B /* APPSBYWILL2 (PRODBY.NAJ'$).mp3 */,
+				0B29A5CF259347F900A92D8F /* APPSBYWILL1.mp3 */,
+				0B29A5D0259347FC00A92D8F /* APPSBYWILL2.mp3 */,
 				0BBB31992490B11C006734E0 /* Dook.mp3 */,
 				0B93A7BB240ACA0700AAFF0B /* impact.ttf */,
 				0B93A7B9240ACA0700AAFF0B /* Impacted.ttf */,
@@ -215,16 +215,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B93A7BC240ACB4100AAFF0B /* impact.ttf in Resources */,
+				0B29A5D1259347FC00A92D8F /* APPSBYWILL1.mp3 in Resources */,
 				0B93A7BD240ACB4100AAFF0B /* Impacted.ttf in Resources */,
 				0B7E4272253CAE8B00282A23 /* Background.mp4 in Resources */,
 				0B93A7BE240ACB4100AAFF0B /* unicode.impact.ttf in Resources */,
+				0B29A5D2259347FC00A92D8F /* APPSBYWILL2.mp3 in Resources */,
 				0BBB319A2490B11C006734E0 /* Dook.mp3 in Resources */,
 				0BF1F04623FCB2A000EDC9CC /* Can You Make It To 1000 - Game.jpg in Resources */,
 				0BDD39BD23F490A300BD40EB /* Assets.xcassets in Resources */,
 				0B55BDE823FE130700AFB383 /* LaunchScreen.storyboard in Resources */,
 				0BDD39BB23F4909100BD40EB /* Main.storyboard in Resources */,
-				0B4C05EA2581D317004BA86B /* APPSBYWILL1.mp3 in Resources */,
-				0B4C05EB2581D317004BA86B /* APPSBYWILL2 (PRODBY.NAJ'$).mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
