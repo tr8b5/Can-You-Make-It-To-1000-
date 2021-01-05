@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="unicode.impact.ttf">
+        <array key="impact.ttf">
             <string>Impact</string>
         </array>
     </customFonts>
@@ -498,19 +498,28 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pny-uR-Sqv" customClass="labelView">
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="50"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Welcome to the hardest game ever..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iRq-zO-evf">
-                                                <rect key="frame" x="0.0" y="0.0" width="430" height="45"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNW-tX-hkh" customClass="tutLabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="430" height="27"/>
                                                 <color key="backgroundColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.055864953049999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="textColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.246648119" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="21"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="430" id="p1j-Vc-d0U"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Welcome to the hardest game ever...">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.42336714269999998" green="0.89707440140000005" blue="0.8999788165" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="22" name="Impact"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="iRq-zO-evf" firstAttribute="leading" secondItem="pny-uR-Sqv" secondAttribute="leading" id="4H6-lB-q4o"/>
-                                            <constraint firstAttribute="trailing" secondItem="iRq-zO-evf" secondAttribute="trailing" id="dAM-vb-yRh"/>
-                                            <constraint firstItem="iRq-zO-evf" firstAttribute="top" secondItem="pny-uR-Sqv" secondAttribute="top" id="khp-qA-roe"/>
-                                            <constraint firstAttribute="bottom" secondItem="iRq-zO-evf" secondAttribute="bottom" constant="5" id="yob-q4-msf"/>
+                                            <constraint firstItem="PNW-tX-hkh" firstAttribute="top" secondItem="pny-uR-Sqv" secondAttribute="top" id="GKe-yy-pxH"/>
+                                            <constraint firstItem="PNW-tX-hkh" firstAttribute="leading" secondItem="pny-uR-Sqv" secondAttribute="leading" id="ZLg-cS-uAr"/>
+                                            <constraint firstAttribute="trailing" secondItem="PNW-tX-hkh" secondAttribute="trailing" id="x4D-83-rcG"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyb-Rj-ewD" customClass="timerView">
@@ -635,7 +644,7 @@
                         <outlet property="timerBar" destination="fbu-So-8f8" id="dMS-3k-lN3"/>
                         <outlet property="timerView" destination="iyb-Rj-ewD" id="JNy-fK-WjQ"/>
                         <outlet property="triangleIcon" destination="4Ze-Bo-cJ6" id="e8x-0Z-E7t"/>
-                        <outlet property="tutLabel" destination="iRq-zO-evf" id="RRr-Au-aSe"/>
+                        <outlet property="tutLabel" destination="PNW-tX-hkh" id="8fq-OH-fPi"/>
                         <outlet property="videoLayer" destination="QSF-II-18j" id="GDJ-72-yLV"/>
                         <outlet property="wallView" destination="XRq-DV-Nia" id="AiY-7I-eET"/>
                     </connections>

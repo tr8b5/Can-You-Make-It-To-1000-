@@ -22,7 +22,7 @@ class TutoialViewController : UIViewController {
         var bottomGlass = UIImageView()
         var audioPlayer: AVAudioPlayer!
 
-        @IBOutlet weak var tutLabel: UITextView!
+        @IBOutlet weak var tutLabel: UILabel!
         @IBOutlet weak var rightWall: UIImageView!
         @IBOutlet weak var leftWall: UIImageView!
         @IBOutlet weak var bottomWall: UIImageView!
@@ -30,7 +30,7 @@ class TutoialViewController : UIViewController {
         @IBOutlet weak var leftDiamond: UIImageView!
         @IBOutlet weak var rightDiamond: UIImageView!
         @IBOutlet weak var bottomDiamond: UIImageView!
-        @IBOutlet weak var circleIcon: UIImageView!
+        @IBOutlet var circleIcon: UIImageView!
         @IBOutlet weak var squareIcon: UIImageView!
         @IBOutlet weak var triangleIcon: UIImageView!
         @IBOutlet weak var timerBar: UIProgressView!
@@ -41,6 +41,7 @@ class TutoialViewController : UIViewController {
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
+    var label = UILabel()
         
         var timer = Timer()
         var randomNumber: Int = 0
@@ -50,8 +51,10 @@ class TutoialViewController : UIViewController {
             
             playVideo()
             
-            tutLabel.text = String(tut.score)
-            tut.selectColors(repetitions: 3, maxValue: 3)
+            tutLabel.text = tut.tutorialStep
+            tutLabel.lineBreakMode = .byWordWrapping
+            tutLabel.numberOfLines = 0
+            tut.selectColors(repetitions: 3, maxValue: 8)
             
             circleIcon.image = tut.sprites[0].icon[tut.colorArray[0]]
             squareIcon.image = tut.sprites[1].icon[tut.colorArray[1]]
@@ -60,25 +63,26 @@ class TutoialViewController : UIViewController {
 //            circleIcon.isHidden = true;
 //            squareIcon.isHidden = true;
 //            triangleIcon.isHidden = true;
-            timerView.isHidden = true;
 //            wallView.isHidden = true;
 //            bottomWallView.isHidden = true;
             
             updateScene()
+            playTutorial()
+            
 //
             
 //            Activate Swipe
-//            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-//            swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-//            self.view.addGestureRecognizer(swipeRight)
-//
-//            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-//            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-//            self.view.addGestureRecognizer(swipeLeft)
-//
-//            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-//            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-//            self.view.addGestureRecognizer(swipeDown)
+            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+            self.view.addGestureRecognizer(swipeRight)
+
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+            self.view.addGestureRecognizer(swipeLeft)
+
+            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+            self.view.addGestureRecognizer(swipeDown)
             
             
             
@@ -111,7 +115,6 @@ class TutoialViewController : UIViewController {
         
         @objc func updateScene() {
             
-            
             timer.invalidate()
             timerBar.progress = 1.0
             
@@ -122,6 +125,7 @@ class TutoialViewController : UIViewController {
                 self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.shape.transform = CGAffineTransform(scaleX: 0, y: 0)
             }
+            
             UIView.animate(withDuration: 0) {
                 self.leftWall.transform = CGAffineTransform(translationX: 0, y: -1000)
                 self.rightWall.transform = CGAffineTransform(translationX: 0, y: -1000)
@@ -146,7 +150,7 @@ class TutoialViewController : UIViewController {
                 self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
             }
             
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(tut.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+            //timer = Timer.scheduledTimer(timeInterval: TimeInterval(tut.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
             
             leftDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.leftDiamondValue]
             rightDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.rightDiamondValue]
@@ -179,9 +183,13 @@ class TutoialViewController : UIViewController {
             shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[1]])")/*, color: tut.sprites[0].color[tut.wallColorArray[0]]*/ //right
             shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[0]])")/*, color: tut.sprites[0].color[tut.wallColorArray[1]]*/ //left
             shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(tut.sprites[0].color[tut.wallColorArray[2]])")/*, color: tut.sprites[0].color[tut.wallColorArray[2]]*/
-            
         
+            
+            
         }
+    
+    
+    
         
         func playSound(breakGlassAudio: String) {
             let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
@@ -199,13 +207,46 @@ class TutoialViewController : UIViewController {
     
     func tutorialActions () {
         
+        //create continue label
+        
+        if (tut.tutNumber == 0) {
+            
+        //timerView.isHidden = true;
+            
+        fadeOut(finished: true)
+        
+        circleIcon = UIImageView(image: tut.sprites[0].icon[tut.colorArray[0]])
+        circleIcon.frame = CGRect(x: 0, y: 0, width: 700, height: 700)
+        circleIcon.layer.zPosition = -1
+        circleIcon.alpha = 0
+        wallView.addSubview(circleIcon)
+            
+        }
+        
+        
     }
+
+    
     
     func playTutorial () {
         
-        //reduce the hight of the background box
+        //reduce the hight of the background box\\
+        
+//        timerBar.removeFromSuperview()
+//        circleIcon.removeFromSuperview()
+//        squareIcon.removeFromSuperview()
+//        triangleIcon.removeFromSuperview()
+//        leftWall.removeFromSuperview()
+//        rightWall.removeFromSuperview()
+//        bottomWall.removeFromSuperview()
+//        shape.removeFromSuperview()
+//        leftDiamond.removeFromSuperview()
+//        rightDiamond.removeFromSuperview()
+//        bottomDiamond.removeFromSuperview()
+//        timerView.isHidden = false;
         
         //Add a tap to continue button
+        tutorialActions()
         
         //Add a 3 second countdown
         
@@ -216,9 +257,8 @@ class TutoialViewController : UIViewController {
         
         func updateLabel() {
             self.updateScene()
-            tut.updateLabel()
-            tutLabel.text = String(tut.score)
-            tutLabel.font = tutLabel.font!.withSize(21)
+            //tutLabel.text = tut.tutorialStep
+            //tutLabel.font = tutLabel.font!.withSize(21)
         }
         
         func gameOver() {
@@ -251,6 +291,29 @@ class TutoialViewController : UIViewController {
                 imageView.removeFromSuperview()
             }
         }
+    
+    func fadeOut(finished: Bool) {
+        UIView.animate(withDuration: 1,
+                delay: 0,
+                options: [UIView.AnimationOptions.curveEaseInOut],
+                animations: {
+                    self.leftDiamond.alpha = 0
+                    self.rightDiamond.alpha = 0
+                    self.bottomDiamond.alpha = 0
+                  },
+                completion: self.fadeIn)
+    }
+    func fadeIn(finished: Bool) {
+        UIView.animate(withDuration: 1,
+                delay: 0,
+                options: [UIView.AnimationOptions.curveEaseInOut],
+                animations: {
+                    self.leftDiamond.alpha = 1
+                    self.rightDiamond.alpha = 1
+                    self.bottomDiamond.alpha = 1
+                  },
+                completion: self.fadeOut)
+    }
         
         @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
             if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -311,6 +374,15 @@ class TutoialViewController : UIViewController {
                 }
             }
         }
+    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        label.alpha = 0;
+//        tut.tutorialStep = "Swipe"
+//        tutLabel.text = tut.tutorialStep
+//
+//
+//           }
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                

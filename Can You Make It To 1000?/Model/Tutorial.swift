@@ -24,8 +24,10 @@ struct Tutorial {
     var rightDiamondValue = 1
     var bottomDiamondValue = 2
     var correctDiamondValue = 1
-    var score = "Welcome to the Can You Make It To 1000?"
+    var score = 0
+    var tutorialStep = "Swipe the shape to the diamond with same color as the shape icon"
     var time: Float = 0.009
+    var tutNumber = 0;
     
     var sprites = [
         Sprite(shape: [#imageLiteral(resourceName: "Blue  Circle"), #imageLiteral(resourceName: "Black  Circle"), #imageLiteral(resourceName: "Green  Circle"), #imageLiteral(resourceName: "Grey  Circle"), #imageLiteral(resourceName: "Red  Circle"), #imageLiteral(resourceName: "Purple  Circle"), #imageLiteral(resourceName: "White  Circle"), #imageLiteral(resourceName: "Yellow  Circle"), #imageLiteral(resourceName: "Orange  Circle")],
@@ -57,10 +59,10 @@ struct Tutorial {
     //Selects 3 unique colors out of the 9 available colors
     mutating func selectColors(repetitions: Int, maxValue: Int) -> [Int] {
         
-//        guard maxValue >= repetitions else {
-//                fatalError("maxValue must be >= repetitions for the colors to be unique")
-//            }
-        
+        if (tutNumber == 0) {
+            colorArray = [0,4,7]
+        }
+        if (tutNumber == 5) {
             //Empties color array
             colorArray = []
             //Creates the array of colors, while not repeating previously picked colors
@@ -71,11 +73,13 @@ struct Tutorial {
                 } while colorArray.contains(n)
                 colorArray.append(n)
             }
+        }
         
         print(colorArray)
         
             return colorArray
         }
+    
         //Randomly selects value out of the 8 colors
         private func random(maxValue: Int) -> Int {
             return Int(arc4random_uniform(UInt32(maxValue + 1)))
@@ -85,29 +89,31 @@ struct Tutorial {
     //Creates Diamonds
      mutating func selectDiamonds() {
         
-        //Add into title text to the score label
-        
-        
-        
-        
-        //Selects a correct Diamond Value out of 3
-        correctDiamondValue = Int.random(in: 0...2)
-        //Selects left diamond color out of the 3 color array values
-        leftDiamondValue = colorArray[Int.random(in: 0...2)]
-        //Selects right diamond color out of the 3 color array values
-        rightDiamondValue = colorArray[Int.random(in: 0...2)]
-        //Selects bottom diamond color out of the 3 color array values
-        bottomDiamondValue = colorArray[Int.random(in: 0...2)]
-        
-        //Picks which diamond will be the correct diamond value based off of the random values created above
-        if correctDiamondValue == 0 {
+        if (tutNumber == 0) {
             leftDiamondValue = correctValue
-        }
-        if correctDiamondValue == 1 {
             rightDiamondValue = correctValue
-        }
-        if correctDiamondValue == 2 {
             bottomDiamondValue = correctValue
+        }
+        if (tutNumber == 5) {
+            //Selects a correct Diamond Value out of 3
+            correctDiamondValue = Int.random(in: 0...2)
+            //Selects left diamond color out of the 3 color array values
+            leftDiamondValue = colorArray[Int.random(in: 0...2)]
+            //Selects right diamond color out of the 3 color array values
+            rightDiamondValue = colorArray[Int.random(in: 0...2)]
+            //Selects bottom diamond color out of the 3 color array values
+            bottomDiamondValue = colorArray[Int.random(in: 0...2)]
+            
+            //Picks which diamond will be the correct diamond value based off of the random values created above
+            if correctDiamondValue == 0 {
+                leftDiamondValue = correctValue
+            }
+            if correctDiamondValue == 1 {
+                rightDiamondValue = correctValue
+            }
+            if correctDiamondValue == 2 {
+                bottomDiamondValue = correctValue
+            }
         }
         
     }
