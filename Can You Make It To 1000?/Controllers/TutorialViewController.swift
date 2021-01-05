@@ -67,7 +67,7 @@ class TutoialViewController : UIViewController {
 //            bottomWallView.isHidden = true;
             
             updateScene()
-            playTutorial()
+            tutorialActions()
             
 //
             
@@ -186,6 +186,7 @@ class TutoialViewController : UIViewController {
         
             
             
+            
         }
     
     
@@ -207,57 +208,16 @@ class TutoialViewController : UIViewController {
     
     func tutorialActions () {
         
-        //create continue label
-        
-        if (tut.tutNumber == 0) {
-            
-        //timerView.isHidden = true;
-            
         fadeOut(finished: true)
         
-        circleIcon = UIImageView(image: tut.sprites[0].icon[tut.colorArray[0]])
-        circleIcon.frame = CGRect(x: 0, y: 0, width: 700, height: 700)
-        circleIcon.layer.zPosition = -1
-        circleIcon.alpha = 0
-        wallView.addSubview(circleIcon)
-            
-        }
-        
-        
-    }
-
-    
-    
-    func playTutorial () {
-        
-        //reduce the hight of the background box\\
-        
-//        timerBar.removeFromSuperview()
-//        circleIcon.removeFromSuperview()
-//        squareIcon.removeFromSuperview()
-//        triangleIcon.removeFromSuperview()
-//        leftWall.removeFromSuperview()
-//        rightWall.removeFromSuperview()
-//        bottomWall.removeFromSuperview()
-//        shape.removeFromSuperview()
-//        leftDiamond.removeFromSuperview()
-//        rightDiamond.removeFromSuperview()
-//        bottomDiamond.removeFromSuperview()
-//        timerView.isHidden = false;
-        
-        //Add a tap to continue button
-        tutorialActions()
-        
-        //Add a 3 second countdown
-        
-        //Run next set of instructions in array
         
         
     }
         
         func updateLabel() {
             self.updateScene()
-            //tutLabel.text = tut.tutorialStep
+            tut.updateLabel()
+            tutLabel.text = tut.tutorialStep
             //tutLabel.font = tutLabel.font!.withSize(21)
         }
         
@@ -292,27 +252,52 @@ class TutoialViewController : UIViewController {
             }
         }
     
+    
     func fadeOut(finished: Bool) {
-        UIView.animate(withDuration: 1,
+        if (tut.tutNumber > 2) {
+            leftDiamond.alpha = 1
+            rightDiamond.alpha = 1
+            bottomDiamond.alpha = 1
+        } else {
+            UIView.animate(withDuration: 0.5,
                 delay: 0,
                 options: [UIView.AnimationOptions.curveEaseInOut],
                 animations: {
+                    if (self.tut.leftDiamondValue == self.tut.correctValue) {
                     self.leftDiamond.alpha = 0
+                    }
+                    if (self.tut.rightDiamondValue == self.tut.correctValue) {
                     self.rightDiamond.alpha = 0
+                    }
+                    if (self.tut.bottomDiamondValue == self.tut.correctValue) {
                     self.bottomDiamond.alpha = 0
+                    }
                   },
                 completion: self.fadeIn)
+        }
     }
     func fadeIn(finished: Bool) {
-        UIView.animate(withDuration: 1,
+        if (tut.tutNumber > 2) {
+            leftDiamond.alpha = 1
+            rightDiamond.alpha = 1
+            bottomDiamond.alpha = 1
+        } else {
+            UIView.animate(withDuration: 0.5,
                 delay: 0,
                 options: [UIView.AnimationOptions.curveEaseInOut],
                 animations: {
+                    if (self.tut.leftDiamondValue == self.tut.correctValue) {
                     self.leftDiamond.alpha = 1
+                    }
+                    if (self.tut.rightDiamondValue == self.tut.correctValue) {
                     self.rightDiamond.alpha = 1
+                    }
+                    if (self.tut.bottomDiamondValue == self.tut.correctValue) {
                     self.bottomDiamond.alpha = 1
+                    }
                   },
                 completion: self.fadeOut)
+        }
     }
         
         @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -326,11 +311,12 @@ class TutoialViewController : UIViewController {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.animate(imageView: self.rightGlass, images: self.shatter2Images)
                             self.rightGlass.alpha = 1
+                            self.tut.tutNumber += 1
                             self.updateLabel()
                             self.playSound(breakGlassAudio: "Dook")
                         }
                     } else {
-                        self.gameOver()
+                        //self.gameOver()
                     }
                     //print("Swiped right")
                 case UISwipeGestureRecognizer.Direction.down:
@@ -342,11 +328,12 @@ class TutoialViewController : UIViewController {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 self.animate(imageView: self.bottomGlass, images: self.shatter1Images)
                                 self.bottomGlass.alpha = 1
+                                self.tut.tutNumber += 1
                                 self.updateLabel()
                                 self.playSound(breakGlassAudio: "Dook")
                             }
                             } else {
-                            self.gameOver()
+                            //self.gameOver()
                             }
                         }
                     //print("Swiped down")
@@ -359,11 +346,12 @@ class TutoialViewController : UIViewController {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.animate(imageView: self.leftGlass, images: self.shatterImages)
                             self.leftGlass.alpha = 1
+                            self.tut.tutNumber += 1
                             self.updateLabel()
                             self.playSound(breakGlassAudio: "Dook")
                         }
                         } else {
-                        self.gameOver()
+                        //self.gameOver()
                         }
                     }
                     //print("Swiped left")

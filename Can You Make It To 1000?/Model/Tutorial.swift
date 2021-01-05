@@ -25,7 +25,7 @@ struct Tutorial {
     var bottomDiamondValue = 2
     var correctDiamondValue = 1
     var score = 0
-    var tutorialStep = "Swipe the shape to the diamond with same color as the shape icon"
+    var tutorialStep = "Swipe the circle to the diamond with same color as its icon"
     var time: Float = 0.009
     var tutNumber = 0;
     
@@ -59,10 +59,10 @@ struct Tutorial {
     //Selects 3 unique colors out of the 9 available colors
     mutating func selectColors(repetitions: Int, maxValue: Int) -> [Int] {
         
-        if (tutNumber == 0) {
+        if (tutNumber < 3) {
             colorArray = [0,4,7]
         }
-        if (tutNumber == 5) {
+        if (tutNumber > 2) {
             //Empties color array
             colorArray = []
             //Creates the array of colors, while not repeating previously picked colors
@@ -89,12 +89,12 @@ struct Tutorial {
     //Creates Diamonds
      mutating func selectDiamonds() {
         
-        if (tutNumber == 0) {
+        if (tutNumber < 3) {
             leftDiamondValue = correctValue
             rightDiamondValue = correctValue
             bottomDiamondValue = correctValue
         }
-        if (tutNumber == 5) {
+        if (tutNumber > 2) {
             //Selects a correct Diamond Value out of 3
             correctDiamondValue = Int.random(in: 0...2)
             //Selects left diamond color out of the 3 color array values
@@ -122,13 +122,24 @@ struct Tutorial {
     mutating func pickShape() -> UIImage {
         //Picks a random shape and random color
         color = colorArray.randomElement()!
-        shapeValue = Int.random(in: 0...2)
+        if (tutNumber == 0) {
+            shapeValue = 0
+        }
+        if (tutNumber == 1) {
+            shapeValue = 1
+        }
+        if (tutNumber == 2) {
+            shapeValue = 2
+        }
+        if (tutNumber > 2) {
+            shapeValue = Int.random(in: 0...2)
+        }
         correctValue = colorArray[shapeValue]
         //Selects Shape based on Values selected
         let shape: UIImage = (sprites[shapeValue].shape[color])
         return shape
     }
-    //Make interger set and assign it to an array then assign those array values to wallArray in order. Use those values to determine color for shatter animation
+    //Make interger set and assign it to an array then assign those array values to wallArray in order. Use values to determine color for shatter animation
     mutating func pickWalls() -> [UIImage] {
         
        while wallColorSet.count < 3 {
@@ -149,7 +160,15 @@ struct Tutorial {
     
     //updaes score
     mutating func updateLabel() {
-       
+        if (tutNumber == 1) {
+            tutorialStep = "Great Job! Now swipe the square to the diamond with same color as its icon"
+        }
+        if (tutNumber == 2) {
+            tutorialStep = "Great Job! Now swipe the Triangle to the diamond with same color as its icon"
+        }
+        if (tutNumber == 3) {
+            tutorialStep = "Seem simple? Well, Try now!"
+        }
     }
     
 }
