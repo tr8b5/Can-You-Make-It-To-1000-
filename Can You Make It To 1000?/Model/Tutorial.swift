@@ -167,7 +167,28 @@ struct Tutorial {
             tutorialStep = "Great Job! Now swipe the Triangle to the diamond with same color as its icon"
         }
         if (tutNumber == 3) {
-            tutorialStep = "Seem simple? Well, Try now!"
+            tutorialStep = "Seem simple? Now try before the timer ends."
+        }
+        if (tutNumber == 4) {
+            tutorialStep = "Looks like you got the hang of it! Keep going!"
+        }
+        if (tutNumber == 5) {
+            tutorialStep = "Try a couple more times"
+        }
+        if (tutNumber == 6) {
+            tutorialStep = "Good Job!"
+        }
+        if (tutNumber == 7) {
+            tutorialStep = "Sensational!"
+        }
+        if (tutNumber == 8) {
+            tutorialStep = "You're a legend!"
+        }
+        if (tutNumber == 9) {
+            tutorialStep = "You are the greatest!"
+        }
+        if (tutNumber == 10) {
+            tutorialStep = "Congratulations you're ready. Make it to 1000 and you've beat the game. Good Luck."
         }
     }
     

@@ -67,7 +67,7 @@ class TutoialViewController : UIViewController {
 //            bottomWallView.isHidden = true;
             
             updateScene()
-            tutorialActions()
+            fadeOut(finished: true)
             
 //
             
@@ -150,7 +150,9 @@ class TutoialViewController : UIViewController {
                 self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
             }
             
-            //timer = Timer.scheduledTimer(timeInterval: TimeInterval(tut.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+            if (tut.tutNumber > 2) {
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(tut.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+            }
             
             leftDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.leftDiamondValue]
             rightDiamond.image = tut.sprites[tut.shapeValue].diamond[tut.rightDiamondValue]
@@ -184,8 +186,7 @@ class TutoialViewController : UIViewController {
             shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(tut.sprites[0].color[tut.wallColorArray[0]])")/*, color: tut.sprites[0].color[tut.wallColorArray[1]]*/ //left
             shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(tut.sprites[0].color[tut.wallColorArray[2]])")/*, color: tut.sprites[0].color[tut.wallColorArray[2]]*/
         
-            
-            
+            tutorialActions()
             
         }
     
@@ -201,16 +202,35 @@ class TutoialViewController : UIViewController {
         @objc func countDown() {
             timerBar.progress = timerBar.progress - 0.001
             if timerBar.progress == 0.0 {
-                timer.invalidate()
-                gameOver()
+                self.tutLabel.text = "You ran out of time, Try again!"
+                self.updateScene()
             }
         }
     
     func tutorialActions () {
         
-        fadeOut(finished: true)
-        
-        
+        if (tut.tutNumber == 10) {
+            timer.invalidate()
+            timerBar.removeFromSuperview()
+            leftWall.removeFromSuperview()
+            rightWall.removeFromSuperview()
+            bottomWall.removeFromSuperview()
+            shape.removeFromSuperview()
+            leftDiamond.removeFromSuperview()
+            rightDiamond.removeFromSuperview()
+            bottomDiamond.removeFromSuperview()
+            circleIcon.removeFromSuperview()
+            squareIcon.removeFromSuperview()
+            triangleIcon.removeFromSuperview()
+            
+            let button:UIButton = UIButton(frame: CGRect(x: 0, y: wallView.frame.size.height/2, width: self.view.frame.width, height: 200))
+            button.backgroundColor = .gray
+            button.setTitle("Play", for: .normal)
+            button.titleLabel!.font = UIFont(name: "Impact", size: 45)
+            button.addTarget(self, action:#selector(playButtonClicked(_:)), for: .touchUpInside)
+            self.view.addSubview(button)
+            
+        }
         
     }
         
@@ -258,6 +278,9 @@ class TutoialViewController : UIViewController {
             leftDiamond.alpha = 1
             rightDiamond.alpha = 1
             bottomDiamond.alpha = 1
+            circleIcon.alpha = 1
+            squareIcon.alpha = 1
+            triangleIcon.alpha = 1
         } else {
             UIView.animate(withDuration: 0.5,
                 delay: 0,
@@ -272,6 +295,18 @@ class TutoialViewController : UIViewController {
                     if (self.tut.bottomDiamondValue == self.tut.correctValue) {
                     self.bottomDiamond.alpha = 0
                     }
+                    if (self.tut.tutNumber == 0) {
+                        self.circleIcon.alpha = 0
+                    }
+                    if (self.tut.tutNumber == 1) {
+                        self.squareIcon.alpha = 0
+                        self.circleIcon.alpha = 1
+                    }
+                    if (self.tut.tutNumber == 2) {
+                        self.triangleIcon.alpha = 0
+                        self.circleIcon.alpha = 1
+                        self.squareIcon.alpha = 1
+                    }
                   },
                 completion: self.fadeIn)
         }
@@ -281,6 +316,9 @@ class TutoialViewController : UIViewController {
             leftDiamond.alpha = 1
             rightDiamond.alpha = 1
             bottomDiamond.alpha = 1
+            circleIcon.alpha = 1
+            squareIcon.alpha = 1
+            triangleIcon.alpha = 1
         } else {
             UIView.animate(withDuration: 0.5,
                 delay: 0,
@@ -294,6 +332,18 @@ class TutoialViewController : UIViewController {
                     }
                     if (self.tut.bottomDiamondValue == self.tut.correctValue) {
                     self.bottomDiamond.alpha = 1
+                    }
+                    if (self.tut.tutNumber == 0) {
+                        self.circleIcon.alpha = 1
+                    }
+                    if (self.tut.tutNumber == 1) {
+                        self.squareIcon.alpha = 1
+                        self.circleIcon.alpha = 1
+                    }
+                    if (self.tut.tutNumber == 2) {
+                        self.triangleIcon.alpha = 1
+                        self.circleIcon.alpha = 1
+                        self.squareIcon.alpha = 1
                     }
                   },
                 completion: self.fadeOut)
@@ -316,7 +366,8 @@ class TutoialViewController : UIViewController {
                             self.playSound(breakGlassAudio: "Dook")
                         }
                     } else {
-                        //self.gameOver()
+                        self.tutLabel.text = "Wrong diamond, Try again!"
+                        self.updateScene()
                     }
                     //print("Swiped right")
                 case UISwipeGestureRecognizer.Direction.down:
@@ -333,7 +384,8 @@ class TutoialViewController : UIViewController {
                                 self.playSound(breakGlassAudio: "Dook")
                             }
                             } else {
-                            //self.gameOver()
+                                self.tutLabel.text = "Wrong diamond, Try again!"
+                                self.updateScene()
                             }
                         }
                     //print("Swiped down")
@@ -351,7 +403,8 @@ class TutoialViewController : UIViewController {
                             self.playSound(breakGlassAudio: "Dook")
                         }
                         } else {
-                        //self.gameOver()
+                            self.tutLabel.text = "Wrong diamond, Try again!"
+                            self.updateScene()
                         }
                     }
                     //print("Swiped left")
@@ -363,14 +416,10 @@ class TutoialViewController : UIViewController {
             }
         }
     
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//        label.alpha = 0;
-//        tut.tutorialStep = "Swipe"
-//        tutLabel.text = tut.tutorialStep
-//
-//
-//           }
+    @objc func playButtonClicked(_ sender : UIButton) {
+        self.performSegue(withIdentifier: "goToGame", sender: self)
+        print("Button Clicked")
+    }
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                

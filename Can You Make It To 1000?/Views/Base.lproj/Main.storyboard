@@ -647,6 +647,7 @@
                         <outlet property="tutLabel" destination="PNW-tX-hkh" id="8fq-OH-fPi"/>
                         <outlet property="videoLayer" destination="QSF-II-18j" id="GDJ-72-yLV"/>
                         <outlet property="wallView" destination="XRq-DV-Nia" id="AiY-7I-eET"/>
+                        <segue destination="daE-G2-XX4" kind="presentation" identifier="goToGame" modalPresentationStyle="fullScreen" id="7Ly-56-tOg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOS-u3-kal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -655,7 +656,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bko-dO-pf5"/>
+        <segue reference="7Ly-56-tOg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Button" width="15.666666984558105" height="15.333333015441895"/>
