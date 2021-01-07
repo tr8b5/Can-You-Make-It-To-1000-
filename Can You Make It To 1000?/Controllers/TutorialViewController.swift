@@ -12,8 +12,8 @@ import AVFoundation
 
 class TutoialViewController : UIViewController {
     
-    var game = GameLogic()
-    var tut = Tutorial()
+        var game = GameLogic()
+        var tut = Tutorial()
         var shatterImages: [UIImage] = []
         var shatter1Images: [UIImage] = []
         var shatter2Images: [UIImage] = []
@@ -39,9 +39,9 @@ class TutoialViewController : UIViewController {
         @IBOutlet weak var timerView: UIView!
         @IBOutlet weak var labelView: UIView!
     
-    @IBOutlet var videoLayer: UIView!
-    var player: AVPlayer!
-    var label = UILabel()
+        @IBOutlet var videoLayer: UIView!
+        var player: AVPlayer!
+        var label = UILabel()
         
         var timer = Timer()
         var randomNumber: Int = 0
@@ -50,6 +50,7 @@ class TutoialViewController : UIViewController {
             super.viewDidLoad()
             
             playVideo()
+            
             
             tutLabel.text = tut.tutorialStep
             tutLabel.lineBreakMode = .byWordWrapping
@@ -223,8 +224,9 @@ class TutoialViewController : UIViewController {
             squareIcon.removeFromSuperview()
             triangleIcon.removeFromSuperview()
             
-            let button:UIButton = UIButton(frame: CGRect(x: 0, y: wallView.frame.size.height/2, width: self.view.frame.width, height: 200))
-            button.backgroundColor = .gray
+            let button:UIButton = UIButton(frame: CGRect(x: 0, y: wallView.frame.size.height/2 + 100, width: self.view.frame.width, height: 100))
+            button.setTitleColor(UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25), for: .normal)
+            button.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
             button.setTitle("Play", for: .normal)
             button.titleLabel!.font = UIFont(name: "Impact", size: 45)
             button.addTarget(self, action:#selector(playButtonClicked(_:)), for: .touchUpInside)

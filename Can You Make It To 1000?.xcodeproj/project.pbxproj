@@ -14,6 +14,7 @@
 		0B55BDE823FE130700AFB383 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */; };
 		0B55BDF423FF1C9600AFB383 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B55BDF323FF1C9600AFB383 /* Wall.swift */; };
 		0B5E12A92403605800B6B4EE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5E12A82403605700B6B4EE /* Icon.swift */; };
+		0B63C63725A6C503004D6118 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63C63625A6C503004D6118 /* Sound.swift */; };
 		0B7E4272253CAE8B00282A23 /* Background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0B7E4270253CABE000282A23 /* Background.mp4 */; };
 		0B8BD17B249E568D0044C0B4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */; };
 		0B8BD17D249E81170044C0B4 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8BD17C249E81170044C0B4 /* Tutorial.swift */; };
@@ -42,6 +43,7 @@
 		0B55BDE723FE130700AFB383 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Can You Make It To 1000?/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		0B55BDF323FF1C9600AFB383 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		0B5E12A82403605700B6B4EE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		0B63C63625A6C503004D6118 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		0B7E4270253CABE000282A23 /* Background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Background.mp4; sourceTree = "<group>"; };
 		0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		0B8BD17C249E81170044C0B4 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				0B93A7BF240B0B8400AAFF0B /* BottomWall.swift */,
 				0B8BD17C249E81170044C0B4 /* Tutorial.swift */,
 				0B4C05E52581D085004BA86B /* MusicPlayer.swift */,
+				0B63C63625A6C503004D6118 /* Sound.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				0B8BD17D249E81170044C0B4 /* Tutorial.swift in Sources */,
 				0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */,
 				0B55A984240B2A7A00A2057D /* GameOverViewController.swift in Sources */,
+				0B63C63725A6C503004D6118 /* Sound.swift in Sources */,
 				0B55BDF423FF1C9600AFB383 /* Wall.swift in Sources */,
 				0BDD39B423F4909100BD40EB /* AppDelegate.swift in Sources */,
 				0B8BD17B249E568D0044C0B4 /* TutorialViewController.swift in Sources */,

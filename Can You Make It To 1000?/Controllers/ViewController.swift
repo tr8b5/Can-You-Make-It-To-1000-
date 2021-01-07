@@ -11,11 +11,14 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    var sound = Sound()
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var rankGameButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
+    @IBOutlet var fxLabel: UILabel!
+    @IBOutlet var soundLabel: UILabel!
     @IBOutlet weak var Tutorial: UIButton!
     @IBOutlet weak var soundButtonOn: UIImageView!
     @IBOutlet weak var tutorialButtonOn: UIImageView!
@@ -58,16 +61,15 @@ class ViewController: UIViewController {
         let defaults: UserDefaults = UserDefaults.standard
         gameNumber = defaults.value(forKey: "gameNumber") as? Int ?? 0
         //if game number = 0 make defaults tutorial on
-        if (gameNumber == 0) {
-            tutorialOn = true
-        }
-        //if game number > 0 turn tutorial off
-        if (gameNumber > 0) {
-            tutorialOn = false
-            tutorialButtonOn.removeFromSuperview()
-        }
+        
         print("Game number: ", gameNumber)
         
+        if (sound.fx == false) {
+            tutorialButtonOn.alpha = 0
+        }
+        if (sound.sound == false) {
+            soundButtonOn.alpha = 0
+        }
         
     }
     
@@ -105,16 +107,33 @@ class ViewController: UIViewController {
     
     @IBAction func Tutorial(_ sender: Any) {
         
-        if tutorialOn == true {
-            tutorialButtonOn.removeFromSuperview()
+        if (sound.fx == false) {
+            sound.fx = true;
+            tutorialButtonOn.alpha = 1
+            return
         }
-        if tutorialOn == false {
-            
+        if (sound.fx == true) {
+            sound.fx = false;
+            tutorialButtonOn.alpha = 0
+            return
         }
         
     }
     
     @IBAction func soundButton(_ sender: Any) {
+        
+        if (sound.sound == false) {
+            sound.sound = true;
+            MusicPlayer.shared.playBackgroundMusic()
+            soundButtonOn.alpha = 1
+            return
+        }
+        if (sound.sound == true) {
+            sound.sound = false;
+            MusicPlayer.shared.stopBackgroundMusic()
+            soundButtonOn.alpha = 0
+            return
+        }
         
         
     }

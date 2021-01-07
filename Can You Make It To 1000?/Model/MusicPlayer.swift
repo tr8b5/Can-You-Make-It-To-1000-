@@ -39,4 +39,9 @@ class MusicPlayer {
         audioPlayer.rate = 5.0
     }
     
+    func playBackgroundMusic() {
+        guard let audioPlayer = audioPlayer else {return}
+        audioPlayer.play()
+    }
+    
 }

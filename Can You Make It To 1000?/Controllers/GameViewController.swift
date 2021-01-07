@@ -14,6 +14,7 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
+    var sound = Sound()
     var game = GameLogic()
     var shatterImages: [UIImage] = []
     var shatter1Images: [UIImage] = []
@@ -188,9 +189,11 @@ class GameViewController: UIViewController {
     }
     
     func playSound(breakGlassAudio: String) {
+        if (sound.fx == true) {
         let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
         audioPlayer = try! AVAudioPlayer(contentsOf: url!)
         audioPlayer.play()
+        }
     }
     
     @objc func countDown() {

@@ -161,7 +161,7 @@ struct Tutorial {
     //updaes score
     mutating func updateLabel() {
         if (tutNumber == 1) {
-            tutorialStep = "Great Job! Now swipe the square to the diamond with same color as its icon"
+            tutorialStep = "Great Job! Now swipe the square to the \ndiamond with same color as its icon"
         }
         if (tutNumber == 2) {
             tutorialStep = "Great Job! Now swipe the Triangle to the diamond with same color as its icon"
@@ -170,7 +170,7 @@ struct Tutorial {
             tutorialStep = "Seem simple? Now try before the timer ends."
         }
         if (tutNumber == 4) {
-            tutorialStep = "Looks like you got the hang of it! Keep going!"
+            tutorialStep = "Looks like you got the hang of it! \nKeep going!"
         }
         if (tutNumber == 5) {
             tutorialStep = "Try a couple more times"
@@ -188,7 +188,7 @@ struct Tutorial {
             tutorialStep = "You are the greatest!"
         }
         if (tutNumber == 10) {
-            tutorialStep = "Congratulations you're ready. Make it to 1000 and you've beat the game. Good Luck."
+            tutorialStep = "Congratulations you're ready. \nMake it to 1000 and you beat the game. \nGood Luck."
         }
     }
     
