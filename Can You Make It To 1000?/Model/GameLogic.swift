@@ -136,7 +136,7 @@ struct GameLogic {
     //Changes the timer speed per level
     mutating func difficulty() {
         if score < 50 {
-            time = 0.007
+            time = 0.008
         }
         if score >= 50 {
             time = 0.007
@@ -156,7 +156,7 @@ struct GameLogic {
         if score >= 400 {
             time = 0.002
         }
-        if score >= 500 {
+        if score >= 700 {
             time = 0.001
         }
     }

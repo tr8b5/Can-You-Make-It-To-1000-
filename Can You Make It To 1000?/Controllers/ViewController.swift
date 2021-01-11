@@ -8,8 +8,17 @@
 
 import UIKit
 import AVFoundation
+import GoogleMobileAds
 
 class ViewController: UIViewController {
+    
+    private let banner: GADBannerView = {
+    let banner = GADBannerView()
+        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.load(GADRequest())
+        banner.backgroundColor = .secondarySystemBackground
+        return banner
+    }()
 
     var sound = Sound()
     @IBOutlet weak var titleLabel: UILabel!
@@ -31,6 +40,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        banner.rootViewController = self
+        view.addSubview(banner)
         
         //Plays background video
         playVideo()
@@ -71,6 +84,11 @@ class ViewController: UIViewController {
             soundButtonOn.alpha = 0
         }
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        banner.frame = CGRect(x: 0, y: view.frame.size.height-50, width: view.frame.size.width, height: 50).integral
     }
     
     func playVideo() {

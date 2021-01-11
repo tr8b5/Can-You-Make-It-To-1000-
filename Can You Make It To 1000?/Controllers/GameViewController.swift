@@ -10,9 +10,18 @@ import UIKit
 import GameplayKit
 import SpriteKit
 import AVFoundation
+import GoogleMobileAds
 
 
 class GameViewController: UIViewController {
+    
+    private let banner: GADBannerView = {
+    let banner = GADBannerView()
+        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.load(GADRequest())
+        banner.backgroundColor = .secondarySystemBackground
+        return banner
+    }()
     
     var sound = Sound()
     var game = GameLogic()
@@ -48,6 +57,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        banner.rootViewController = self
+        view.addSubview(banner)
         playVideo()
         
         //Creates Score Label
@@ -77,6 +88,11 @@ class GameViewController: UIViewController {
         updateScene()
         
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        banner.frame = CGRect(x: 0, y: view.frame.size.height-100, width: view.frame.size.width, height: 50).integral
     }
     
     func playVideo() {
