@@ -25,6 +25,7 @@ struct GameLogic {
     var correctDiamondValue = 1
     var score = 0
     var time: Float = 0.009
+    var gamesTillAd = 4
     
     var sprites = [
         Sprite(shape: [#imageLiteral(resourceName: "Blue  Circle"), #imageLiteral(resourceName: "Black  Circle"), #imageLiteral(resourceName: "Green  Circle"), #imageLiteral(resourceName: "Grey  Circle"), #imageLiteral(resourceName: "Red  Circle"), #imageLiteral(resourceName: "Purple  Circle"), #imageLiteral(resourceName: "White  Circle"), #imageLiteral(resourceName: "Yellow  Circle"), #imageLiteral(resourceName: "Orange  Circle")],
@@ -82,6 +83,7 @@ struct GameLogic {
     
     //Creates Diamonds
      mutating func selectDiamonds() {
+        
         //Selects a correct Diamond Value out of 3
         correctDiamondValue = Int.random(in: 0...2)
         //Selects left diamond color out of the 3 color array values
@@ -90,7 +92,7 @@ struct GameLogic {
         rightDiamondValue = colorArray[Int.random(in: 0...2)]
         //Selects bottom diamond color out of the 3 color array values
         bottomDiamondValue = colorArray[Int.random(in: 0...2)]
-        
+
         //Picks which diamond will be the correct diamond value based off of the random values created above
         if correctDiamondValue == 0 {
             leftDiamondValue = correctValue
@@ -163,6 +165,20 @@ struct GameLogic {
     //updaes score
     mutating func updateScore() {
         score += 5
+    }
+    
+    mutating func loadGamesTillAd() {
+        let defaults: UserDefaults = UserDefaults.standard
+        gamesTillAd = defaults.value(forKey: "gamesTillAd") as? Int ?? 0
+    }
+    mutating func updateGamesTillAd() {
+        gamesTillAd-=1
+        if gamesTillAd == -1 {
+            gamesTillAd = 3
+        }
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.set(gamesTillAd, forKey: "gamesTillAd")
+        defaults.synchronize()
     }
     
 }

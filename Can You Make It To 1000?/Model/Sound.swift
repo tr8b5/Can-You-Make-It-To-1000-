@@ -11,4 +11,31 @@ import Foundation
 struct Sound {
     var sound = true
     var fx = true
+    
+    mutating func loadSound() {
+        let defaultSound: UserDefaults = UserDefaults.standard
+        sound = defaultSound.bool(forKey: "sound")
+    }
+    
+    mutating func saveSound() {
+        
+        let defaultSound: UserDefaults = UserDefaults.standard
+        defaultSound.set(sound, forKey: "sound")
+        defaultSound.synchronize()
+        
+
+    }
+    
+    mutating func loadFx() {
+        let defaultfx: UserDefaults = UserDefaults.standard
+        fx = defaultfx.bool(forKey: "fx")
+    }
+    
+    mutating func saveFx() {
+        
+        let defaultfx: UserDefaults = UserDefaults.standard
+        defaultfx.set(fx, forKey: "fx")
+        defaultfx.synchronize()
+        
+    }
 }

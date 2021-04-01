@@ -8,13 +8,16 @@
 
 import UIKit
 import AVFoundation
+import GoogleMobileAds
 
 class GameOverViewController: UIViewController {
 
+    @IBOutlet weak var btnRevive: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var highScoreLabel: UILabel!
     @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var gameOverLabel: UILabel!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
@@ -22,11 +25,26 @@ class GameOverViewController: UIViewController {
     var gameView = GameViewController()
     var score: Int!
     var highscore = 0
+    private var interstitialAd: GADInterstitial?
+    var rewardedAd: GADRewardedAd?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         playVideo()
         
+        Constants.didRevive = false
+        btnRevive.isHidden = !Constants.canRevive
+        if !Constants.canRevive {Constants.canRevive = true}
+        rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
+        rewardedAd?.load(GADRequest()) { error in
+              if let error = error {
+                print(error.localizedDescription)
+                // Handle ad failed to load case.
+              } else {
+                // Ad successfully loaded.
+              }
+            }
         let defaults: UserDefaults = UserDefaults.standard
         highscore = defaults.value(forKey: "highscore") as? Int ?? 0
         highScoreLabel.text = "HIGHSCORE: \(String(highscore))"
@@ -40,6 +58,32 @@ class GameOverViewController: UIViewController {
             defaults.synchronize()
             highScoreLabel.text = "HIGHSCORE: \(String(highscore))"
         }
+        
+        if score == 1000 {
+            gameOverLabel.text = "Victory"
+            gameOverLabel.textColor = UIColor.green
+        }
+         interstitialAd =  createAd()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
+    func displayAd() {
+        if interstitialAd?.isReady == true {
+            interstitialAd?.present(fromRootViewController: self)
+        } else {
+            print("Ad Not Ready")
+        }
+    }
+    
+    private func createAd() -> GADInterstitial {
+        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
+        ad.delegate = self
+        ad.load(GADRequest())
+        return ad
     }
     
     func playVideo() {
@@ -68,11 +112,46 @@ class GameOverViewController: UIViewController {
     }
     
     @IBAction func tryButtonClicked(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToGame", sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func homeButtonClicked(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToHome", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! ViewController
+        UIApplication.shared.windows.first?.rootViewController = vc
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+      
     }
     
+    @IBAction func revive(_ sender: Any) {
+        if rewardedAd?.isReady == true {
+               rewardedAd?.present(fromRootViewController: self, delegate:self)
+            }
+    }
     
+}
+
+extension GameOverViewController : GADInterstitialDelegate{
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        ad.present(fromRootViewController: self)
+    }
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error.localizedDescription)
+    }
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        //print(error.localizedDescription)
+    }
+
+}
+
+extension GameOverViewController : GADRewardedAdDelegate{
+    func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
+        Constants.didRevive = true
+        Constants.canRevive = false
+        
+    }
+    func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+        if Constants.didRevive{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }

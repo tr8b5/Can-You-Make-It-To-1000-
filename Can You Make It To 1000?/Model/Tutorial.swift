@@ -18,6 +18,7 @@ struct Tutorial {
     var wallSet = Set<UIImage>()
     var shapeValue = 0
     var color = 0
+    var introArray = [6, 7, 8]
     var randomIndex = 0
     var correctValue = 0
     var leftDiamondValue = 0
@@ -25,15 +26,15 @@ struct Tutorial {
     var bottomDiamondValue = 2
     var correctDiamondValue = 1
     var score = 0
-    var tutorialStep = "Swipe the circle to the diamond with same color as its icon"
+    var tutorialStep = "The shape can only touch the wall \nwith the diamond with the same \ncolor as the icon"
     var time: Float = 0.009
     var tutNumber = 0;
     
     var sprites = [
         Sprite(shape: [#imageLiteral(resourceName: "Blue  Circle"), #imageLiteral(resourceName: "Black  Circle"), #imageLiteral(resourceName: "Green  Circle"), #imageLiteral(resourceName: "Grey  Circle"), #imageLiteral(resourceName: "Red  Circle"), #imageLiteral(resourceName: "Purple  Circle"), #imageLiteral(resourceName: "White  Circle"), #imageLiteral(resourceName: "Yellow  Circle"), #imageLiteral(resourceName: "Orange  Circle")],
                diamond: [#imageLiteral(resourceName: "Blue Diamond"), #imageLiteral(resourceName: "Black Diamond"), #imageLiteral(resourceName: "Green Diamond"), #imageLiteral(resourceName: "Grey Diamond"), #imageLiteral(resourceName: "Red Diamond"), #imageLiteral(resourceName: "Purple Diamond"), #imageLiteral(resourceName: "White Diamond"), #imageLiteral(resourceName: "Yellow Diamond"), #imageLiteral(resourceName: "Orange Diamond")],
-               wall: [#imageLiteral(resourceName: "Blue Wall"), #imageLiteral(resourceName: "Black Wall"), #imageLiteral(resourceName: "Green Wall"), #imageLiteral(resourceName: "Grey Wall"), #imageLiteral(resourceName: "Red Wall"), #imageLiteral(resourceName: "Purple Wall"), #imageLiteral(resourceName: "White Wall"), #imageLiteral(resourceName: "Yellow Wall"), #imageLiteral(resourceName: "Orange Wall")],
-               bottomWall: [#imageLiteral(resourceName: "Blue Wall Small"), #imageLiteral(resourceName: "Black Wall Small"), #imageLiteral(resourceName: "Green Wall Small"), #imageLiteral(resourceName: "Grey Wall Small"), #imageLiteral(resourceName: "Red Wall Small"), #imageLiteral(resourceName: "Purple Wall Small"), #imageLiteral(resourceName: "White Wall Small"), #imageLiteral(resourceName: "Yellow Wall Small"), #imageLiteral(resourceName: "Orange Wall Small")],
+               wall: [#imageLiteral(resourceName: "Blue Wall"), #imageLiteral(resourceName: "Black Wall"), #imageLiteral(resourceName: "Green Wall"), #imageLiteral(resourceName: "Grey Wall"), #imageLiteral(resourceName: "Red Wall"), #imageLiteral(resourceName: "Purple Wall"), #imageLiteral(resourceName: "White Wall"), #imageLiteral(resourceName: "White Wall"), #imageLiteral(resourceName: "White Wall")],
+               bottomWall: [#imageLiteral(resourceName: "Blue Wall Small"), #imageLiteral(resourceName: "Black Wall Small"), #imageLiteral(resourceName: "Green Wall Small"), #imageLiteral(resourceName: "Grey Wall Small"), #imageLiteral(resourceName: "Red Wall Small"), #imageLiteral(resourceName: "Purple Wall Small"), #imageLiteral(resourceName: "White Wall Small"), #imageLiteral(resourceName: "White Wall Small"), #imageLiteral(resourceName: "White Wall Small")],
                icon: [#imageLiteral(resourceName: "Blue Circle Icon"), #imageLiteral(resourceName: "Black Circle Icon"), #imageLiteral(resourceName: "Green Circle Icon"), #imageLiteral(resourceName: "Grey Circle Icon"), #imageLiteral(resourceName: "Red Circle Icon"), #imageLiteral(resourceName: "Purple Circle Icon"), #imageLiteral(resourceName: "White Circle Icon"), #imageLiteral(resourceName: "Yellow Circle Icon"), #imageLiteral(resourceName: "Orange Circle Icon")],
                correctValue: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                color: ["Blue", "Black", "Green", "Gray", "Red", "Purple", "White", "Yellow", "Orange"]),
@@ -62,7 +63,22 @@ struct Tutorial {
         if (tutNumber < 3) {
             colorArray = [0,4,7]
         }
-        if (tutNumber > 2) {
+        if (tutNumber == 3) {
+            colorArray = [4,7,0]
+        }
+        if (tutNumber == 4) {
+            colorArray = [7,4,0]
+        }
+        if (tutNumber == 5) {
+            colorArray = [0,4,7]
+        }
+        if (tutNumber == 6) {
+            colorArray = [4,7,0]
+        }
+        if (tutNumber == 7) {
+            colorArray = [7,0,4]
+        }
+        if (tutNumber > 7) {
             //Empties color array
             colorArray = []
             //Creates the array of colors, while not repeating previously picked colors
@@ -89,12 +105,42 @@ struct Tutorial {
     //Creates Diamonds
      mutating func selectDiamonds() {
         
-        if (tutNumber < 3) {
+        if (tutNumber == 0) {
             leftDiamondValue = correctValue
-            rightDiamondValue = correctValue
+            rightDiamondValue = 4
             bottomDiamondValue = correctValue
         }
-        if (tutNumber > 2) {
+        if (tutNumber == 2) {
+            leftDiamondValue = 4
+            rightDiamondValue = correctValue
+            bottomDiamondValue = 7
+        }
+        if (tutNumber == 3) {
+            leftDiamondValue = correctValue
+            rightDiamondValue = 0
+            bottomDiamondValue = 7
+        }
+        if (tutNumber == 4) {
+            leftDiamondValue = 0
+            rightDiamondValue = 4
+            bottomDiamondValue = correctValue
+        }
+        if (tutNumber == 5) {
+            leftDiamondValue = 4
+            rightDiamondValue = correctValue
+            bottomDiamondValue = 7
+        }
+        if (tutNumber == 6) {
+            leftDiamondValue = correctValue
+            rightDiamondValue = 0
+            bottomDiamondValue = 7
+        }
+        if (tutNumber == 7) {
+            leftDiamondValue = 4
+            rightDiamondValue = 7
+            bottomDiamondValue = correctValue
+        }
+        if (tutNumber > 7) {
             //Selects a correct Diamond Value out of 3
             correctDiamondValue = Int.random(in: 0...2)
             //Selects left diamond color out of the 3 color array values
@@ -103,7 +149,7 @@ struct Tutorial {
             rightDiamondValue = colorArray[Int.random(in: 0...2)]
             //Selects bottom diamond color out of the 3 color array values
             bottomDiamondValue = colorArray[Int.random(in: 0...2)]
-            
+
             //Picks which diamond will be the correct diamond value based off of the random values created above
             if correctDiamondValue == 0 {
                 leftDiamondValue = correctValue
@@ -124,31 +170,71 @@ struct Tutorial {
         color = colorArray.randomElement()!
         if (tutNumber == 0) {
             shapeValue = 0
+            color = 6
         }
         if (tutNumber == 1) {
-            shapeValue = 1
+            shapeValue = 0
+            color = 6
         }
         if (tutNumber == 2) {
-            shapeValue = 2
+            shapeValue = 0
+            color = 6
         }
-        if (tutNumber > 2) {
+        if (tutNumber == 3) {
+            shapeValue = 0
+            color = 6
+        }
+        if (tutNumber == 4) {
+            shapeValue = 0
+            color = 4
+        }
+        if (tutNumber == 5) {
+            shapeValue = 0
+            color = 7
+        }
+        if (tutNumber == 6) {
+            shapeValue = 0
+            color = 7
+        }
+        if (tutNumber == 7) {
+            shapeValue = 0
+            color = 7
+        }
+        if (tutNumber > 7) {
             shapeValue = Int.random(in: 0...2)
         }
         correctValue = colorArray[shapeValue]
         //Selects Shape based on Values selected
+        if (tutNumber > 2) {
+        let shape: UIImage = (sprites[shapeValue].shape[color])
+            return shape
+        }
         let shape: UIImage = (sprites[shapeValue].shape[color])
         return shape
     }
     //Make interger set and assign it to an array then assign those array values to wallArray in order. Use values to determine color for shatter animation
     mutating func pickWalls() -> [UIImage] {
         
+        if (tutNumber > 3) {
        while wallColorSet.count < 3 {
          randomIndex = colorArray.randomElement()!
-            wallColorSet.insert(sprites[0].correctValue[randomIndex])
+            wallColorSet.insert(sprites[1].correctValue[randomIndex])
         }
         
         wallColorArray = Array(wallColorSet)
-        wallArray = [sprites[0].wall[wallColorArray[0]], sprites[0].wall[wallColorArray[1]], sprites[0].bottomWall[wallColorArray[2]]]
+        wallArray = [sprites[1].wall[wallColorArray[0]], sprites[1].wall[wallColorArray[1]], sprites[1].bottomWall[wallColorArray[2]]]
+            
+        } else {
+            while wallColorSet.count < 3 {
+               
+              randomIndex = introArray.randomElement()!
+                 wallColorSet.insert(sprites[0].correctValue[randomIndex])
+             }
+             
+             wallColorArray = Array(wallColorSet)
+             wallArray = [sprites[0].wall[wallColorArray[0]], sprites[0].wall[wallColorArray[1]], sprites[0].bottomWall[wallColorArray[2]]]
+            
+        }
         
         return wallArray
     }
@@ -164,7 +250,7 @@ struct Tutorial {
             tutorialStep = "Great Job! Now swipe the square to the \ndiamond with same color as its icon"
         }
         if (tutNumber == 2) {
-            tutorialStep = "Great Job! Now swipe the Triangle to the diamond with same color as its icon"
+            tutorialStep = "Great Job! Now swipe the Triangle to the \ndiamond with same color as its icon"
         }
         if (tutNumber == 3) {
             tutorialStep = "Seem simple? Now try before the timer ends."

@@ -13,15 +13,11 @@ import AVFoundation
 import GoogleMobileAds
 
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController  {
     
-    private let banner: GADBannerView = {
-    let banner = GADBannerView()
-        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        banner.load(GADRequest())
-        banner.backgroundColor = .secondarySystemBackground
-        return banner
-    }()
+    
+    
+    private var interstitialAd: GADInterstitial?
     
     var sound = Sound()
     var game = GameLogic()
@@ -54,22 +50,10 @@ class GameViewController: UIViewController {
     var timer = Timer()
     var randomNumber: Int = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        banner.rootViewController = self
-        view.addSubview(banner)
-        playVideo()
-        
-        //Creates Score Label
-        scoreLabel.text = String(game.score)
-        //Defines Colors and
-        game.selectColors(repetitions: 3, maxValue: 8)
-        
-        circleIcon.image = game.sprites[0].icon[game.colorArray[0]]
-        squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
-        triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
-
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
@@ -84,15 +68,33 @@ class GameViewController: UIViewController {
         self.view.addGestureRecognizer(swipeDown)
         
         
-        
-        updateScene()
-        
-        
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        banner.frame = CGRect(x: 0, y: view.frame.size.height-100, width: view.frame.size.width, height: 50).integral
+    override func viewWillAppear(_ animated: Bool) {
+        self.interstitialAd = createAd()
+        
+        if !Constants.didRevive{game = GameLogic()}
+        
+        sound = Sound() 
+        playVideo()
+        
+        sound.loadSound()
+        sound.loadFx()
+        
+        //Creates Score Label
+        scoreLabel.text = String(game.score)
+        //Defines Colors and
+        game.selectColors(repetitions: 3, maxValue: 8)
+        
+        circleIcon.image = game.sprites[0].icon[game.colorArray[0]]
+        squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
+        triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
+        updateScene()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
     func playVideo() {
@@ -129,6 +131,11 @@ class GameViewController: UIViewController {
             squareIcon.removeFromSuperview()
             triangleIcon.removeFromSuperview()
         }
+        
+        if game.score == 1000 {
+            timer.invalidate()
+            self.gameOver()
+        } else {
         
         timer.invalidate()
         timerBar.progress = 1.0
@@ -200,7 +207,7 @@ class GameViewController: UIViewController {
         shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
         
         shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
-        
+        }
     
     }
     
@@ -221,29 +228,48 @@ class GameViewController: UIViewController {
     }
     
     func updateLabel() {
-        self.updateScene()
         game.updateScore()
+        self.updateScene()
         scoreLabel.text = String(game.score)
     }
     
     func gameOver() {
         
+        game.loadGamesTillAd()
+        if game.gamesTillAd == 0 {
+            displayAd()
+            game.updateGamesTillAd()
+        } else {
+            game.updateGamesTillAd()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
         self.performSegue(withIdentifier: "gotToGameOver", sender: self)
         }
-    }
-    
-    func createImagesArray(total: Int, imagePrefix: String/*, color: UIColor*/) -> [UIImage] {
-        var imageArray: [UIImage] = []
-        
-        for imageCount in (1..<total) {
-            let imageName = "\(imagePrefix)-\(imageCount).png"
-            let image = UIImage(named: imageName)!
-            //image = image.imageWithColor(color)!
-            
-            imageArray.append(image)
             
         }
+    }
+    
+    func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
+        var imageArray: [UIImage] = []
+       
+        for imageCount in (1..<total) {
+            let imageNames = ["\(imagePrefix)-\(imageCount)" , "\(imagePrefix)-000\(imageCount)","\(imagePrefix)-0\(imageCount)","\(imagePrefix)-_0000\(imageCount)","\(imagePrefix)-\(imageCount)", "\(imagePrefix)-0000\(imageCount)"]
+            
+            
+            var didFindName = false
+            for name in imageNames{
+                if let path = Bundle.main.path(forResource: "\(name)", ofType: "png"){
+                    let image = UIImage(contentsOfFile: path)!
+                    imageArray.append(image)
+                    didFindName = true
+                }
+            }
+            
+            if !didFindName{
+                print(imageNames)
+                print("\(imagePrefix)-\(imageCount)")
+            }
+        }
+
         return imageArray.compactMap({ $0 })
     }
     
@@ -272,7 +298,9 @@ class GameViewController: UIViewController {
                         self.playSound(breakGlassAudio: "Dook")
                     }
                 } else {
+                    
                     self.gameOver()
+                    
                 }
                 //print("Swiped right")
             case UISwipeGestureRecognizer.Direction.down:
@@ -288,7 +316,9 @@ class GameViewController: UIViewController {
                             self.playSound(breakGlassAudio: "Dook")
                         }
                         } else {
-                        self.gameOver()
+                            
+                            self.gameOver()
+                            
                         }
                     }
                 //print("Swiped down")
@@ -305,7 +335,9 @@ class GameViewController: UIViewController {
                         self.playSound(breakGlassAudio: "Dook")
                     }
                     } else {
-                    self.gameOver()
+                        
+                        self.gameOver()
+                        
                     }
                 }
                 //print("Swiped left")
@@ -325,6 +357,28 @@ class GameViewController: UIViewController {
             destinationVC.score = game.score
            }
        }
+    
+    func displayAd() {
+        if interstitialAd?.isReady == true {
+            interstitialAd?.present(fromRootViewController: self)
+        } else {
+            print("Ad Not Ready")
+        }
+    }
+    
+    private func createAd() -> GADInterstitial {
+        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
+        ad.delegate = self
+        ad.load(GADRequest())
+        return ad
+    }
+}
+
+extension GameViewController:  GADInterstitialDelegate {
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitialAd = createAd()
+        gameOver()
+    }
 }
 
 extension UIImage {
@@ -346,25 +400,9 @@ extension UIImage {
     }
 }
 
-
-
-/*extension UIImage {
-  func load(image imageName: String) -> UIImage {
-    // declare image location
-    let imagePath: String = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(imageName).png"
-    let imageUrl: URL = URL(fileURLWithPath: imagePath)
-
-    // check if the image is stored already
-    if FileManager.default.fileExists(atPath: imagePath),
-       let imageData: Data = try? Data(contentsOf: imageUrl),
-       let image: UIImage = UIImage(data: imageData, scale: UIScreen.main.scale) {
-      return image
-    }
-
-    // image has not been created yet: create it, store it, return it
-    let newImage: UIImage =
-    try? newImage.pngData()?.write(to: imageUrl)// create your UIImage here
-    //try? pngData(newImage)?.write(to: imageUrl)
-    return newImage
-  }
-}*/
+struct Constants {
+    static let interstitialAdId = "ca-app-pub-3526204639815359/7322176381"
+    static let rewardAdId = "ca-app-pub-3526204639815359/6560355524"
+    static var canRevive = true
+    static var didRevive = false
+}

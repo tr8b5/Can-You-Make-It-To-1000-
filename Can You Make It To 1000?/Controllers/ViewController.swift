@@ -12,14 +12,6 @@ import GoogleMobileAds
 
 class ViewController: UIViewController {
     
-    private let banner: GADBannerView = {
-    let banner = GADBannerView()
-        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        banner.load(GADRequest())
-        banner.backgroundColor = .secondarySystemBackground
-        return banner
-    }()
-
     var sound = Sound()
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
@@ -37,18 +29,12 @@ class ViewController: UIViewController {
     var gameNumber = 0
     var tutorialOn: Bool!
     var soundOn: Bool!
-    
+    var shouldShowGameScreen =  false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        banner.rootViewController = self
-        view.addSubview(banner)
-        
+       
         //Plays background video
         playVideo()
-        MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
-        MusicPlayer.shared.speedUpBackgroundMusic()
         
         // Do any additional setup after loading the view.
         
@@ -75,6 +61,9 @@ class ViewController: UIViewController {
         gameNumber = defaults.value(forKey: "gameNumber") as? Int ?? 0
         //if game number = 0 make defaults tutorial on
         
+        sound.loadSound()
+        sound.loadFx()
+        
         print("Game number: ", gameNumber)
         
         if (sound.fx == false) {
@@ -82,13 +71,19 @@ class ViewController: UIViewController {
         }
         if (sound.sound == false) {
             soundButtonOn.alpha = 0
+        } else {
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+            MusicPlayer.shared.speedUpBackgroundMusic()
         }
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        banner.frame = CGRect(x: 0, y: view.frame.size.height-50, width: view.frame.size.width, height: 50).integral
+        if shouldShowGameScreen{
+            playButtonClicked("")
+            
+        }
+        
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
+        try? AVAudioSession.sharedInstance().setActive(true)
+        
     }
     
     func playVideo() {
@@ -128,11 +123,13 @@ class ViewController: UIViewController {
         if (sound.fx == false) {
             sound.fx = true;
             tutorialButtonOn.alpha = 1
+            sound.saveFx()
             return
         }
         if (sound.fx == true) {
             sound.fx = false;
             tutorialButtonOn.alpha = 0
+            sound.saveFx()
             return
         }
         
@@ -142,17 +139,19 @@ class ViewController: UIViewController {
         
         if (sound.sound == false) {
             sound.sound = true;
-            MusicPlayer.shared.playBackgroundMusic()
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+            MusicPlayer.shared.speedUpBackgroundMusic()
             soundButtonOn.alpha = 1
+            sound.saveSound()
             return
         }
         if (sound.sound == true) {
             sound.sound = false;
             MusicPlayer.shared.stopBackgroundMusic()
             soundButtonOn.alpha = 0
+            sound.saveSound()
             return
         }
-        
         
     }
     
