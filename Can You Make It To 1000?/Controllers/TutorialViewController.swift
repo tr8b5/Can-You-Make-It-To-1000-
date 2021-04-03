@@ -39,10 +39,20 @@ class TutoialViewController : UIViewController {
     @IBOutlet weak var bottomWallView: UIView!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var labelView: UIView!
+    @IBOutlet var noButton: UIButton!
+    @IBOutlet var yesButton: UIButton!
+    
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
     var label = UILabel()
+    var label2 = UILabel()
+    var label3 = UILabel()
+    var label4 = UILabel()
+    var label5 = UILabel()
+    var ttContinue = UILabel()
+    
+    var canTap : Bool = true
     
     var timer = Timer()
     var randomNumber: Int = 0
@@ -70,13 +80,58 @@ class TutoialViewController : UIViewController {
         tutLabel.numberOfLines = 0
         tut.selectColors(repetitions: 3, maxValue: 8)
         
+        
         circleIcon.image = tut.sprites[0].icon[tut.colorArray[0]]
         squareIcon.image = tut.sprites[1].icon[tut.colorArray[1]]
         triangleIcon.image = tut.sprites[2].icon[tut.colorArray[2]]
         
+        
+        label2 = UILabel(frame: CGRect(x: 0, y: wallView.frame.size.height/5 + 100, width: self.view.frame.width, height: 75))
+        label2.textColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25)
+        label2.textAlignment = .center
+        label2.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+        label2.text = "Each game you are given the \nfollowing 3 shapes."
+        label2.numberOfLines = 0
+        label2.font = UIFont(name: "Impact", size: 21)
+        self.view.addSubview(label2)
+        
+        label3 = UILabel(frame: CGRect(x: 0, y: wallView.frame.size.height/2 + 100, width: self.view.frame.width, height: 75))
+        label3.textColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25)
+        label3.textAlignment = .center
+        label3.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+        label3.text = "They stay the same colors each \ngame, so try to remeber them."
+        label3.numberOfLines = 0
+        label3.font = UIFont(name: "Impact", size: 21)
+        self.view.addSubview(label3)
+        
+        label4 = UILabel(frame: CGRect(x: 0, y: wallView.frame.size.height - 100, width: self.view.frame.width, height: 75))
+        label4.textColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25)
+        label4.textAlignment = .center
+        label4.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+        label4.text = "Each game you are given the \nfollowing 3 shapes."
+        label4.numberOfLines = 0
+        label4.font = UIFont(name: "Impact", size: 21)
+        self.view.addSubview(label4)
+        
+        label5 = UILabel(frame: CGRect(x: 0, y: wallView.frame.size.height, width: self.view.frame.width, height: 75))
+        label5.textColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25)
+        label5.textAlignment = .center
+        label5.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+        label5.text = "Each game you are given the \nfollowing 3 shapes."
+        label5.numberOfLines = 0
+        label5.font = UIFont(name: "Impact", size: 21)
+        self.view.addSubview(label5)
+        
+        
+        ttContinue = UILabel(frame: CGRect(x: 0, y: wallView.frame.size.height + 220, width: self.view.frame.width - 20, height: 10))
+        ttContinue.textColor = .white
+        ttContinue.textAlignment = .right
+        ttContinue.text = "Tap to continue"
+        ttContinue.numberOfLines = 0
+        ttContinue.font = UIFont(name: "Impact", size: 14)
+        self.view.addSubview(ttContinue)
+        
         tutorialSteps()
-        //updateScene()
-        //fadeOut(finished: true)
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -183,6 +238,7 @@ class TutoialViewController : UIViewController {
         timer.invalidate()
         
         
+        
         //Animation Initilizations
         self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
         self.shape.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -192,12 +248,19 @@ class TutoialViewController : UIViewController {
         self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: -1000)
         self.bottomWall.transform = CGAffineTransform(translationX: -1000, y: 0)
         self.bottomDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
+        self.label2.transform = CGAffineTransform(translationX: 0, y: 1200)
+        self.label3.transform = CGAffineTransform(translationX: 0, y: 1200)
+        self.label4.transform = CGAffineTransform(translationX: 0, y: 1200)
+        self.label5.transform = CGAffineTransform(translationX: 0, y: 1200)
+        self.ttContinue.alpha = 0
         print(tut.tutNumber)
         
         //Tutorial Steps
         if (tut.tutNumber == 0) {
             
             //Logic Initializations
+            
+            canTap = false;
             
             rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
             rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
@@ -221,6 +284,9 @@ class TutoialViewController : UIViewController {
             shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
             shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
             
+            label2.text = "Well You don't"
+            label3.text = "Good luck though."
+            
             //Animation Initilizations 1
             self.leftWall.transform = CGAffineTransform(translationX: -1000, y: 0)
             self.leftDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
@@ -233,12 +299,31 @@ class TutoialViewController : UIViewController {
             self.timerBar.transform = CGAffineTransform(translationX: 0, y: -1200)
             self.rightWall.transform = CGAffineTransform(translationX: 1000, y: 0)
             self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 1200)
+            self.label2.transform = CGAffineTransform(translationX: 0, y: 1200)
+            self.label3.transform = CGAffineTransform(translationX: 0, y: 1200)
+            self.label4.transform = CGAffineTransform(translationX: 0, y: 1200)
+            self.label5.transform = CGAffineTransform(translationX: 0, y: 1200)
             self.shape.transform = CGAffineTransform(scaleX: 0, y: 0)
             
             UIView.animate(withDuration: 2) {
-                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 400)
+                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 100)
             }
             
+            yesButton = UIButton(frame: CGRect(x: 15, y: wallView.frame.size.height + 100, width: self.view.frame.width/2 - 20, height: 100))
+            yesButton.setTitleColor(UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25), for: .normal)
+            yesButton.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+            yesButton.setTitle("Yes", for: .normal)
+            yesButton.titleLabel!.font = UIFont(name: "Impact", size: 45)
+            yesButton.addTarget(self, action:#selector(buttonClicked(_:)), for: .touchUpInside)
+            self.view.addSubview(yesButton)
+            
+            noButton = UIButton(frame: CGRect(x: 215, y: wallView.frame.size.height + 100, width: self.view.frame.width/2 - 20, height: 100))
+            noButton.setTitleColor(UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25), for: .normal)
+            noButton.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+            noButton.setTitle("No", for: .normal)
+            noButton.titleLabel!.font = UIFont(name: "Impact", size: 45)
+            noButton.addTarget(self, action:#selector(buttonClicked(_:)), for: .touchUpInside)
+            self.view.addSubview(noButton)
             
         }
         if (tut.tutNumber == 1) {
@@ -266,6 +351,7 @@ class TutoialViewController : UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
+            fadeOut(finished: true)
         }
         if (tut.tutNumber == 2) {
             
@@ -501,106 +587,6 @@ class TutoialViewController : UIViewController {
             shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
             
             //Animation Initilizations 1
-            UIView.animate(withDuration: 0.5) {
-                self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
-                self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self.circleIcon.transform = CGAffineTransform(translationX: 70, y: 0)
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }
-            
-        }
-        if (tut.tutNumber == 7) {
-            
-            //Logic Initilizations 1
-            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-            self.view.addGestureRecognizer(swipeDown)
-            
-            leftWall.image = tut.pickWalls()[0]
-            rightWall.image = tut.pickWalls()[1]
-            bottomWall.image = tut.pickWalls()[2]
-            
-            rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-            rightGlass.layer.zPosition = -1
-            rightGlass.alpha = 0
-            wallView.addSubview(rightGlass)
-            
-            leftGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-            leftGlass.layer.zPosition = -1
-            leftGlass.alpha = 0
-            wallView.addSubview(leftGlass)
-            
-            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-White-0.png"))
-            bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-            bottomGlass.layer.zPosition = -1
-            bottomGlass.alpha = 0
-            bottomWallView.addSubview(bottomGlass)
-            
-            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
-            
-            //Animation Initilizations 1
-            UIView.animate(withDuration: 0.5) {
-                self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
-                self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self.circleIcon.transform = CGAffineTransform(translationX: 70, y: 0)
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }
-            
-        }
-        if (tut.tutNumber == 8) {
-            
-            //Logic Initilizations 1
-            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-            self.view.addGestureRecognizer(swipeDown)
-            
-            leftWall.image = tut.pickWalls()[0]
-            rightWall.image = tut.pickWalls()[1]
-            bottomWall.image = tut.pickWalls()[2]
-            
-            rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-            rightGlass.layer.zPosition = -1
-            rightGlass.alpha = 0
-            wallView.addSubview(rightGlass)
-            
-            leftGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-            leftGlass.layer.zPosition = -1
-            leftGlass.alpha = 0
-            wallView.addSubview(leftGlass)
-            
-            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-White-0.png"))
-            bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-            bottomGlass.layer.zPosition = -1
-            bottomGlass.alpha = 0
-            bottomWallView.addSubview(bottomGlass)
-            
-            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
-            
-            //Animation Initilizations 1
             self.circleIcon.transform = CGAffineTransform(translationX: -1200, y: 0)
             self.squareIcon.transform = CGAffineTransform(translationX: 0, y: 0)
             UIView.animate(withDuration: 0.5) {
@@ -618,56 +604,7 @@ class TutoialViewController : UIViewController {
             }
             
         }
-        if (tut.tutNumber == 9) {
-            
-            //Logic Initilizations 1
-            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-            self.view.addGestureRecognizer(swipeDown)
-            
-            leftWall.image = tut.pickWalls()[0]
-            rightWall.image = tut.pickWalls()[1]
-            bottomWall.image = tut.pickWalls()[2]
-            
-            rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-            rightGlass.layer.zPosition = -1
-            rightGlass.alpha = 0
-            wallView.addSubview(rightGlass)
-            
-            leftGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
-            leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-            leftGlass.layer.zPosition = -1
-            leftGlass.alpha = 0
-            wallView.addSubview(leftGlass)
-            
-            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-White-0.png"))
-            bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-            bottomGlass.layer.zPosition = -1
-            bottomGlass.alpha = 0
-            bottomWallView.addSubview(bottomGlass)
-            
-            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
-            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
-            
-            //Animation Initilizations 1
-            UIView.animate(withDuration: 0.5) {
-                self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
-                self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }
-            
-        }
-        if (tut.tutNumber == 10) {
+        if (tut.tutNumber == 7) {
             
             //Logic Initilizations 1
             let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
@@ -718,12 +655,25 @@ class TutoialViewController : UIViewController {
             }
             
         }
-        if (tut.tutNumber == 11) {
+        if (tut.tutNumber == 8) {
             
             //Logic Initilizations 1
-            let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-            swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-            self.view.addGestureRecognizer(swipeDown)
+            label2.text = "Each game you are given the \nfollowing 3 shapes."
+            label3.text = "They stay the same colors each \ngame, so try to remeber them."
+            
+            //Animation Initilizations 1
+            self.triangleIcon.transform = CGAffineTransform(translationX: -1200, y: 0)
+            UIView.animate(withDuration: 0.5) {
+            self.label2.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.label3.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.circleIcon.transform = CGAffineTransform(translationX: 0, y: 125)
+            self.squareIcon.transform = CGAffineTransform(translationX: 0, y: 125)
+            self.triangleIcon.transform = CGAffineTransform(translationX: 0, y: 125)
+            }
+            
+            
+        }
+        if (tut.tutNumber == 9) {
             
             leftWall.image = tut.pickWalls()[0]
             rightWall.image = tut.pickWalls()[1]
@@ -761,6 +711,104 @@ class TutoialViewController : UIViewController {
                 self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
                 self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self.circleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.squareIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.triangleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+            
+        }
+        if (tut.tutNumber == 10) {
+            
+            leftWall.image = tut.pickWalls()[0]
+            rightWall.image = tut.pickWalls()[1]
+            bottomWall.image = tut.pickWalls()[2]
+            
+            rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
+            rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
+            rightGlass.layer.zPosition = -1
+            rightGlass.alpha = 0
+            wallView.addSubview(rightGlass)
+            
+            leftGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
+            leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
+            leftGlass.layer.zPosition = -1
+            leftGlass.alpha = 0
+            wallView.addSubview(leftGlass)
+            
+            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-White-0.png"))
+            bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
+            bottomGlass.layer.zPosition = -1
+            bottomGlass.alpha = 0
+            bottomWallView.addSubview(bottomGlass)
+            
+            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-White")
+            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
+            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
+            
+            
+            //Animation Initilizations 1
+            UIView.animate(withDuration: 0.5) {
+                self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
+                self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self.circleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.squareIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.triangleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+            
+        }
+        if (tut.tutNumber == 11) {
+            
+            leftWall.image = tut.pickWalls()[0]
+            rightWall.image = tut.pickWalls()[1]
+            bottomWall.image = tut.pickWalls()[2]
+            
+            rightGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
+            rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
+            rightGlass.layer.zPosition = -1
+            rightGlass.alpha = 0
+            wallView.addSubview(rightGlass)
+            
+            leftGlass = UIImageView(image: UIImage(named: "Shatter-White-1.png")!)
+            leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
+            leftGlass.layer.zPosition = -1
+            leftGlass.alpha = 0
+            wallView.addSubview(leftGlass)
+            
+            bottomGlass = UIImageView(image: UIImage(named: "Shatter1-White-0.png"))
+            bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
+            bottomGlass.layer.zPosition = -1
+            bottomGlass.alpha = 0
+            bottomWallView.addSubview(bottomGlass)
+            
+            shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-White")
+            shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-White")
+            shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-White")
+            
+            //Animation Initilizations 1
+            UIView.animate(withDuration: 0.5) {
+                self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.tutLabel.transform = CGAffineTransform(translationX: 0, y: 50)
+                self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self.circleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.squareIcon.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.triangleIcon.transform = CGAffineTransform(translationX: 0, y: 0)
             }
             UIView.animate(withDuration: 0.5) {
                 self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -769,16 +817,37 @@ class TutoialViewController : UIViewController {
         }
         if (tut.tutNumber == 12) {
             
-            //Logic Initilizations 1
             
+            label2.text = "Peep the timer. In order to beat the game \nyou must match the shape correctly each \nround before the timer runs out."
+            label3.text = "This countdown gets \nquicker with each point you score \nso you have to think fast."
+            label4.text = "Each score is worth 5 points so you only \nneed to score 200 times to win."
+            label5.text = "99% of people don’t beat this game \nand neither will you! Good Luck."
             
-            //Animation Initilizations 1
-            self.triangleIcon.transform = CGAffineTransform(translationX: -1200, y: 0)
+            self.circleIcon.transform = CGAffineTransform(translationX: 0, y: -1200)
+            self.squareIcon.transform = CGAffineTransform(translationX: 0, y: -1200)
+            self.triangleIcon.transform = CGAffineTransform(translationX: 0, y: -1200)
             
+            UIView.animate(withDuration: 0.5) {
+            self.timerBar.transform = CGAffineTransform(translationX: 0, y: 200)
+            self.label2.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.label3.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.label4.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.label5.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+            
+            let button:UIButton = UIButton(frame: CGRect(x: 0, y: wallView.frame.size.height + 100, width: self.view.frame.width, height: 100))
+            button.setTitleColor(UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.25), for: .normal)
+            button.backgroundColor = UIColor(red: 108/225, green: 229/225, blue: 229/225, alpha: 0.05)
+            button.setTitle("Play", for: .normal)
+            button.titleLabel!.font = UIFont(name: "Impact", size: 45)
+            button.addTarget(self, action:#selector(playButtonClicked(_:)), for: .touchUpInside)
+            self.view.addSubview(button)
             
         }
         
     }
+    
+    
     
     func resetBars() {
         
@@ -879,14 +948,7 @@ class TutoialViewController : UIViewController {
     
     
     func fadeOut(finished: Bool) {
-        if (tut.tutNumber > 2) {
-            leftDiamond.alpha = 1
-            rightDiamond.alpha = 1
-            bottomDiamond.alpha = 1
-            circleIcon.alpha = 1
-            squareIcon.alpha = 1
-            triangleIcon.alpha = 1
-        } else {
+       
             UIView.animate(withDuration: 0.5,
                            delay: 0,
                            options: [UIView.AnimationOptions.curveEaseInOut],
@@ -914,7 +976,7 @@ class TutoialViewController : UIViewController {
                             }
                            },
                            completion: self.fadeIn)
-        }
+        
     }
     func fadeIn(finished: Bool) {
         if (tut.tutNumber > 2) {
@@ -1021,10 +1083,32 @@ class TutoialViewController : UIViewController {
         }
     }
     @objc func screenTapped() {
+        if  (tut.tutNumber < 12 && canTap == true) {
         tut.tutNumber += 1
         updateLabel()
+        }
+        if (canTap == false) {
+            print("Can't Tap")
+        }
     }
     
+    @objc func buttonClicked(_ sender : UIButton) {
+        
+        yesButton.removeFromSuperview()
+        noButton.removeFromSuperview()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.canTap = true
+        }
+        UIView.animate(withDuration: 1.5) {
+            self.label2.transform = CGAffineTransform(translationX: 0, y: 15)
+        }
+        UIView.animate(withDuration: 6) {
+        self.label3.transform = CGAffineTransform(translationX: 0, y: -65)
+        self.ttContinue.alpha = 1.0
+        }
+        
+    }
     @objc func playButtonClicked(_ sender : UIButton) {
         self.performSegue(withIdentifier: "goToGame", sender: self)
         print("Button Clicked")

@@ -26,7 +26,7 @@ struct Tutorial {
     var bottomDiamondValue = 2
     var correctDiamondValue = 1
     var score = 0
-    var tutorialStep = "The shape can only touch the wall \nwith the diamond with the same \ncolor as the icon"
+    var tutorialStep = "Do you really think you got what it \ntakes to beat this game?"
     var time: Float = 0.009
     var tutNumber = 0;
     
@@ -73,10 +73,10 @@ struct Tutorial {
             colorArray = [0,4,7]
         }
         if (tutNumber == 6) {
-            colorArray = [4,7,0]
+            colorArray = [0,4,7]
         }
         if (tutNumber == 7) {
-            colorArray = [7,0,4]
+            colorArray = [0,7,4]
         }
         if (tutNumber > 7) {
             //Empties color array
@@ -131,14 +131,14 @@ struct Tutorial {
             bottomDiamondValue = 7
         }
         if (tutNumber == 6) {
-            leftDiamondValue = correctValue
-            rightDiamondValue = 0
+            leftDiamondValue = 0
+            rightDiamondValue = correctValue
             bottomDiamondValue = 7
         }
         if (tutNumber == 7) {
-            leftDiamondValue = 4
-            rightDiamondValue = 7
-            bottomDiamondValue = correctValue
+            leftDiamondValue = correctValue
+            rightDiamondValue = 4
+            bottomDiamondValue = 7
         }
         if (tutNumber > 7) {
             //Selects a correct Diamond Value out of 3
@@ -193,12 +193,12 @@ struct Tutorial {
             color = 7
         }
         if (tutNumber == 6) {
-            shapeValue = 0
+            shapeValue = 1
             color = 7
         }
         if (tutNumber == 7) {
-            shapeValue = 0
-            color = 7
+            shapeValue = 2
+            color = 4
         }
         if (tutNumber > 7) {
             shapeValue = Int.random(in: 0...2)
@@ -247,34 +247,34 @@ struct Tutorial {
     //updaes score
     mutating func updateLabel() {
         if (tutNumber == 1) {
-            tutorialStep = "Great Job! Now swipe the square to the \ndiamond with same color as its icon"
+            tutorialStep = "Swipe the shape to the wall with the \nmatching icon color & diamond color."
         }
         if (tutNumber == 2) {
-            tutorialStep = "Great Job! Now swipe the Triangle to the \ndiamond with same color as its icon"
+            tutorialStep = "Good. Now this time I threw in another \nwall."
         }
         if (tutNumber == 3) {
-            tutorialStep = "Seem simple? Now try before the timer ends."
+            tutorialStep = "Your doing better than I thought you would \nnow pay attention to the colors here."
         }
         if (tutNumber == 4) {
-            tutorialStep = "Looks like you got the hang of it! \nKeep going!"
+            tutorialStep = "Remember the shape must go to the \ndiamond with the color matching the icon"
         }
         if (tutNumber == 5) {
-            tutorialStep = "Try a couple more times"
+            tutorialStep = "Great Job. Remember it’s the same concept \nmatch the icon & diamond color. "
         }
         if (tutNumber == 6) {
-            tutorialStep = "Good Job!"
+            tutorialStep = "Try with the square. \nSame concept."
         }
         if (tutNumber == 7) {
-            tutorialStep = "Sensational!"
+            tutorialStep = "I think you know what to do here."
         }
         if (tutNumber == 8) {
-            tutorialStep = "You're a legend!"
+            tutorialStep = "Wonderful! You understand the concept \nand now your ready for a real challenge."
         }
         if (tutNumber == 9) {
-            tutorialStep = "You are the greatest!"
+            tutorialStep = "You can do it!"
         }
         if (tutNumber == 10) {
-            tutorialStep = "Congratulations you're ready. \nMake it to 1000 and you beat the game. \nGood Luck."
+            tutorialStep = "Nice! Your almost ready..."
         }
     }
     
