@@ -28,6 +28,7 @@ class GameViewController: UIViewController  {
     var rightGlass = UIImageView()
     var bottomGlass = UIImageView()
     var audioPlayer: AVAudioPlayer!
+    var backgroundImage = UIImageView()
 
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var rightWall: UIImageView!
@@ -53,7 +54,9 @@ class GameViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
         
+        assignbackground()
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
@@ -70,19 +73,49 @@ class GameViewController: UIViewController  {
         
     }
     
+    func assignbackground(){
+            let background = UIImage(named: "Background")
+
+            var imageView : UIImageView!
+            imageView = UIImageView(frame: view.bounds)
+            imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = background
+            imageView.center = view.center
+            imageView.alpha = 0.5;
+            view.addSubview(imageView)
+            self.view.sendSubviewToBack(imageView)
+            
+        
+        }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.interstitialAd = createAd()
         
         if !Constants.didRevive{game = GameLogic()}
         
         sound = Sound() 
-        playVideo()
+        //playVideo()
         
         sound.loadSound()
         sound.loadFx()
         
         //Creates Score Label
         scoreLabel.text = String(game.score)
+        let color1 = hexStringToUIColor(hex: "#000000")
+        
+        //This adds stroke to the Title Text
+        let attrString = NSAttributedString(
+            string: scoreLabel.text!,
+            attributes: [
+                //bbe1fa
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        scoreLabel.attributedText = attrString
+        
+        
         //Defines Colors and
         game.selectColors(repetitions: 3, maxValue: 8)
         
@@ -114,7 +147,6 @@ class GameViewController: UIViewController  {
         player.seek(to: CMTime.zero)
         
         player.play()
-        
         
     }
     
@@ -405,4 +437,26 @@ struct Constants {
     static let rewardAdId = "ca-app-pub-3526204639815359/6560355524"
     static var canRevive = true
     static var didRevive = false
+}
+
+func hexStringToUIColor (hex:String) -> UIColor {
+    var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+    if (cString.hasPrefix("#")) {
+        cString.remove(at: cString.startIndex)
+    }
+
+    if ((cString.count) != 6) {
+        return UIColor.gray
+    }
+
+    var rgbValue:UInt64 = 0
+    Scanner(string: cString).scanHexInt64(&rgbValue)
+
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(0.3)
+    )
 }

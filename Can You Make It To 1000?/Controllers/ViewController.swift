@@ -32,14 +32,18 @@ class ViewController: UIViewController {
     var shouldShowGameScreen =  false
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.black
+        
+        assignbackground()
        
         //Plays background video
-        playVideo()
+        //playVideo()
         
         // Do any additional setup after loading the view.
         
         //This is the stroke color
-        let color1 = hexStringToUIColor(hex: "#bbe1fa")
+        let color1 = hexStringToUIColor(hex: "#000000")
         
         //This adds stroke to the Title Text
         let attrString = NSAttributedString(
@@ -47,14 +51,14 @@ class ViewController: UIViewController {
             attributes: [
                 //bbe1fa
                 NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -3.0,
+                NSAttributedString.Key.strokeWidth: -6.0,
             ]
         )
         titleLabel.attributedText = attrString
         
         //Sets transparancy on button holders
-        soundButton.alpha = 0.25
-        Tutorial.alpha = 0.25
+        //soundButton.alpha = 0.25
+        //Tutorial.alpha = 0.25
         
         //Load game number
         let defaults: UserDefaults = UserDefaults.standard
@@ -85,6 +89,25 @@ class ViewController: UIViewController {
         try? AVAudioSession.sharedInstance().setActive(true)
         
     }
+    
+    func assignbackground(){
+            let background = UIImage(named: "Background")
+
+            var imageView : UIImageView!
+            imageView = UIImageView(frame: view.bounds)
+            imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = background
+            imageView.center = view.center
+            imageView.alpha = 0.5;
+            view.addSubview(imageView)
+            self.view.sendSubviewToBack(imageView)
+        
+            
+            
+        
+        }
+    
     
     func playVideo() {
         

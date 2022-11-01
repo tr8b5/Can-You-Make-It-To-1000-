@@ -31,7 +31,13 @@ class GameOverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playVideo()
+        //playVideo()
+        assignbackground()
+        
+        self.view.backgroundColor = UIColor.black
+        
+        
+        let color1 = hexStringToUIColor(hex: "#000000")
         
         Constants.didRevive = false
         btnRevive.isHidden = !Constants.canRevive
@@ -63,9 +69,57 @@ class GameOverViewController: UIViewController {
             gameOverLabel.text = "Victory"
             gameOverLabel.textColor = UIColor.green
         }
+        
+        //This adds stroke to the Title Text
+        let attrString = NSAttributedString(
+            string: gameOverLabel.text!,
+            attributes: [
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        gameOverLabel.attributedText = attrString
+        
+        let attrString1 = NSAttributedString(
+            string: highScoreLabel.text!,
+            attributes: [
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        highScoreLabel.attributedText = attrString1
+        
+        let attrString2 = NSAttributedString(
+            string: scoreLabel.text!,
+            attributes: [
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        scoreLabel.attributedText = attrString2
+        
          interstitialAd =  createAd()
+        
+        
     }
     
+    func assignbackground(){
+            let background = UIImage(named: "Background")
+
+            var imageView : UIImageView!
+            imageView = UIImageView(frame: view.bounds)
+            imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = background
+            imageView.center = view.center
+            imageView.alpha = 0.5;
+            view.addSubview(imageView)
+            self.view.sendSubviewToBack(imageView)
+        
+            
+            
+        
+        }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -155,3 +209,5 @@ extension GameOverViewController : GADRewardedAdDelegate{
         }
     }
 }
+
+

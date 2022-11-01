@@ -29,6 +29,7 @@ struct Tutorial {
     var tutorialStep = "Do you really think you got what it \ntakes to beat this game?"
     var time: Float = 0.009
     var tutNumber = 0;
+    var lossCount = 0;
     
     var sprites = [
         Sprite(shape: [#imageLiteral(resourceName: "Blue  Circle"), #imageLiteral(resourceName: "Black  Circle"), #imageLiteral(resourceName: "Green  Circle"), #imageLiteral(resourceName: "Grey  Circle"), #imageLiteral(resourceName: "Red  Circle"), #imageLiteral(resourceName: "Purple  Circle"), #imageLiteral(resourceName: "White  Circle"), #imageLiteral(resourceName: "Yellow  Circle"), #imageLiteral(resourceName: "Orange  Circle")],
@@ -78,7 +79,19 @@ struct Tutorial {
         if (tutNumber == 7) {
             colorArray = [0,7,4]
         }
-        if (tutNumber > 7) {
+        if (tutNumber == 8) {
+            colorArray = [0,6,2]
+        }
+        if (tutNumber == 9) {
+            colorArray = [0,6,2]
+        }
+        if (tutNumber == 10) {
+            colorArray = [0,6,2]
+        }
+        if (tutNumber == 11) {
+            colorArray = [0,6,2]
+        }
+        if (tutNumber > 11) {
             //Empties color array
             colorArray = []
             //Creates the array of colors, while not repeating previously picked colors
@@ -200,7 +213,19 @@ struct Tutorial {
             shapeValue = 2
             color = 4
         }
-        if (tutNumber > 7) {
+        if (tutNumber == 8) {
+            shapeValue = 0
+        }
+        if (tutNumber == 9) {
+            shapeValue = 0
+        }
+        if (tutNumber == 10) {
+            shapeValue = 1
+        }
+        if (tutNumber == 11) {
+            shapeValue = 2
+        }
+        if (tutNumber > 11) {
             shapeValue = Int.random(in: 0...2)
         }
         correctValue = colorArray[shapeValue]
