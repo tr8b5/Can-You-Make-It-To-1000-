@@ -11,11 +11,14 @@ import GameplayKit
 import SpriteKit
 import AVFoundation
 import GoogleMobileAds
-
+import GameKit
 
 class GameViewController: UIViewController  {
     
-    
+    // Game Center
+    var gcEnabled = Bool() // Check if the user has Game Center enabled
+    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+
     
     private var interstitialAd: GADInterstitial?
     
