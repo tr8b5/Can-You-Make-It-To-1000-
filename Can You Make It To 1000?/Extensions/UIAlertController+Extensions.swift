@@ -15,4 +15,17 @@ extension UIAlertController {
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
         controller.present(alert, animated: true)
     }
+    
+    class func show(message: String, from controller: UIViewController, okAction: @escaping ()->Void, cancelAction: @escaping ()->Void) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            okAction()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in
+            cancelAction()
+        }
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+    }
 }

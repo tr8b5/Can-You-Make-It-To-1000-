@@ -36,6 +36,7 @@
 		0BF1F04C23FCC0DC00EDC9CC /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04B23FCC0DC00EDC9CC /* GameLogic.swift */; };
 		0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04D23FCC17500EDC9CC /* Shape.swift */; };
 		0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04F23FCC49900EDC9CC /* Sprite.swift */; };
+		9C38F7F329141B7A00580067 /* DisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */; };
 		9C839AE12912E1B20081EB4D /* GameViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */; };
 		9C839AE42912E3EA0081EB4D /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C839AE32912E3EA0081EB4D /* UIAlertController+Extensions.swift */; };
 		9CC5042729129A8A00C26971 /* Shatter-Purple-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC5012B29129A8900C26971 /* Shatter-Purple-1.png */; };
@@ -454,6 +455,7 @@
 		0BF1F04F23FCC49900EDC9CC /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		8B4C455E5768A40521524C8A /* Pods_Can_You_Make_It_To_1000_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Can_You_Make_It_To_1000_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC9A8CE905AD17B3D06145B /* Pods-Can You Make It To 1000?.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Can You Make It To 1000?.debug.xcconfig"; path = "Target Support Files/Pods-Can You Make It To 1000?/Pods-Can You Make It To 1000?.debug.xcconfig"; sourceTree = "<group>"; };
+		9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerViewController.swift; sourceTree = "<group>"; };
 		9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9C839AE32912E3EA0081EB4D /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		9CC5012B29129A8900C26971 /* Shatter-Purple-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shatter-Purple-1.png"; sourceTree = "<group>"; };
@@ -887,6 +889,7 @@
 				0B55A983240B2A7A00A2057D /* GameOverViewController.swift */,
 				0BD123C123FBF42C0097F68C /* GameViewController.swift */,
 				0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */,
+				9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1935,6 +1938,7 @@
 				0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */,
 				0B8BD17D249E81170044C0B4 /* Tutorial.swift in Sources */,
 				0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */,
+				9C38F7F329141B7A00580067 /* DisclaimerViewController.swift in Sources */,
 				0B55A984240B2A7A00A2057D /* GameOverViewController.swift in Sources */,
 				0B63C63725A6C503004D6118 /* Sound.swift in Sources */,
 				0B55BDF423FF1C9600AFB383 /* Wall.swift in Sources */,

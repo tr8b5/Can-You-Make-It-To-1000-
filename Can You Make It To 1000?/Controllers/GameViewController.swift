@@ -440,6 +440,7 @@ struct Constants {
     static let rewardAdId = "ca-app-pub-3526204639815359/6560355524"
     static var canRevive = true
     static var didRevive = false
+    static let disclaimerAccepted = "DISCLAIMER_ACCEPTED"
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {

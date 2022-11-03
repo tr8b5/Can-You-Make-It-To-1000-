@@ -88,6 +88,16 @@ class ViewController: UIViewController {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try? AVAudioSession.sharedInstance().setActive(true)
         
+        // Check if the user had accepted the disclaimer
+        guard let accepted = defaults.value(forKey: Constants.disclaimerAccepted) as? String,
+              accepted == "0"
+        else {
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "DisclaimerViewController") as? DisclaimerViewController {
+                controller.modalPresentationStyle = .fullScreen
+                self.present(controller, animated: true)
+            }
+            return
+        }
     }
     
     func assignbackground(){
