@@ -9,8 +9,8 @@
 import Foundation
 import GameKit
 
-extension GameViewController {
-    func aunthenticatePlayer() {
+extension ViewController: GKGameCenterControllerDelegate {
+    func authenticatePlayer() {
         let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = {(controller, error) -> Void in
             
@@ -18,7 +18,7 @@ extension GameViewController {
                 self.present(controller!, animated: true, completion: nil)
                 
             } else if localPlayer.isAuthenticated {
-                self.gcEnabled = true
+                Constants.gcEnabled = true
                 
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
                     if error != nil {
@@ -26,34 +26,34 @@ extension GameViewController {
                         print(error!)
                     }
                     else {
-                        self.gcDefaultLeaderBoard = leaderboardIdentifer!
+                        Constants.gcDefaultLeaderBoard = leaderboardIdentifer!
                     }
                 })
             } else {
-                self.gcEnabled = false
+                Constants.gcEnabled = false
                 UIAlertController.show("Local player could not be authenticated!", from: self)
                 print(error!)
             }
         }
     }
-    
-    func updateScore(with value:Int)
-    {
-        if (self.gcEnabled)
-        {
-            GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: [self.gcDefaultLeaderBoard], completionHandler: {error in})
-        }
-    }
-    
+        
     func openLeaderboard() {
-        let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
+        let GameCenterVC = GKGameCenterViewController(leaderboardID: Constants.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
         present(GameCenterVC, animated: true, completion: nil)
     }
-}
-
-extension GameViewController: GKGameCenterControllerDelegate {
+    
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated:true)
+    }
+}
+
+extension GameViewController {
+    func updateScore(with value:Int)
+    {
+        if (Constants.gcEnabled)
+        {
+            GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: [Constants.gcDefaultLeaderBoard], completionHandler: {error in})
+        }
     }
 }

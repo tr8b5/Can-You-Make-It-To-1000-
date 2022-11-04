@@ -11,15 +11,9 @@ import GameplayKit
 import SpriteKit
 import AVFoundation
 import GoogleMobileAds
-import GameKit
 
 class GameViewController: UIViewController  {
-    
-    // Game Center
-    var gcEnabled = Bool() // Check if the user has Game Center enabled
-    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
-
-    
+        
     private var interstitialAd: GADInterstitial?
     
     var sound = Sound()
@@ -264,6 +258,7 @@ class GameViewController: UIViewController  {
     
     func updateLabel() {
         game.updateScore()
+        updateScore(with: game.score)
         self.updateScene()
         scoreLabel.text = String(game.score)
     }
@@ -441,6 +436,9 @@ struct Constants {
     static var canRevive = true
     static var didRevive = false
     static let disclaimerAccepted = "DISCLAIMER_ACCEPTED"
+    // Game Center
+    static var gcEnabled = Bool() // Check if the user has Game Center enabled
+    static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {

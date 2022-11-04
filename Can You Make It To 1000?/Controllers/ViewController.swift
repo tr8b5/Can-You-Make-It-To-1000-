@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import GoogleMobileAds
+import GameKit
 
 class ViewController: UIViewController {
     
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
     var tutorialOn: Bool!
     var soundOn: Bool!
     var shouldShowGameScreen =  false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,10 +89,15 @@ class ViewController: UIViewController {
         
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try? AVAudioSession.sharedInstance().setActive(true)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let defaults: UserDefaults = UserDefaults.standard
+
         // Check if the user had accepted the disclaimer
         guard let accepted = defaults.value(forKey: Constants.disclaimerAccepted) as? String,
-              accepted == "0"
+              accepted == "1"
         else {
             if let controller = self.storyboard?.instantiateViewController(withIdentifier: "DisclaimerViewController") as? DisclaimerViewController {
                 controller.modalPresentationStyle = .fullScreen
@@ -98,6 +105,7 @@ class ViewController: UIViewController {
             }
             return
         }
+        authenticatePlayer()
     }
     
     func assignbackground(){
@@ -201,6 +209,14 @@ class ViewController: UIViewController {
     @IBAction func rankGameButtonClicked(_ sender: Any) {
         removeTitleMenu()
         self.performSegue(withIdentifier: "goToTutorial", sender: self)
+    }
+    
+    @IBAction func leaderboardButtonClicked(_ sender: Any) {
+        if Constants.gcEnabled {
+            openLeaderboard()
+        } else {
+            UIAlertController.show("Please wait while leaderboard is being prepared", from: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

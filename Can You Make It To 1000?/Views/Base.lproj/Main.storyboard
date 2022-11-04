@@ -138,7 +138,7 @@
                                         <rect key="frame" x="0.0" y="402" width="414" height="494"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Nqq-fo-Pzx">
-                                                <rect key="frame" x="0.0" y="50" width="414" height="172"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="283"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC7-Zb-fQf">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
@@ -162,6 +162,18 @@
                                                         <connections>
                                                             <action selector="rankGameButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Su-tq-6oQ"/>
                                                             <segue destination="oud-24-veI" kind="presentation" identifier="goToTutorial" id="FXA-uv-0w0"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QmV-Gs-VWb">
+                                                        <rect key="frame" x="0.0" y="222" width="414" height="61"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
+                                                        <color key="tintColor" red="0.79833249179999999" green="0.99001634540000005" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="LEADERBOARD">
+                                                            <color key="titleColor" systemColor="systemGreenColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="leaderboardButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="47S-ZT-jWT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -572,47 +584,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-pF-J6G">
-                                <rect key="frame" x="10" y="44" width="394" height="728"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-pF-J6G">
+                                <rect key="frame" x="10" y="54" width="394" height="718"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disclaimer!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3P-p6-17C">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
                                         <color key="tintColor" red="0.14539724679999999" green="0.21239100359999999" blue="0.57647058819999997" alpha="0.29933136189999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="57"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-Bl-mH6">
-                                        <rect key="frame" x="0.0" y="90" width="394" height="638"/>
+                                        <rect key="frame" x="0.0" y="92" width="394" height="626"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.r sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.r sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Kailasa-Bold" family="Kailasa" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="GPD-Bl-mH6" firstAttribute="top" secondItem="t3P-p6-17C" secondAttribute="bottom" constant="22" id="xVj-Eg-mKs"/>
+                                </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-4l-eSx">
-                                <rect key="frame" x="0.0" y="785.5" width="414" height="44.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-4l-eSx">
+                                <rect key="frame" x="0.0" y="777" width="414" height="43"/>
                                 <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKN-cM-UM5">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="44.5"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKN-cM-UM5">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="43"/>
+                                        <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="25"/>
                                         <color key="tintColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Accept">
-                                            <fontDescription key="titleFontDescription" name="Impact" family="Impact" pointSize="25"/>
-                                        </buttonConfiguration>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Accept">
+                                            <color key="titleColor" systemColor="systemGreenColor"/>
+                                        </state>
                                         <connections>
                                             <action selector="buttonEventWithSender:" destination="yOr-s4-DXv" eventType="touchUpInside" id="QFW-GA-4sF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0C-gz-zGS">
-                                        <rect key="frame" x="207" y="0.0" width="207" height="44.5"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0C-gz-zGS">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="43"/>
+                                        <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Reject">
-                                            <fontDescription key="titleFontDescription" name="Impact" family="Impact" pointSize="25"/>
-                                        </buttonConfiguration>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Reject">
+                                            <color key="titleColor" systemColor="systemRedColor"/>
+                                        </state>
                                         <connections>
                                             <action selector="buttonEventWithSender:" destination="yOr-s4-DXv" eventType="touchUpInside" id="gbt-5A-Zmq"/>
                                         </connections>
@@ -623,10 +640,10 @@
                         <viewLayoutGuide key="safeArea" id="qzF-Xy-0cL"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="EwZ-pF-J6G" firstAttribute="top" secondItem="37G-Ix-8BZ" secondAttribute="top" constant="44" id="2RQ-5C-wb0"/>
+                            <constraint firstItem="EwZ-pF-J6G" firstAttribute="top" secondItem="37G-Ix-8BZ" secondAttribute="top" constant="54" id="2RQ-5C-wb0"/>
                             <constraint firstItem="u2O-4l-eSx" firstAttribute="leading" secondItem="qzF-Xy-0cL" secondAttribute="leading" id="8Sl-Sl-2ee"/>
                             <constraint firstItem="qzF-Xy-0cL" firstAttribute="bottom" secondItem="EwZ-pF-J6G" secondAttribute="bottom" constant="66" id="R07-tz-Eww"/>
-                            <constraint firstItem="qzF-Xy-0cL" firstAttribute="bottom" secondItem="u2O-4l-eSx" secondAttribute="bottom" constant="8" id="Y2E-bg-LCU"/>
+                            <constraint firstItem="qzF-Xy-0cL" firstAttribute="bottom" secondItem="u2O-4l-eSx" secondAttribute="bottom" constant="18" id="XOT-Ro-Zj0"/>
                             <constraint firstItem="EwZ-pF-J6G" firstAttribute="leading" secondItem="qzF-Xy-0cL" secondAttribute="leading" constant="10" id="hqf-wK-7UZ"/>
                             <constraint firstItem="u2O-4l-eSx" firstAttribute="trailing" secondItem="qzF-Xy-0cL" secondAttribute="trailing" id="yaw-uB-UYz"/>
                             <constraint firstItem="qzF-Xy-0cL" firstAttribute="trailing" secondItem="EwZ-pF-J6G" secondAttribute="trailing" constant="10" id="zcu-Z8-06f"/>

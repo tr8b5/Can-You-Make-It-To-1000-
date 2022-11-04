@@ -27,5 +27,6 @@ extension UIAlertController {
         
         alert.addAction(okAction)
         alert.addAction(cancelAction)
+        controller.present(alert, animated: true)
     }
 }
