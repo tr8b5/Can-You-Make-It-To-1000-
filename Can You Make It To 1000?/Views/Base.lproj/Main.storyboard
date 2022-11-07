@@ -267,6 +267,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-Lv-rUz">
                                         <rect key="frame" x="0.0" y="120" width="414" height="648"/>
                                         <subviews>
+                                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XdW-WN-1G0" customClass="LottieAnimationView" customModule="Lottie">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="633"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="will_coins"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green Wall" translatesAutoresizingMaskIntoConstraints="NO" id="zdm-O2-Tuj">
                                                 <rect key="frame" x="10" y="15" width="66" height="618"/>
                                                 <constraints>
@@ -370,10 +378,11 @@
                         <outlet property="bottomWall" destination="U5k-ES-kaC" id="ALA-nH-ltr"/>
                         <outlet property="bottomWallView" destination="JZP-hM-gOn" id="rXZ-pR-9II"/>
                         <outlet property="circleIcon" destination="S6M-ub-aQd" id="Nx9-C5-EQR"/>
+                        <outlet property="coinAnimationView" destination="XdW-WN-1G0" id="Okd-BA-uC6"/>
                         <outlet property="leftDiamond" destination="ZZE-a5-zWa" id="r3X-3f-aTT"/>
                         <outlet property="leftWall" destination="LMq-1L-fW9" id="zTs-sM-2xY"/>
                         <outlet property="rightDiamond" destination="mbH-5v-Rl4" id="hVb-4R-CMH"/>
-                        <outlet property="rightWall" destination="zdm-O2-Tuj" id="1ZL-Ce-X8B"/>
+                        <outlet property="rightWall" destination="zdm-O2-Tuj" id="8nA-7y-ndk"/>
                         <outlet property="scoreLabel" destination="uiM-OS-vPP" id="5eX-uG-3ts"/>
                         <outlet property="shape" destination="tHz-BD-i4N" id="HSn-aL-oxh"/>
                         <outlet property="squareIcon" destination="Hfa-dn-pS0" id="cZI-zb-wT8"/>

@@ -11,7 +11,7 @@ import GameplayKit
 import SpriteKit
 import AVFoundation
 import GoogleMobileAds
-
+import Lottie
 class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
     private var interstitialAd: GADInterstitial?
@@ -41,6 +41,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var timerBar: UIProgressView!
     @IBOutlet weak var wallView: UIView!
     @IBOutlet weak var bottomWallView: UIView!
+    @IBOutlet weak var coinAnimationView: LottieAnimationView!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
@@ -67,7 +68,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         swipeDown.direction = UISwipeGestureRecognizer.Direction.down
         self.view.addGestureRecognizer(swipeDown)
         
-        
+        coinAnimationView.loopMode = .playOnce
+        coinAnimationView.animationSpeed = 1
     }
     
     func assignbackground(){
@@ -213,23 +215,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         rightWall.image = game.pickWalls()[1]
         bottomWall.image = game.pickWalls()[2]
         
-        rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
-        rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-        rightGlass.layer.zPosition = -1
-        rightGlass.alpha = 0
-        wallView.addSubview(rightGlass)
-        
-        leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
-        leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-        leftGlass.layer.zPosition = -1
-        leftGlass.alpha = 0
-        wallView.addSubview(leftGlass)
-        
-        bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
-        bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-        bottomGlass.layer.zPosition = -1
-        bottomGlass.alpha = 0
-        bottomWallView.addSubview(bottomGlass)
+//        rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
+//        rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
+//        rightGlass.layer.zPosition = -1
+//        rightGlass.alpha = 0
+//        wallView.addSubview(rightGlass)
+//
+//        leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
+//        leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
+//        leftGlass.layer.zPosition = -1
+//        leftGlass.alpha = 0
+//        wallView.addSubview(leftGlass)
+//
+//        bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
+//        bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
+//        bottomGlass.layer.zPosition = -1
+//        bottomGlass.alpha = 0
+//        bottomWallView.addSubview(bottomGlass)
         
         shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
         
@@ -242,9 +244,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     
     func playSound(breakGlassAudio: String) {
       //  if (sound.fx == true) {
-            let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
-            audioPlayer = try! AVAudioPlayer(contentsOf: url!)
-            audioPlayer.delegate = self
+        let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
+        audioPlayer = try! AVAudioPlayer(contentsOf: url!)
+        audioPlayer.delegate = self
+
             audioPlayer.play()
        // }
     }
@@ -316,20 +319,21 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
-                UIView.animate(withDuration: 0.3, delay: 0) {
+               self.playSound(breakGlassAudio: "Dook")
+
+                UIView.animate(withDuration:0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.rightDiamondValue {
-                    self.playSound(breakGlassAudio: "Dook")
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        
-                        self.animate(imageView: self.rightGlass, images: self.shatter2Images)
+                    self.coinAnimationView.play { _ in
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         self.rightGlass.alpha = 1
                         self.updateLabel()
                     }
-                    
+
                 } else {
                     
                     self.gameOver()
@@ -337,36 +341,39 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 }
                 //print("Swiped right")
             case UISwipeGestureRecognizer.Direction.down:
-                UIView.animate(withDuration: 0.3, delay: 0) {
+                self.playSound(breakGlassAudio: "Dook")
+
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
                 }
                 
                 if self.game.correctValue == self.game.bottomDiamondValue {
-                    self.playSound(breakGlassAudio: "Dook")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.coinAnimationView.play { _ in
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
-                        self.animate(imageView: self.bottomGlass, images: self.shatter1Images)
                         self.bottomGlass.alpha = 1
                         self.updateLabel()
                     }
                 } else {
                     
                     self.gameOver()
-                    
                 }
+                //}
                 //print("Swiped down")
             case UISwipeGestureRecognizer.Direction.left:
-                UIView.animate(withDuration: 0.3, delay: 0) {
+                self.playSound(breakGlassAudio: "Dook")
+
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.leftDiamondValue {
-                    self.playSound(breakGlassAudio: "Dook")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.coinAnimationView.play { _ in
+                    }
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
-                        self.animate(imageView: self.leftGlass, images: self.shatterImages)
                         self.leftGlass.alpha = 1
                         self.updateLabel()
                     }
