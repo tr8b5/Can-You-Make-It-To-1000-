@@ -27,7 +27,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     var audioPlayer: AVAudioPlayer!
     var backgroundImage = UIImageView()
 
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var scoreButton: UIButton!
     @IBOutlet weak var rightWall: UIImageView!
     @IBOutlet weak var leftWall: UIImageView!
     @IBOutlet weak var bottomWall: UIImageView!
@@ -70,6 +70,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         coinAnimationView.loopMode = .playOnce
         coinAnimationView.animationSpeed = 1
+        
+        timerBar.layer.cornerRadius = 5
+        timerBar.clipsToBounds = true
     }
     
     func assignbackground(){
@@ -99,22 +102,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         sound.loadSound()
         sound.loadFx()
         
-        //Creates Score Label
-        scoreLabel.text = String(game.score)
-        let color1 = hexStringToUIColor(hex: "#000000")
-        
-        //This adds stroke to the Title Text
-        let attrString = NSAttributedString(
-            string: scoreLabel.text!,
-            attributes: [
-                //bbe1fa
-                NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -6.0,
-            ]
-        )
-        scoreLabel.attributedText = attrString
-        
-        
+        updateScoreBoard(score: "\(game.score)")
         //Defines Colors and
         game.selectColors(repetitions: 3, maxValue: 8)
         
@@ -243,13 +231,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func playSound(breakGlassAudio: String) {
-      //  if (sound.fx == true) {
-        let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
-        audioPlayer = try! AVAudioPlayer(contentsOf: url!)
-        audioPlayer.delegate = self
-
+        if (sound.fx == true) {
+            let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
+            audioPlayer = try! AVAudioPlayer(contentsOf: url!)
+            audioPlayer.delegate = self
+            
             audioPlayer.play()
-       // }
+        }
     }
     
     @objc func countDown() {
@@ -264,7 +252,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         game.updateScore()
         updateScore(with: game.score)
         self.updateScene()
-        scoreLabel.text = String(game.score)
+        updateScoreBoard(score: "\(game.score)")
     }
     
     func gameOver() {
@@ -413,6 +401,21 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         ad.delegate = self
         ad.load(GADRequest())
         return ad
+    }
+    
+    private func updateScoreBoard(score: String) {
+        let color1 = hexStringToUIColor(hex: "#000000")
+
+        //This adds stroke to the Title Text
+        let attrString = NSAttributedString(
+            string: "$"+score,
+            attributes: [
+                //bbe1fa
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        scoreButton.setAttributedTitle(attrString, for: .normal)
     }
 }
 

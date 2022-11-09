@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet var fxLabel: UILabel!
     @IBOutlet var soundLabel: UILabel!
     @IBOutlet weak var Tutorial: UIButton!
-    @IBOutlet weak var soundButtonOn: UIImageView!
+    @IBOutlet weak var fxButton: UIButton!
     @IBOutlet weak var tutorialButtonOn: UIImageView!
     
     @IBOutlet var videoLayer: UIView!
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //This is the stroke color
-        let color1 = hexStringToUIColor(hex: "#000000")
+        /*let color1 = hexStringToUIColor(hex: "#000000")
         
         //This adds stroke to the Title Text
         let attrString = NSAttributedString(
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
         }
         
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
-        try? AVAudioSession.sharedInstance().setActive(true)
+        try? AVAudioSession.sharedInstance().setActive(true)*/
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -142,10 +142,7 @@ class ViewController: UIViewController {
         self.videoLayer.layer.addSublayer(playerLayer)
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         player.seek(to: CMTime.zero)
-        
         player.play()
-        
-        
     }
     
     @objc func playerItemDidReachEnd() {
@@ -159,21 +156,20 @@ class ViewController: UIViewController {
         rankGameButton.removeFromSuperview()
     }
     
-    @IBAction func Tutorial(_ sender: Any) {
+    @IBAction func fx(_ sender: Any) {
         
         if (sound.fx == false) {
             sound.fx = true;
-            tutorialButtonOn.alpha = 1
+            fxButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveFx()
             return
         }
         if (sound.fx == true) {
             sound.fx = false;
-            tutorialButtonOn.alpha = 0
+            fxButton.setImage(UIImage(named: "button_holder"), for: .normal)
             sound.saveFx()
             return
         }
-        
     }
     
     @IBAction func soundButton(_ sender: Any) {
@@ -182,33 +178,33 @@ class ViewController: UIViewController {
             sound.sound = true;
             MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
             MusicPlayer.shared.speedUpBackgroundMusic()
-            soundButtonOn.alpha = 1
+            soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveSound()
             return
         }
         if (sound.sound == true) {
             sound.sound = false;
             MusicPlayer.shared.stopBackgroundMusic()
-            soundButtonOn.alpha = 0
+            soundButton.setImage(UIImage(named: "button_holder"), for: .normal)
             sound.saveSound()
             return
         }
-        
     }
     
     @IBAction func playButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToGame", sender: self)
     }
     
     @IBAction func tutorialButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToTutorial", sender: self)
     }
     
     @IBAction func rankGameButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToTutorial", sender: self)
+    }
+    
+    @IBAction func shareButtonClicked(_ sender: Any) {
+        openShare(applink: "https://github.com/tr8b5/Can-You-Make-It-To-1000-", message: "join thousand of other players in this challenge")
     }
     
     @IBAction func leaderboardButtonClicked(_ sender: Any) {
@@ -248,5 +244,12 @@ class ViewController: UIViewController {
         )
     }
 
+    func openShare(applink: String, message: String) {
+        let appLink = NSURL(string: applink)
+        let shareAll = [appLink] as [Any]
+        let activityViewController = UIActivityViewController(activityItems: shareAll as [Any], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 

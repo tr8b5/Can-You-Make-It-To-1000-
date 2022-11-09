@@ -17,7 +17,7 @@ class GameOverViewController: UIViewController {
     @IBOutlet weak var highScoreLabel: UILabel!
     @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var gameOverLabel: UILabel!
+   // @IBOutlet weak var gameOverLabel: UILabel!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
@@ -53,32 +53,32 @@ class GameOverViewController: UIViewController {
             }
         let defaults: UserDefaults = UserDefaults.standard
         highscore = defaults.value(forKey: "highscore") as? Int ?? 0
-        highScoreLabel.text = "HIGHSCORE: \(String(highscore))"
+        highScoreLabel.text = "$\(String(highscore))"
         
-        scoreLabel.text = "SCORE: \(String(score))"
+        scoreLabel.text = "$\(String(score))"
         
         if score > highscore {
             highscore = score
             let defaults: UserDefaults = UserDefaults.standard
             defaults.set(highscore, forKey: "highscore")
             defaults.synchronize()
-            highScoreLabel.text = "HIGHSCORE: \(String(highscore))"
+            highScoreLabel.text = "$\(String(highscore))"
         }
         
         if score == 1000 {
-            gameOverLabel.text = "Victory"
-            gameOverLabel.textColor = UIColor.green
+//            gameOverLabel.text = "Victory"
+//            gameOverLabel.textColor = UIColor.green
         }
         
         //This adds stroke to the Title Text
-        let attrString = NSAttributedString(
+        /*let attrString = NSAttributedString(
             string: gameOverLabel.text!,
             attributes: [
                 NSAttributedString.Key.strokeColor: color1,
                 NSAttributedString.Key.strokeWidth: -6.0,
             ]
         )
-        gameOverLabel.attributedText = attrString
+        gameOverLabel.attributedText = attrString*/
         
         let attrString1 = NSAttributedString(
             string: highScoreLabel.text!,

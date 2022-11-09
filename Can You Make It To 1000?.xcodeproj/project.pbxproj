@@ -412,6 +412,7 @@
 		9CC5059829129A8A00C26971 /* Shatter-Gray-00025.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC502A529129A8900C26971 /* Shatter-Gray-00025.png */; };
 		9CC5059929129A8A00C26971 /* Shatter-Gray-00019.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC502A629129A8900C26971 /* Shatter-Gray-00019.png */; };
 		9CC5059A29129A8A00C26971 /* Shatter-Gray-00026.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC502A729129A8900C26971 /* Shatter-Gray-00026.png */; };
+		9CEEEC41291A977900583925 /* Lemon Days.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CEEEC40291A977900583925 /* Lemon Days.ttf */; };
 		B97610B303A32A08B7AFFF96 /* Pods_Can_You_Make_It_To_1000_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4C455E5768A40521524C8A /* Pods_Can_You_Make_It_To_1000_.framework */; };
 /* End PBXBuildFile section */
 
@@ -833,6 +834,7 @@
 		9CC502A629129A8900C26971 /* Shatter-Gray-00019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shatter-Gray-00019.png"; sourceTree = "<group>"; };
 		9CC502A729129A8900C26971 /* Shatter-Gray-00026.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shatter-Gray-00026.png"; sourceTree = "<group>"; };
 		9CC5070F29129BE800C26971 /* Can You Make It To 1000?.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Can You Make It To 1000?.entitlements"; sourceTree = "<group>"; };
+		9CEEEC40291A977900583925 /* Lemon Days.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lemon Days.ttf"; sourceTree = "<group>"; };
 		A85F0D9BFF65A2E5E8908247 /* Pods-Can You Make It To 1000?.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Can You Make It To 1000?.release.xcconfig"; path = "Target Support Files/Pods-Can You Make It To 1000?/Pods-Can You Make It To 1000?.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -878,6 +880,7 @@
 				0B29A5CF259347F900A92D8F /* APPSBYWILL1.mp3 */,
 				0B29A5D0259347FC00A92D8F /* APPSBYWILL2.mp3 */,
 				0BBB31992490B11C006734E0 /* Dook.mp3 */,
+				9CEEEC40291A977900583925 /* Lemon Days.ttf */,
 				0B93A7BB240ACA0700AAFF0B /* impact.ttf */,
 				0B93A7B9240ACA0700AAFF0B /* Impacted.ttf */,
 				0B93A7BA240ACA0700AAFF0B /* unicode.impact.ttf */,
@@ -1550,6 +1553,7 @@
 				9CC5056D29129A8A00C26971 /* Shatter_00011.png in Resources */,
 				9CC5048429129A8A00C26971 /* Shatter-Green-00033.png in Resources */,
 				9CC5046129129A8A00C26971 /* Shatter-Orange-19.png in Resources */,
+				9CEEEC41291A977900583925 /* Lemon Days.ttf in Resources */,
 				9CC504AF29129A8A00C26971 /* Shatter-Yellow-33.png in Resources */,
 				0B93A7BC240ACB4100AAFF0B /* impact.ttf in Resources */,
 				9CC5050F29129A8A00C26971 /* Shatter-Blue-21.png in Resources */,

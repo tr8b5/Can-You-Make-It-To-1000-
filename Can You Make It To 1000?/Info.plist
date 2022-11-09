@@ -32,6 +32,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>impact.ttf</string>
+		<string>Lemon Days.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
