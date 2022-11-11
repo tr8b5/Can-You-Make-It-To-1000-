@@ -45,23 +45,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //This is the stroke color
-        /*let color1 = hexStringToUIColor(hex: "#000000")
-        
-        //This adds stroke to the Title Text
-        let attrString = NSAttributedString(
-            string: titleLabel.text!,
-            attributes: [
-                //bbe1fa
-                NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -6.0,
-            ]
-        )
-        titleLabel.attributedText = attrString
-        
-        //Sets transparancy on button holders
-        //soundButton.alpha = 0.25
-        //Tutorial.alpha = 0.25
-        
+        let color1 = hexStringToUIColor(hex: "#000000")
+                
         //Load game number
         let defaults: UserDefaults = UserDefaults.standard
         gameNumber = defaults.value(forKey: "gameNumber") as? Int ?? 0
@@ -69,15 +54,11 @@ class ViewController: UIViewController {
         
         sound.loadSound()
         sound.loadFx()
-        
-        print("Game number: ", gameNumber)
-        
-        if (sound.fx == false) {
-            tutorialButtonOn.alpha = 0
-        }
+                
         if (sound.sound == false) {
-            soundButtonOn.alpha = 0
+            soundButton.setImage(nil, for: .normal)
         } else {
+            soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
             MusicPlayer.shared.speedUpBackgroundMusic()
         }
@@ -88,7 +69,7 @@ class ViewController: UIViewController {
         }
         
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
-        try? AVAudioSession.sharedInstance().setActive(true)*/
+        try? AVAudioSession.sharedInstance().setActive(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -166,7 +147,7 @@ class ViewController: UIViewController {
         }
         if (sound.fx == true) {
             sound.fx = false;
-            fxButton.setImage(UIImage(named: "button_holder"), for: .normal)
+            fxButton.setImage(nil, for: .normal)
             sound.saveFx()
             return
         }
@@ -185,7 +166,7 @@ class ViewController: UIViewController {
         if (sound.sound == true) {
             sound.sound = false;
             MusicPlayer.shared.stopBackgroundMusic()
-            soundButton.setImage(UIImage(named: "button_holder"), for: .normal)
+            soundButton.setImage(nil, for: .normal)
             sound.saveSound()
             return
         }

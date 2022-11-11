@@ -27,6 +27,7 @@ class GameOverViewController: UIViewController {
     var highscore = 0
     private var interstitialAd: GADInterstitial?
     var rewardedAd: GADRewardedAd?
+    var didTimeUp: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +43,19 @@ class GameOverViewController: UIViewController {
         Constants.didRevive = false
         btnRevive.isHidden = !Constants.canRevive
         if !Constants.canRevive {Constants.canRevive = true}
-        rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
-        rewardedAd?.load(GADRequest()) { error in
-              if let error = error {
-                print(error.localizedDescription)
-                // Handle ad failed to load case.
-              } else {
-                // Ad successfully loaded.
-              }
+        
+        if didTimeUp {
+            rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
+            rewardedAd?.load(GADRequest()) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    // Handle ad failed to load case.
+                } else {
+                    // Ad successfully loaded.
+                }
             }
+        }
+
         let defaults: UserDefaults = UserDefaults.standard
         highscore = defaults.value(forKey: "highscore") as? Int ?? 0
         highScoreLabel.text = "$\(String(highscore))"
@@ -98,7 +103,7 @@ class GameOverViewController: UIViewController {
         )
         scoreLabel.attributedText = attrString2
         
-         interstitialAd =  createAd()
+         //interstitialAd =  createAd()
         
         
     }

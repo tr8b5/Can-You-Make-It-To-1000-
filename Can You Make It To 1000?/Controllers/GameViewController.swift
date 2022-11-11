@@ -48,7 +48,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     
     var timer = Timer()
     var randomNumber: Int = 0
-    
+    var didTimeUp: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +154,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         if game.score == 1000 {
             timer.invalidate()
-            self.gameOver()
+            self.gameOver(timeUp: false)
         } else {
         
         timer.invalidate()
@@ -244,7 +245,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         timerBar.progress = timerBar.progress - 0.001
         if timerBar.progress == 0.0 {
             timer.invalidate()
-            gameOver()
+            gameOver(timeUp: true)
         }
     }
     
@@ -255,8 +256,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         updateScoreBoard(score: "\(game.score)")
     }
     
-    func gameOver() {
+    func gameOver(timeUp: Bool) {
+        timer.invalidate()
+        timerBar.progress = 1.0
+        didTimeUp = timeUp
+
         game.loadGamesTillAd()
+
         if game.gamesTillAd == 0 {
             displayAd()
             game.updateGamesTillAd()
@@ -324,7 +330,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
 
                 } else {
                     
-                    self.gameOver()
+                    self.gameOver(timeUp: false)
                     
                 }
                 //print("Swiped right")
@@ -345,7 +351,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                     }
                 } else {
                     
-                    self.gameOver()
+                    self.gameOver(timeUp: false)
                 }
                 //}
                 //print("Swiped down")
@@ -367,7 +373,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                     }
                 } else {
                     
-                    self.gameOver()
+                    self.gameOver(timeUp: false)
                     
                 }
                 //print("Swiped left")
@@ -385,6 +391,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                
                let destinationVC = segue.destination as! GameOverViewController
             destinationVC.score = game.score
+               destinationVC.didTimeUp = didTimeUp
            }
        }
     
@@ -428,7 +435,7 @@ extension GameViewController: AVAudioPlayerDelegate {
 extension GameViewController:  GADInterstitialDelegate {
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitialAd = createAd()
-        gameOver()
+        gameOver(timeUp: false)
     }
 }
 

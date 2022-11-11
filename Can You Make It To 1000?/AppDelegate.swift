@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.set(4, forKey: "gamesTillAd")
+
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         return true
