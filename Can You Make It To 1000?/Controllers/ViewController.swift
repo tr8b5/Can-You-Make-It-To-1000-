@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             soundButton.setImage(nil, for: .normal)
         } else {
             soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
-            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "CanYouMake1kBeat")
             MusicPlayer.shared.speedUpBackgroundMusic()
         }
         
@@ -157,7 +157,7 @@ class ViewController: UIViewController {
         
         if (sound.sound == false) {
             sound.sound = true;
-            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "CanYouMake1kBeat")
             MusicPlayer.shared.speedUpBackgroundMusic()
             soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveSound()
