@@ -33,6 +33,11 @@
 		0BDD39B823F4909100BD40EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDD39B723F4909100BD40EB /* ViewController.swift */; };
 		0BDD39BB23F4909100BD40EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BDD39B923F4909100BD40EB /* Main.storyboard */; };
 		0BDD39BD23F490A300BD40EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BDD39BC23F490A300BD40EB /* Assets.xcassets */; };
+		0BE03D1F29214A1A0005D28C /* Beat%25202%2520-%2520Fortnite.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BE03D1E29214A1A0005D28C /* Beat%25202%2520-%2520Fortnite.wav */; };
+		0BE03D2129214FF90005D28C /* CanYouMake1kBeat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BE03D2029214FF80005D28C /* CanYouMake1kBeat.mp3 */; };
+		0BE03D232921643A0005D28C /* Point.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BE03D222921643A0005D28C /* Point.mp3 */; };
+		0BE03D25292164DF0005D28C /* Victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BE03D24292164DE0005D28C /* Victory.mp3 */; };
+		0BE03D27292168F00005D28C /* Wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BE03D26292168EF0005D28C /* Wrong.mp3 */; };
 		0BF1F04C23FCC0DC00EDC9CC /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04B23FCC0DC00EDC9CC /* GameLogic.swift */; };
 		0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04D23FCC17500EDC9CC /* Shape.swift */; };
 		0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04F23FCC49900EDC9CC /* Sprite.swift */; };
@@ -452,6 +457,11 @@
 		0BDD39BA23F4909100BD40EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0BDD39BC23F490A300BD40EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0BDD39C123F490A300BD40EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BE03D1E29214A1A0005D28C /* Beat%25202%2520-%2520Fortnite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Beat%25202%2520-%2520Fortnite.wav"; path = "../../../Beat%25202%2520-%2520Fortnite.wav"; sourceTree = "<group>"; };
+		0BE03D2029214FF80005D28C /* CanYouMake1kBeat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CanYouMake1kBeat.mp3; sourceTree = "<group>"; };
+		0BE03D222921643A0005D28C /* Point.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Point.mp3; sourceTree = "<group>"; };
+		0BE03D24292164DE0005D28C /* Victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Victory.mp3; sourceTree = "<group>"; };
+		0BE03D26292168EF0005D28C /* Wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wrong.mp3; sourceTree = "<group>"; };
 		0BF1F04B23FCC0DC00EDC9CC /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		0BF1F04D23FCC17500EDC9CC /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		0BF1F04F23FCC49900EDC9CC /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
@@ -876,6 +886,11 @@
 		0B93A7B8240AC9F600AAFF0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0BE03D26292168EF0005D28C /* Wrong.mp3 */,
+				0BE03D24292164DE0005D28C /* Victory.mp3 */,
+				0BE03D222921643A0005D28C /* Point.mp3 */,
+				0BE03D2029214FF80005D28C /* CanYouMake1kBeat.mp3 */,
+				0BE03D1E29214A1A0005D28C /* Beat%25202%2520-%2520Fortnite.wav */,
 				9C6B3A982919459700B73F77 /* will_coins.json */,
 				0B29A5CF259347F900A92D8F /* APPSBYWILL1.mp3 */,
 				0B29A5D0259347FC00A92D8F /* APPSBYWILL2.mp3 */,
@@ -1555,6 +1570,7 @@
 				9CC5046129129A8A00C26971 /* Shatter-Orange-19.png in Resources */,
 				9CEEEC41291A977900583925 /* Lemon Days.ttf in Resources */,
 				9CC504AF29129A8A00C26971 /* Shatter-Yellow-33.png in Resources */,
+				0BE03D27292168F00005D28C /* Wrong.mp3 in Resources */,
 				0B93A7BC240ACB4100AAFF0B /* impact.ttf in Resources */,
 				9CC5050F29129A8A00C26971 /* Shatter-Blue-21.png in Resources */,
 				9CC504EE29129A8A00C26971 /* Shatter-Red-22.png in Resources */,
@@ -1564,6 +1580,7 @@
 				9CC504A729129A8A00C26971 /* Shatter-Yellow-25.png in Resources */,
 				9CC5050029129A8A00C26971 /* Shatter-Red-3.png in Resources */,
 				9CC5045329129A8A00C26971 /* Shatter-Orange-15.png in Resources */,
+				0BE03D2129214FF90005D28C /* CanYouMake1kBeat.mp3 in Resources */,
 				9CC5052829129A8A00C26971 /* Shatter-Gray-_00024.png in Resources */,
 				9CC504D529129A8A00C26971 /* Shatter-White-9.png in Resources */,
 				9CC5046229129A8A00C26971 /* Shatter-Orange-18.png in Resources */,
@@ -1803,6 +1820,8 @@
 				9CC5059929129A8A00C26971 /* Shatter-Gray-00019.png in Resources */,
 				9CC5058929129A8A00C26971 /* Shatter-Gray-00005.png in Resources */,
 				9CC5047D29129A8A00C26971 /* Shatter-Green-00030.png in Resources */,
+				0BE03D25292164DF0005D28C /* Victory.mp3 in Resources */,
+				0BE03D1F29214A1A0005D28C /* Beat%25202%2520-%2520Fortnite.wav in Resources */,
 				9CC504B629129A8A00C26971 /* Shatter-Black-4.png in Resources */,
 				9CC504A929129A8A00C26971 /* Shatter-Yellow-30.png in Resources */,
 				9CC5045829129A8A00C26971 /* Shatter-Orange-13.png in Resources */,
@@ -1824,6 +1843,7 @@
 				9CC5044729129A8A00C26971 /* Shatter-Purple-8.png in Resources */,
 				9CC5046429129A8A00C26971 /* Shatter-Orange-30.png in Resources */,
 				9CC5049C29129A8A00C26971 /* Shatter-Yellow-3.png in Resources */,
+				0BE03D232921643A0005D28C /* Point.mp3 in Resources */,
 				9CC5048229129A8A00C26971 /* Shatter-Green-00031.png in Resources */,
 				9CC5048E29129A8A00C26971 /* Shatter-Yellow-16.png in Resources */,
 				9CC5054629129A8A00C26971 /* Shatter-23.png in Resources */,

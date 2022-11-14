@@ -350,7 +350,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
-               self.playSound(breakGlassAudio: "Dook")
 
                 UIView.animate(withDuration:0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
@@ -361,19 +360,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                     self.coinAnimationView.play { _ in
                         self.updateSceneStepTwo()
                     }
+                    self.playSound(breakGlassAudio: "Point")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         self.rightGlass.alpha = 1
                         self.updateLabel()
                     }
 
                 } else {
+                    self.playSound(breakGlassAudio: "Wrong")
                     
                     self.gameOver(timeUp: false)
                     
                 }
                 //print("Swiped right")
             case UISwipeGestureRecognizer.Direction.down:
-                self.playSound(breakGlassAudio: "Dook")
 
                 UIView.animate(withDuration: 0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
@@ -383,19 +383,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                     self.coinAnimationView.play { _ in
                         self.updateSceneStepTwo()
                     }
+                    self.playSound(breakGlassAudio: "Point")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
                         self.bottomGlass.alpha = 1
                         self.updateLabel()
                     }
                 } else {
+                    self.playSound(breakGlassAudio: "Wrong")
                     
                     self.gameOver(timeUp: false)
                 }
                 //}
                 //print("Swiped down")
             case UISwipeGestureRecognizer.Direction.left:
-                self.playSound(breakGlassAudio: "Dook")
 
                 UIView.animate(withDuration: 0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
@@ -406,6 +407,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                         self.updateSceneStepTwo()
 
                     }
+                    self.playSound(breakGlassAudio: "Point")
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
@@ -413,6 +415,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                         self.updateLabel()
                     }
                 } else {
+                    self.playSound(breakGlassAudio: "Wrong")
                     
                     self.gameOver(timeUp: false)
                     
