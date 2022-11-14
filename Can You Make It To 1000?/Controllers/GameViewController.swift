@@ -111,6 +111,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
         triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
         updateScene()
+        updateSceneStepTwo()
     }
     
     
@@ -176,7 +177,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             self.bottomDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
         }
         
-        UIView.animate(withDuration: 0.5) {
+       /* UIView.animate(withDuration: 0.5) {
             self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }
         UIView.animate(withDuration: 0.5) {
@@ -226,9 +227,45 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
         
-        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
+        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom*/
         }
     
+    }
+    
+    func updateSceneStepTwo() {
+        UIView.animate(withDuration: 0.5) {
+            self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+
+        game.difficulty()
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+        
+        leftDiamond.image = game.sprites[game.shapeValue].diamond[game.leftDiamondValue]
+        rightDiamond.image = game.sprites[game.shapeValue].diamond[game.rightDiamondValue]
+        bottomDiamond.image = game.sprites[game.shapeValue].diamond[game.bottomDiamondValue]
+        
+        game.resetwallcount()
+        
+        leftWall.image = game.pickWalls()[0]
+        rightWall.image = game.pickWalls()[1]
+        bottomWall.image = game.pickWalls()[2]
+
+        shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
+        
+        shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
+        
+        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
     }
     
     func playSound(breakGlassAudio: String) {
@@ -315,13 +352,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             case UISwipeGestureRecognizer.Direction.right:
                self.playSound(breakGlassAudio: "Dook")
 
-                UIView.animate(withDuration:0, delay: 0) {
+                UIView.animate(withDuration:0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.rightDiamondValue {
                     
                     self.coinAnimationView.play { _ in
+                        self.updateSceneStepTwo()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         self.rightGlass.alpha = 1
@@ -337,12 +375,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             case UISwipeGestureRecognizer.Direction.down:
                 self.playSound(breakGlassAudio: "Dook")
 
-                UIView.animate(withDuration: 0, delay: 0) {
+                UIView.animate(withDuration: 0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
                 }
                 
                 if self.game.correctValue == self.game.bottomDiamondValue {
                     self.coinAnimationView.play { _ in
+                        self.updateSceneStepTwo()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
@@ -358,12 +397,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             case UISwipeGestureRecognizer.Direction.left:
                 self.playSound(breakGlassAudio: "Dook")
 
-                UIView.animate(withDuration: 0, delay: 0) {
+                UIView.animate(withDuration: 0.3, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.leftDiamondValue {
                     self.coinAnimationView.play { _ in
+                        self.updateSceneStepTwo()
+
                     }
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
@@ -389,9 +430,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
            
            if segue.identifier == "gotToGameOver" {
                
-               let destinationVC = segue.destination as! GameOverViewController
+            let destinationVC = segue.destination as! GameOverViewController
             destinationVC.score = game.score
-               destinationVC.didTimeUp = didTimeUp
+            destinationVC.didTimeUp = didTimeUp
            }
        }
     

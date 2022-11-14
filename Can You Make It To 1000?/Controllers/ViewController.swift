@@ -63,6 +63,12 @@ class ViewController: UIViewController {
             MusicPlayer.shared.speedUpBackgroundMusic()
         }
         
+        if (sound.fx == false) {
+            fxButton.setImage(nil, for: .normal)
+        } else {
+            fxButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
+        }
+        
         if shouldShowGameScreen{
             playButtonClicked("")
             
