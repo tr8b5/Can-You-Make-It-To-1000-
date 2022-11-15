@@ -70,7 +70,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.view.addGestureRecognizer(swipeDown)
         
         coinAnimationView.loopMode = .playOnce
-        coinAnimationView.animationSpeed = 1
+        coinAnimationView.animationSpeed = 2
         
         timerBar.layer.cornerRadius = 5
         timerBar.clipsToBounds = true
@@ -351,19 +351,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
 
-                UIView.animate(withDuration:0.3, delay: 0) {
+                UIView.animate(withDuration:0.0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.rightDiamondValue {
                     
                     self.coinAnimationView.play { _ in
-                        self.updateSceneStepTwo()
                     }
                     self.playSound(breakGlassAudio: "Point")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         self.rightGlass.alpha = 1
                         self.updateLabel()
+                        self.updateSceneStepTwo()
                     }
 
                 } else {
@@ -375,19 +375,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 //print("Swiped right")
             case UISwipeGestureRecognizer.Direction.down:
 
-                UIView.animate(withDuration: 0.3, delay: 0) {
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
                 }
                 
                 if self.game.correctValue == self.game.bottomDiamondValue {
                     self.coinAnimationView.play { _ in
-                        self.updateSceneStepTwo()
                     }
                     self.playSound(breakGlassAudio: "Point")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
                         self.bottomGlass.alpha = 1
                         self.updateLabel()
+                        self.updateSceneStepTwo()
                     }
                 } else {
                     self.playSound(breakGlassAudio: "Wrong")
@@ -398,21 +398,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 //print("Swiped down")
             case UISwipeGestureRecognizer.Direction.left:
 
-                UIView.animate(withDuration: 0.3, delay: 0) {
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
                 }
                 
                 if self.game.correctValue == self.game.leftDiamondValue {
-                    self.coinAnimationView.play { _ in
-                        self.updateSceneStepTwo()
-
-                    }
+                self.coinAnimationView.play()
                     self.playSound(breakGlassAudio: "Point")
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         
                         self.leftGlass.alpha = 1
                         self.updateLabel()
+                        self.updateSceneStepTwo()
                     }
                 } else {
                     self.playSound(breakGlassAudio: "Wrong")
