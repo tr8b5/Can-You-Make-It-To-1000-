@@ -277,7 +277,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="El3-5E-h6y">
                                         <rect key="frame" x="0.0" y="74" width="414" height="70"/>
                                         <subviews>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="gGZ-U7-mMS">
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" progressImage="countdown_timer" trackImage="countdown" translatesAutoresizingMaskIntoConstraints="NO" id="gGZ-U7-mMS">
                                                 <rect key="frame" x="40" y="35" width="334" height="10"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
@@ -777,6 +777,8 @@
         <image name="Red Square Icon" width="80" height="78"/>
         <image name="Red Triangle Icon" width="83" height="75"/>
         <image name="button_holder" width="17" height="18.5"/>
+        <image name="countdown" width="965" height="35"/>
+        <image name="countdown_timer" width="965" height="35"/>
         <image name="crown" width="14.5" height="11.5"/>
         <image name="current_score" width="123" height="52"/>
         <image name="gameover_title" width="128.5" height="93"/>
