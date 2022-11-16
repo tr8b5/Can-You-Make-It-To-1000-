@@ -356,7 +356,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 }
                 
                 if self.game.correctValue == self.game.rightDiamondValue {
-                    
+                    self.vibrateOnScoring()
                     self.coinAnimationView.play { _ in
                     }
                     self.playSound(breakGlassAudio: "Point")
@@ -380,6 +380,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 }
                 
                 if self.game.correctValue == self.game.bottomDiamondValue {
+                    self.vibrateOnScoring()
+
                     self.coinAnimationView.play { _ in
                     }
                     self.playSound(breakGlassAudio: "Point")
@@ -403,6 +405,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
                 }
                 
                 if self.game.correctValue == self.game.leftDiamondValue {
+                    self.vibrateOnScoring()
+
                 self.coinAnimationView.play()
                     self.playSound(breakGlassAudio: "Point")
 
@@ -465,6 +469,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             ]
         )
         scoreButton.setAttributedTitle(attrString, for: .normal)
+    }
+    
+    private func vibrateOnScoring() {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
     }
 }
 
