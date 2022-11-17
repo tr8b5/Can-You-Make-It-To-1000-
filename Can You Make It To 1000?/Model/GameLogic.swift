@@ -180,5 +180,4 @@ struct GameLogic {
         defaults.set(gamesTillAd, forKey: "gamesTillAd")
         defaults.synchronize()
     }
-    
 }

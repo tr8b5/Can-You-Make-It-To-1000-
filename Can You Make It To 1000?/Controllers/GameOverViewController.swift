@@ -28,6 +28,7 @@ class GameOverViewController: UIViewController {
     private var interstitialAd: GADInterstitial?
     var rewardedAd: GADRewardedAd?
     var didTimeUp: Bool = false
+    var attemptsLeft: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,20 +42,22 @@ class GameOverViewController: UIViewController {
         let color1 = hexStringToUIColor(hex: "#000000")
         
         Constants.didRevive = false
-        btnRevive.isHidden = !Constants.canRevive
-        if !Constants.canRevive {Constants.canRevive = true}
         
-        if didTimeUp {
-            rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
-            rewardedAd?.load(GADRequest()) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    // Handle ad failed to load case.
-                } else {
-                    // Ad successfully loaded.
+        getInterstitialAd()
+        self.getRewardedAd()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if self.didTimeUp {
+
+                if self.rewardedAd?.isReady == true {
+                    MusicPlayer.shared.stopBackgroundMusic()
+                    self.rewardedAd?.present(fromRootViewController: self, delegate:self)
                 }
+            } else if self.attemptsLeft == 0 {
+                self.displayAd()
             }
         }
+
 
         let defaults: UserDefaults = UserDefaults.standard
         highscore = defaults.value(forKey: "highscore") as? Int ?? 0
@@ -102,10 +105,13 @@ class GameOverViewController: UIViewController {
             ]
         )
         scoreLabel.attributedText = attrString2
-        
-         //interstitialAd =  createAd()
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        btnRevive.isHidden = !Constants.canRevive
+        if !Constants.canRevive {Constants.canRevive = true}
     }
     
     func assignbackground(){
@@ -132,17 +138,20 @@ class GameOverViewController: UIViewController {
     
     func displayAd() {
         if interstitialAd?.isReady == true {
+            MusicPlayer.shared.stopBackgroundMusic()
             interstitialAd?.present(fromRootViewController: self)
         } else {
             print("Ad Not Ready")
         }
     }
     
-    private func createAd() -> GADInterstitial {
-        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
-        ad.delegate = self
-        ad.load(GADRequest())
-        return ad
+    private func getInterstitialAd() {
+        interstitialAd = AppDelegate.shared().interstitialAd
+        interstitialAd?.delegate = self
+    }
+    
+    private func getRewardedAd() {
+        rewardedAd = AppDelegate.shared().rewardedAd
     }
     
     func playVideo() {
@@ -182,16 +191,31 @@ class GameOverViewController: UIViewController {
     }
     
     @IBAction func revive(_ sender: Any) {
-        if rewardedAd?.isReady == true {
-               rewardedAd?.present(fromRootViewController: self, delegate:self)
+        if rewardedAd?.isReady == false {
+            AppDelegate.shared().createRewardedAds()
+            getRewardedAd()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                if self.rewardedAd?.isReady == true {
+                    MusicPlayer.shared.stopBackgroundMusic()
+                    self.rewardedAd?.present(fromRootViewController: self, delegate:self)
+                } else {
+                    self.showAlert(message: "Cannot revive as ad is not ready yet.")
+                }
             }
+        } else {
+            rewardedAd?.present(fromRootViewController: self, delegate:self)
+        }
     }
     
+    func showAlert(message: String) {
+        UIAlertController.show(message, from: self)
+    }
 }
 
 extension GameOverViewController : GADInterstitialDelegate{
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        ad.present(fromRootViewController: self)
+        //ad.present(fromRootViewController: self)
     }
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
         print(error.localizedDescription)
@@ -199,7 +223,9 @@ extension GameOverViewController : GADInterstitialDelegate{
     func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
         //print(error.localizedDescription)
     }
-
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        MusicPlayer.shared.playBackgroundMusic()
+    }
 }
 
 extension GameOverViewController : GADRewardedAdDelegate{
@@ -208,9 +234,13 @@ extension GameOverViewController : GADRewardedAdDelegate{
         Constants.canRevive = false
         
     }
+    func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
+        print("Failed to load add\(error)")
+    }
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+        MusicPlayer.shared.playBackgroundMusic()
         if Constants.didRevive{
-            self.dismiss(animated: true, completion: nil)
+         //   self.dismiss(animated: true, completion: nil)
         }
     }
 }

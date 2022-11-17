@@ -14,7 +14,7 @@ import GoogleMobileAds
 import Lottie
 class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
-    private var interstitialAd: GADInterstitial?
+    //private var interstitialAd: GADInterstitial? Not needed here
     
     var sound = Sound()
     var game = GameLogic()
@@ -93,8 +93,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.interstitialAd = createAd()
-        
+        AppDelegate.shared().createInterstitialAd()
+        AppDelegate.shared().createRewardedAds()
+
         if !Constants.didRevive{game = GameLogic()}
         
         sound = Sound() 
@@ -300,15 +301,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
 
         game.loadGamesTillAd()
 
-        if game.gamesTillAd == 0 {
-            displayAd()
-            game.updateGamesTillAd()
-        } else {
-            game.updateGamesTillAd()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.performSegue(withIdentifier: "gotToGameOver", sender: self)
-            }
-        }
+        self.performSegue(withIdentifier: "gotToGameOver", sender: self)
+        game.updateGamesTillAd()
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -432,16 +426,17 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           
-           if segue.identifier == "gotToGameOver" {
-               
+        
+        if segue.identifier == "gotToGameOver" {
+            
             let destinationVC = segue.destination as! GameOverViewController
             destinationVC.score = game.score
             destinationVC.didTimeUp = didTimeUp
-           }
-       }
+            destinationVC.attemptsLeft = game.gamesTillAd
+        }
+    }
     
-    func displayAd() {
+  /*  func displayAd() { Not needed here now
         if interstitialAd?.isReady == true {
             interstitialAd?.present(fromRootViewController: self)
         } else {
@@ -455,6 +450,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         ad.load(GADRequest())
         return ad
     }
+    */
     
     private func updateScoreBoard(score: String) {
         let color1 = hexStringToUIColor(hex: "#000000")
@@ -482,12 +478,12 @@ extension GameViewController: AVAudioPlayerDelegate {
     }
 }
 
-extension GameViewController:  GADInterstitialDelegate {
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitialAd = createAd()
-        gameOver(timeUp: false)
-    }
-}
+//extension GameViewController:  GADInterstitialDelegate {
+//    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+//        interstitialAd = createAd()
+//        gameOver(timeUp: false)
+//    }
+//}
 
 extension UIImage {
     func imageWithColor(_ color: UIColor) -> UIImage? {

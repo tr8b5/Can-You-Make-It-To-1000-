@@ -11,9 +11,24 @@ import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var interstitialAd: GADInterstitial?
+    var rewardedAd: GADRewardedAd?
 
-
-
+    class func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func createInterstitialAd() {
+        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
+        ad.load(GADRequest())
+        interstitialAd = ad
+    }
+    
+    func createRewardedAds() {
+        rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
+        rewardedAd?.load(GADRequest())
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let defaults: UserDefaults = UserDefaults.standard
@@ -21,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         checkNotificationPermission()
+        
+        createInterstitialAd()
+        createRewardedAds()
         return true
     }
 
@@ -85,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current
 
-        dateComponents.hour = 1 
+        dateComponents.minute = 1
            
         // Create the trigger as a repeating event.
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
