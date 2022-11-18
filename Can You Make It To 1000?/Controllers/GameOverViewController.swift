@@ -36,6 +36,9 @@ class GameOverViewController: UIViewController {
         //playVideo()
         assignbackground()
         
+        btnRevive.isHidden = !Constants.canRevive
+        if !Constants.canRevive {Constants.canRevive = true}
+
         self.view.backgroundColor = UIColor.black
         
         
@@ -48,11 +51,7 @@ class GameOverViewController: UIViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             if self.didTimeUp {
-
-                if self.rewardedAd?.isReady == true {
-                    MusicPlayer.shared.stopBackgroundMusic()
-                    self.rewardedAd?.present(fromRootViewController: self, delegate:self)
-                }
+                self.displayAd()
             } else if self.attemptsLeft == 0 {
                 self.displayAd()
             }
@@ -109,9 +108,6 @@ class GameOverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        btnRevive.isHidden = !Constants.canRevive
-        if !Constants.canRevive {Constants.canRevive = true}
     }
     
     func assignbackground(){
@@ -239,8 +235,8 @@ extension GameOverViewController : GADRewardedAdDelegate{
     }
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
         MusicPlayer.shared.playBackgroundMusic()
-        if Constants.didRevive{
-         //   self.dismiss(animated: true, completion: nil)
+        if Constants.didRevive {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
