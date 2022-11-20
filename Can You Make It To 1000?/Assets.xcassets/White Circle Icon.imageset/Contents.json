@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "White Circle Icon.png",
+      "filename" : "WhiteCircleIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "White Circle Icon@2x.png",
+      "filename" : "WhiteCircleIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "White Circle Icon@3x.png",
+      "filename" : "WhiteCircleIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

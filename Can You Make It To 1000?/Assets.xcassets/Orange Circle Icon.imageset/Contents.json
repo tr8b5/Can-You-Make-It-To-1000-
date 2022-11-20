@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Orange Circle Icon.png",
+      "filename" : "OrangeCircleIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Orange Circle Icon@2x.png",
+      "filename" : "OrangeCircleIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Orange Circle Icon@3x.png",
+      "filename" : "OrangeCircleIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Black Triangle Icon.png",
+      "filename" : "Icon@1x copy.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Black Triangle Icon@2x.png",
+      "filename" : "Icon@2x copy.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Black Triangle Icon@3x.png",
+      "filename" : "Icon@3x copy.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

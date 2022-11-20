@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Red Wall Small.png",
+      "filename" : "BottomWall.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Red Wall Small@2x.png",
+      "filename" : "BottomWall@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Red Wall Small@3x.png",
+      "filename" : "BottomWall@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
