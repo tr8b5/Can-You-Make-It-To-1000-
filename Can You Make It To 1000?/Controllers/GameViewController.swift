@@ -159,9 +159,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     @objc func updateScene() {
         
         if game.score == 500 {
-            circleIcon.removeFromSuperview()
-            squareIcon.removeFromSuperview()
-            triangleIcon.removeFromSuperview()
+//            circleIcon.removeFromSuperview()
+//            squareIcon.removeFromSuperview()
+//            triangleIcon.removeFromSuperview()
+            circleIcon.isHidden = true
+            squareIcon.isHidden = true
+            triangleIcon.isHidden = true
         }
         
         if game.score == 1000 {

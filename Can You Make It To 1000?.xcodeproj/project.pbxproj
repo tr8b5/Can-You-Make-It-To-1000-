@@ -40,6 +40,7 @@
 		0BF1F04C23FCC0DC00EDC9CC /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04B23FCC0DC00EDC9CC /* GameLogic.swift */; };
 		0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04D23FCC17500EDC9CC /* Shape.swift */; };
 		0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04F23FCC49900EDC9CC /* Sprite.swift */; };
+		9C1DC9BD292CBDCC006C3802 /* logo_flux_fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */; };
 		9C38F7F329141B7A00580067 /* DisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */; };
 		9C6B3A992919459700B73F77 /* will_coins.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B3A982919459700B73F77 /* will_coins.json */; };
 		9C839AE12912E1B20081EB4D /* GameViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */; };
@@ -465,6 +466,7 @@
 		0BF1F04F23FCC49900EDC9CC /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		8B4C455E5768A40521524C8A /* Pods_Can_You_Make_It_To_1000_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Can_You_Make_It_To_1000_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC9A8CE905AD17B3D06145B /* Pods-Can You Make It To 1000?.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Can You Make It To 1000?.debug.xcconfig"; path = "Target Support Files/Pods-Can You Make It To 1000?/Pods-Can You Make It To 1000?.debug.xcconfig"; sourceTree = "<group>"; };
+		9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_flux_fire.png; sourceTree = "<group>"; };
 		9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerViewController.swift; sourceTree = "<group>"; };
 		9C6B3A982919459700B73F77 /* will_coins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = will_coins.json; sourceTree = "<group>"; };
 		9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -884,6 +886,7 @@
 		0B93A7B8240AC9F600AAFF0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */,
 				0BE03D26292168EF0005D28C /* Wrong.mp3 */,
 				0BE03D24292164DE0005D28C /* Victory.mp3 */,
 				0BE03D222921643A0005D28C /* Point.mp3 */,
@@ -1797,6 +1800,7 @@
 				9CC5043529129A8A00C26971 /* Shatter-Purple-13.png in Resources */,
 				9CC504E229129A8A00C26971 /* Shatter-White-30.png in Resources */,
 				9CC504F829129A8A00C26971 /* Shatter-Red-5.png in Resources */,
+				9C1DC9BD292CBDCC006C3802 /* logo_flux_fire.png in Resources */,
 				9CC504D629129A8A00C26971 /* Shatter-White-4.png in Resources */,
 				0BBB319A2490B11C006734E0 /* Dook.mp3 in Resources */,
 				9CC5053D29129A8A00C26971 /* Shatter-21.png in Resources */,
