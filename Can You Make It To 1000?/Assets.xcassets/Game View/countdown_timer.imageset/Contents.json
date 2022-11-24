@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CountdownTimer.png",
+      "filename" : "CountdownTimer-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CountdownTimer@2x.png",
+      "filename" : "CountdownTimer@2x-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CountdownTimer@3x.png",
+      "filename" : "CountdownTimer@3x-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

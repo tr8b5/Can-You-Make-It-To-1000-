@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Grey Wall.png",
+      "filename" : "SideWall.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Grey Wall@2x.png",
+      "filename" : "SideWall@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Grey Wall@3x.png",
+      "filename" : "SideWall@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

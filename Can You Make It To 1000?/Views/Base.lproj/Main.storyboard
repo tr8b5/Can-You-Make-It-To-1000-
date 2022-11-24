@@ -296,21 +296,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-Lv-rUz">
                                         <rect key="frame" x="0.0" y="144" width="414" height="602"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="-15" translatesAutoresizingMaskIntoConstraints="NO" id="C3f-ef-ZFj">
-                                                <rect key="frame" x="95.5" y="0.0" width="223" height="90"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="C3f-ef-ZFj">
+                                                <rect key="frame" x="97.5" y="0.0" width="219" height="63"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Circle Icon" translatesAutoresizingMaskIntoConstraints="NO" id="S6M-ub-aQd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="83" height="90"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green Circle Icon" translatesAutoresizingMaskIntoConstraints="NO" id="S6M-ub-aQd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="83" height="63"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Square Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Hfa-dn-pS0">
-                                                        <rect key="frame" x="68" y="0.0" width="80" height="90"/>
-                                                    </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Triangle Icon" translatesAutoresizingMaskIntoConstraints="NO" id="KYy-yg-IN3">
-                                                        <rect key="frame" x="133" y="0.0" width="90" height="90"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green Square Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Hfa-dn-pS0">
+                                                        <rect key="frame" x="78" y="0.0" width="63" height="63"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="90" id="mE6-ER-y5p"/>
-                                                            <constraint firstAttribute="height" constant="90" id="zql-cl-jj9"/>
+                                                            <constraint firstAttribute="height" constant="63" id="P9C-R9-iQX"/>
+                                                            <constraint firstAttribute="width" constant="63" id="VPK-nS-oXQ"/>
                                                         </constraints>
+                                                    </imageView>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green Triangle Icon" translatesAutoresizingMaskIntoConstraints="NO" id="KYy-yg-IN3">
+                                                        <rect key="frame" x="136" y="0.0" width="83" height="63"/>
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
@@ -330,18 +330,25 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="ZZE-a5-zWa">
-                                                <rect key="frame" x="15" y="278" width="45" height="46.5"/>
+                                                <rect key="frame" x="23" y="281" width="38" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="38" id="Bkq-Yi-d9X"/>
+                                                    <constraint firstAttribute="height" constant="40" id="wjK-rH-h7K"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="mbH-5v-Rl4">
-                                                <rect key="frame" x="342" y="278" width="45" height="46.5"/>
+                                                <rect key="frame" x="351" y="281" width="38" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="38" id="CRs-0U-PEb"/>
+                                                    <constraint firstAttribute="height" constant="40" id="Y2r-e2-Ecb"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="zdm-O2-Tuj" firstAttribute="top" secondItem="CfT-Lv-rUz" secondAttribute="top" constant="15" id="0et-NR-ggm"/>
-                                            <constraint firstItem="ZZE-a5-zWa" firstAttribute="leading" secondItem="CfT-Lv-rUz" secondAttribute="leading" constant="15" id="7kS-r9-ZPh"/>
-                                            <constraint firstAttribute="trailing" secondItem="mbH-5v-Rl4" secondAttribute="trailing" constant="27" id="Cqs-V7-6KZ"/>
                                             <constraint firstItem="tHz-BD-i4N" firstAttribute="centerX" secondItem="CfT-Lv-rUz" secondAttribute="centerX" id="Hp6-JD-oag"/>
                                             <constraint firstItem="mbH-5v-Rl4" firstAttribute="centerY" secondItem="CfT-Lv-rUz" secondAttribute="centerY" id="K0x-yg-lpo"/>
+                                            <constraint firstItem="mbH-5v-Rl4" firstAttribute="centerX" secondItem="LMq-1L-fW9" secondAttribute="centerX" constant="-1" id="MAT-mj-HRy"/>
                                             <constraint firstItem="tHz-BD-i4N" firstAttribute="centerY" secondItem="CfT-Lv-rUz" secondAttribute="centerY" id="RGK-0G-nsS"/>
                                             <constraint firstAttribute="bottom" secondItem="LMq-1L-fW9" secondAttribute="bottom" constant="15" id="TOW-ag-P9H"/>
                                             <constraint firstItem="LMq-1L-fW9" firstAttribute="top" secondItem="CfT-Lv-rUz" secondAttribute="top" constant="15" id="Tcq-LQ-wQJ"/>
@@ -350,6 +357,7 @@
                                             <constraint firstItem="C3f-ef-ZFj" firstAttribute="top" secondItem="CfT-Lv-rUz" secondAttribute="top" id="cLn-OA-bT4"/>
                                             <constraint firstItem="ZZE-a5-zWa" firstAttribute="centerY" secondItem="CfT-Lv-rUz" secondAttribute="centerY" id="egv-nu-flf"/>
                                             <constraint firstItem="zdm-O2-Tuj" firstAttribute="leading" secondItem="CfT-Lv-rUz" secondAttribute="leading" constant="10" id="nov-EW-Ycw"/>
+                                            <constraint firstItem="ZZE-a5-zWa" firstAttribute="centerX" secondItem="zdm-O2-Tuj" secondAttribute="centerX" constant="-1" id="rLA-M9-gFi"/>
                                             <constraint firstAttribute="trailing" secondItem="LMq-1L-fW9" secondAttribute="trailing" constant="10" id="u0z-RA-b7l"/>
                                         </constraints>
                                     </view>
@@ -360,16 +368,17 @@
                                                 <rect key="frame" x="34.5" y="0.0" width="345" height="55"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="Q3c-hH-NhO">
-                                                <rect key="frame" x="184.5" y="0.5" width="45" height="46.5"/>
+                                                <rect key="frame" x="188" y="7.5" width="38" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="45" id="bjs-6M-DjQ"/>
+                                                    <constraint firstAttribute="width" constant="38" id="RC1-u8-8gN"/>
+                                                    <constraint firstAttribute="height" constant="40" id="TYE-kn-twM"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="U5k-ES-kaC" firstAttribute="centerX" secondItem="JZP-hM-gOn" secondAttribute="centerX" id="2z9-DU-tAD"/>
+                                            <constraint firstItem="Q3c-hH-NhO" firstAttribute="centerY" secondItem="U5k-ES-kaC" secondAttribute="centerY" id="5c8-qW-QMc"/>
                                             <constraint firstItem="U5k-ES-kaC" firstAttribute="top" secondItem="JZP-hM-gOn" secondAttribute="top" id="FF3-XL-GoZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="Q3c-hH-NhO" secondAttribute="bottom" constant="33" id="VGd-Wg-jEt"/>
                                             <constraint firstAttribute="height" constant="80" id="WgW-LJ-GpX"/>
                                             <constraint firstItem="Q3c-hH-NhO" firstAttribute="centerX" secondItem="JZP-hM-gOn" secondAttribute="centerX" id="gLG-Me-5L5"/>
                                         </constraints>
@@ -770,12 +779,12 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Green  Circle" width="66" height="66"/>
+        <image name="Green Circle Icon" width="83" height="92.5"/>
+        <image name="Green Square Icon" width="80" height="78"/>
+        <image name="Green Triangle Icon" width="83" height="75"/>
         <image name="Green Wall" width="58" height="548.5"/>
         <image name="Green Wall Small" width="345" height="55"/>
-        <image name="Red Circle Icon" width="83" height="83"/>
         <image name="Red Diamond" width="45" height="46.5"/>
-        <image name="Red Square Icon" width="80" height="78"/>
-        <image name="Red Triangle Icon" width="83" height="75"/>
         <image name="button_holder" width="17" height="18.5"/>
         <image name="countdown" width="965" height="35"/>
         <image name="countdown_timer" width="965" height="35"/>

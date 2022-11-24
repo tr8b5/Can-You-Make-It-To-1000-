@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Red Square Icon.png",
+      "filename" : "RedSquareIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Red Square Icon@2x.png",
+      "filename" : "RedSquareIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Red Square Icon@3x.png",
+      "filename" : "RedSquareIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
