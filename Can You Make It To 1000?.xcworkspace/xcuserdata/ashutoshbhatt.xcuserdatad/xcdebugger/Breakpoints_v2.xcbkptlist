@@ -14,42 +14,10 @@
             filePath = "Can You Make It To 1000?/Controllers/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "492"
+            endingLineNumber = "492"
             landmarkName = "GameViewController"
             landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "60F1820E-6F0E-4868-B2B0-1965ABB9EAFA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Can You Make It To 1000?/Controllers/GameOverViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C09529F5-64DD-476F-8825-68E3AB38FF27"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Can You Make It To 1000?/Controllers/GameOverViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -87,49 +55,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3238A042-5938-44C6-AACC-B73085E7784A"
+            uuid = "8459877E-740B-4782-A1A8-DF8E9F64F426"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Can You Make It To 1000?/Controllers/GameOverViewController.swift"
+            filePath = "Can You Make It To 1000?/Controllers/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "updateScene()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3238A042-5938-44C6-AACC-B73085E7784A - 8e9439dbbd5efc22"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Can_You_Make_It_To_1000_.GameOverViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Can You Make It To 1000?"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ashutoshbhatt/Documents/GitHub/Can-You-Make-It-To-1000-/Can%20You%20Make%20It%20To%201000%3F/Controllers/GameOverViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "1340">
-               </Location>
-               <Location
-                  uuid = "3238A042-5938-44C6-AACC-B73085E7784A - 35cfb1f00d18d39f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Can_You_Make_It_To_1000_.GameOverViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Can You Make It To 1000?"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ashutoshbhatt/Documents/GitHub/Can-You-Make-It-To-1000-/Can%20You%20Make%20It%20To%201000%3F/Controllers/GameOverViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

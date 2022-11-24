@@ -96,23 +96,33 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         AppDelegate.shared().createInterstitialAd()
         AppDelegate.shared().createRewardedAds()
 
-        if !Constants.didRevive{game = GameLogic()}
-        
-        sound = Sound() 
-        //playVideo()
-        
-        sound.loadSound()
-        sound.loadFx()
-        
-        updateScoreBoard(score: "\(game.score)")
-        //Defines Colors and
-        game.selectColors(repetitions: 3, maxValue: 8)
-        
-        circleIcon.image = game.sprites[0].icon[game.colorArray[0]]
-        squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
-        triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
-        updateScene()
-        updateSceneStepTwo()
+        if !Constants.didRevive {
+            game = GameLogic()
+            
+            sound = Sound()
+            
+            sound.loadSound()
+            sound.loadFx()
+            
+            updateScoreBoard(score: "\(game.score)")
+            //Defines Colors and
+            game.selectColors(repetitions: 3, maxValue: 8)
+            
+            circleIcon.image = game.sprites[0].icon[game.colorArray[0]]
+            squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
+            triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
+            updateScene()
+            updateSceneStepTwo()
+
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+            timer.invalidate()
+            timerBar.progress = 1.0
+
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+        }
     }
     
     
@@ -149,9 +159,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     @objc func updateScene() {
         
         if game.score == 500 {
-            circleIcon.removeFromSuperview()
-            squareIcon.removeFromSuperview()
-            triangleIcon.removeFromSuperview()
+//            circleIcon.removeFromSuperview()
+//            squareIcon.removeFromSuperview()
+//            triangleIcon.removeFromSuperview()
+            circleIcon.isHidden = true
+            squareIcon.isHidden = true
+            triangleIcon.isHidden = true
         }
         
         if game.score == 1000 {
