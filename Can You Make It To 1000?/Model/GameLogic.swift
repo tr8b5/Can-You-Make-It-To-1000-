@@ -174,11 +174,10 @@ struct GameLogic {
     mutating func updateGamesTillAd() {
         gamesTillAd-=1
         if gamesTillAd == -1 {
-            gamesTillAd = 3
+            gamesTillAd = 4
         }
         let defaults: UserDefaults = UserDefaults.standard
         defaults.set(gamesTillAd, forKey: "gamesTillAd")
         defaults.synchronize()
     }
-    
 }

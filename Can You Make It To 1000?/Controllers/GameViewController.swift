@@ -11,13 +11,10 @@ import GameplayKit
 import SpriteKit
 import AVFoundation
 import GoogleMobileAds
-
-
-class GameViewController: UIViewController  {
-    
-    
-    
-    private var interstitialAd: GADInterstitial?
+import Lottie
+class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
+        
+    //private var interstitialAd: GADInterstitial? Not needed here
     
     var sound = Sound()
     var game = GameLogic()
@@ -30,7 +27,7 @@ class GameViewController: UIViewController  {
     var audioPlayer: AVAudioPlayer!
     var backgroundImage = UIImageView()
 
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var scoreButton: UIButton!
     @IBOutlet weak var rightWall: UIImageView!
     @IBOutlet weak var leftWall: UIImageView!
     @IBOutlet weak var bottomWall: UIImageView!
@@ -44,13 +41,15 @@ class GameViewController: UIViewController  {
     @IBOutlet weak var timerBar: UIProgressView!
     @IBOutlet weak var wallView: UIView!
     @IBOutlet weak var bottomWallView: UIView!
+    @IBOutlet weak var coinAnimationView: LottieAnimationView!
     
     @IBOutlet var videoLayer: UIView!
     var player: AVPlayer!
     
     var timer = Timer()
     var randomNumber: Int = 0
-    
+    var didTimeUp: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +69,11 @@ class GameViewController: UIViewController  {
         swipeDown.direction = UISwipeGestureRecognizer.Direction.down
         self.view.addGestureRecognizer(swipeDown)
         
+        coinAnimationView.loopMode = .playOnce
+        coinAnimationView.animationSpeed = 2
         
+        timerBar.layer.cornerRadius = 5
+        timerBar.clipsToBounds = true
     }
     
     func assignbackground(){
@@ -90,8 +93,9 @@ class GameViewController: UIViewController  {
         }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.interstitialAd = createAd()
-        
+        AppDelegate.shared().createInterstitialAd()
+        AppDelegate.shared().createRewardedAds()
+
         if !Constants.didRevive{game = GameLogic()}
         
         sound = Sound() 
@@ -100,22 +104,7 @@ class GameViewController: UIViewController  {
         sound.loadSound()
         sound.loadFx()
         
-        //Creates Score Label
-        scoreLabel.text = String(game.score)
-        let color1 = hexStringToUIColor(hex: "#000000")
-        
-        //This adds stroke to the Title Text
-        let attrString = NSAttributedString(
-            string: scoreLabel.text!,
-            attributes: [
-                //bbe1fa
-                NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -6.0,
-            ]
-        )
-        scoreLabel.attributedText = attrString
-        
-        
+        updateScoreBoard(score: "\(game.score)")
         //Defines Colors and
         game.selectColors(repetitions: 3, maxValue: 8)
         
@@ -123,6 +112,7 @@ class GameViewController: UIViewController  {
         squareIcon.image = game.sprites[1].icon[game.colorArray[1]]
         triangleIcon.image = game.sprites[2].icon[game.colorArray[2]]
         updateScene()
+        updateSceneStepTwo()
     }
     
     
@@ -166,7 +156,7 @@ class GameViewController: UIViewController  {
         
         if game.score == 1000 {
             timer.invalidate()
-            self.gameOver()
+            self.gameOver(timeUp: false)
         } else {
         
         timer.invalidate()
@@ -188,7 +178,7 @@ class GameViewController: UIViewController  {
             self.bottomDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
         }
         
-        UIView.animate(withDuration: 0.5) {
+       /* UIView.animate(withDuration: 0.5) {
             self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }
         UIView.animate(withDuration: 0.5) {
@@ -216,38 +206,76 @@ class GameViewController: UIViewController  {
         rightWall.image = game.pickWalls()[1]
         bottomWall.image = game.pickWalls()[2]
         
-        rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
-        rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-        rightGlass.layer.zPosition = -1
-        rightGlass.alpha = 0
-        wallView.addSubview(rightGlass)
-        
-        leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
-        leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-        leftGlass.layer.zPosition = -1
-        leftGlass.alpha = 0
-        wallView.addSubview(leftGlass)
-        
-        bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
-        bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-        bottomGlass.layer.zPosition = -1
-        bottomGlass.alpha = 0
-        bottomWallView.addSubview(bottomGlass)
+//        rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
+//        rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
+//        rightGlass.layer.zPosition = -1
+//        rightGlass.alpha = 0
+//        wallView.addSubview(rightGlass)
+//
+//        leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
+//        leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
+//        leftGlass.layer.zPosition = -1
+//        leftGlass.alpha = 0
+//        wallView.addSubview(leftGlass)
+//
+//        bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
+//        bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
+//        bottomGlass.layer.zPosition = -1
+//        bottomGlass.alpha = 0
+//        bottomWallView.addSubview(bottomGlass)
         
         shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
         
         shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
         
-        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
+        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom*/
         }
     
     }
     
+    func updateSceneStepTwo() {
+        UIView.animate(withDuration: 0.5) {
+            self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+
+        game.difficulty()
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
+        
+        leftDiamond.image = game.sprites[game.shapeValue].diamond[game.leftDiamondValue]
+        rightDiamond.image = game.sprites[game.shapeValue].diamond[game.rightDiamondValue]
+        bottomDiamond.image = game.sprites[game.shapeValue].diamond[game.bottomDiamondValue]
+        
+        game.resetwallcount()
+        
+        leftWall.image = game.pickWalls()[0]
+        rightWall.image = game.pickWalls()[1]
+        bottomWall.image = game.pickWalls()[2]
+
+        shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
+        
+        shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
+        
+        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom
+    }
+    
     func playSound(breakGlassAudio: String) {
         if (sound.fx == true) {
-        let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
-        audioPlayer = try! AVAudioPlayer(contentsOf: url!)
-        audioPlayer.play()
+            let url = Bundle.main.url(forResource: breakGlassAudio, withExtension: "mp3")
+            audioPlayer = try! AVAudioPlayer(contentsOf: url!)
+            audioPlayer.delegate = self
+            
+            audioPlayer.play()
         }
     }
     
@@ -255,29 +283,26 @@ class GameViewController: UIViewController  {
         timerBar.progress = timerBar.progress - 0.001
         if timerBar.progress == 0.0 {
             timer.invalidate()
-            gameOver()
+            gameOver(timeUp: true)
         }
     }
     
     func updateLabel() {
         game.updateScore()
+        updateScore(with: game.score)
         self.updateScene()
-        scoreLabel.text = String(game.score)
+        updateScoreBoard(score: "\(game.score)")
     }
     
-    func gameOver() {
-        
+    func gameOver(timeUp: Bool) {
+        timer.invalidate()
+        timerBar.progress = 1.0
+        didTimeUp = timeUp
+
         game.loadGamesTillAd()
-        if game.gamesTillAd == 0 {
-            displayAd()
-            game.updateGamesTillAd()
-        } else {
-            game.updateGamesTillAd()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+
         self.performSegue(withIdentifier: "gotToGameOver", sender: self)
-        }
-            
-        }
+        game.updateGamesTillAd()
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -319,58 +344,77 @@ class GameViewController: UIViewController  {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
-                UIView.animate(withDuration: 0.1) {
+
+                UIView.animate(withDuration:0.0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 160, y: 0)
                 }
+                
                 if self.game.correctValue == self.game.rightDiamondValue {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        self.animate(imageView: self.rightGlass, images: self.shatter2Images)
+                    self.vibrateOnScoring()
+                    self.coinAnimationView.play { _ in
+                    }
+                    self.playSound(breakGlassAudio: "Point")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
                         self.rightGlass.alpha = 1
                         self.updateLabel()
-                        self.playSound(breakGlassAudio: "Dook")
+                        self.updateSceneStepTwo()
                     }
+
                 } else {
+                    self.playSound(breakGlassAudio: "Wrong")
                     
-                    self.gameOver()
+                    self.gameOver(timeUp: false)
                     
                 }
                 //print("Swiped right")
             case UISwipeGestureRecognizer.Direction.down:
-                UIView.animate(withDuration: 0.1) {
+
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: 0, y: 320)
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if self.game.correctValue == self.game.bottomDiamondValue {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            self.animate(imageView: self.bottomGlass, images: self.shatter1Images)
-                            self.bottomGlass.alpha = 1
-                            self.updateLabel()
-                            self.playSound(breakGlassAudio: "Dook")
-                        }
-                        } else {
-                            
-                            self.gameOver()
-                            
-                        }
+                
+                if self.game.correctValue == self.game.bottomDiamondValue {
+                    self.vibrateOnScoring()
+
+                    self.coinAnimationView.play { _ in
                     }
+                    self.playSound(breakGlassAudio: "Point")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
+                        
+                        self.bottomGlass.alpha = 1
+                        self.updateLabel()
+                        self.updateSceneStepTwo()
+                    }
+                } else {
+                    self.playSound(breakGlassAudio: "Wrong")
+                    
+                    self.gameOver(timeUp: false)
+                }
+                //}
                 //print("Swiped down")
             case UISwipeGestureRecognizer.Direction.left:
-                UIView.animate(withDuration: 0.1) {
+
+                UIView.animate(withDuration: 0, delay: 0) {
                     self.shape.transform = CGAffineTransform(translationX: -160, y: 0)
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                
                 if self.game.correctValue == self.game.leftDiamondValue {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        self.animate(imageView: self.leftGlass, images: self.shatterImages)
+                    self.vibrateOnScoring()
+
+                self.coinAnimationView.play()
+                    self.playSound(breakGlassAudio: "Point")
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
+                        
                         self.leftGlass.alpha = 1
                         self.updateLabel()
-                        self.playSound(breakGlassAudio: "Dook")
+                        self.updateSceneStepTwo()
                     }
-                    } else {
-                        
-                        self.gameOver()
-                        
-                    }
+                } else {
+                    self.playSound(breakGlassAudio: "Wrong")
+                    
+                    self.gameOver(timeUp: false)
+                    
                 }
                 //print("Swiped left")
             case UISwipeGestureRecognizer.Direction.up:
@@ -382,15 +426,17 @@ class GameViewController: UIViewController  {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           
-           if segue.identifier == "gotToGameOver" {
-               
-               let destinationVC = segue.destination as! GameOverViewController
+        
+        if segue.identifier == "gotToGameOver" {
+            
+            let destinationVC = segue.destination as! GameOverViewController
             destinationVC.score = game.score
-           }
-       }
+            destinationVC.didTimeUp = didTimeUp
+            destinationVC.attemptsLeft = game.gamesTillAd
+        }
+    }
     
-    func displayAd() {
+  /*  func displayAd() { Not needed here now
         if interstitialAd?.isReady == true {
             interstitialAd?.present(fromRootViewController: self)
         } else {
@@ -404,14 +450,40 @@ class GameViewController: UIViewController  {
         ad.load(GADRequest())
         return ad
     }
-}
+    */
+    
+    private func updateScoreBoard(score: String) {
+        let color1 = hexStringToUIColor(hex: "#000000")
 
-extension GameViewController:  GADInterstitialDelegate {
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitialAd = createAd()
-        gameOver()
+        //This adds stroke to the Title Text
+        let attrString = NSAttributedString(
+            string: "$"+score,
+            attributes: [
+                //bbe1fa
+                NSAttributedString.Key.strokeColor: color1,
+                NSAttributedString.Key.strokeWidth: -6.0,
+            ]
+        )
+        scoreButton.setAttributedTitle(attrString, for: .normal)
+    }
+    
+    private func vibrateOnScoring() {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
     }
 }
+
+extension GameViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+    }
+}
+
+//extension GameViewController:  GADInterstitialDelegate {
+//    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+//        interstitialAd = createAd()
+//        gameOver(timeUp: false)
+//    }
+//}
 
 extension UIImage {
     func imageWithColor(_ color: UIColor) -> UIImage? {
@@ -437,6 +509,10 @@ struct Constants {
     static let rewardAdId = "ca-app-pub-3526204639815359/6560355524"
     static var canRevive = true
     static var didRevive = false
+    static let disclaimerAccepted = "DISCLAIMER_ACCEPTED"
+    // Game Center
+    static var gcEnabled = Bool() // Check if the user has Game Center enabled
+    static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {

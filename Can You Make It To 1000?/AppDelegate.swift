@@ -11,14 +11,34 @@ import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var interstitialAd: GADInterstitial?
+    var rewardedAd: GADRewardedAd?
 
-
-
+    class func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func createInterstitialAd() {
+        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
+        ad.load(GADRequest())
+        interstitialAd = ad
+    }
+    
+    func createRewardedAds() {
+        rewardedAd = GADRewardedAd(adUnitID: Constants.rewardAdId)
+        rewardedAd?.load(GADRequest())
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.set(4, forKey: "gamesTillAd")
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        checkNotificationPermission()
         
+        createInterstitialAd()
+        createRewardedAds()
         return true
     }
 
@@ -36,6 +56,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func checkNotificationPermission() {
+        // Request Notification Settings
+        UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
+            switch notificationSettings.authorizationStatus {
+            case .notDetermined:
+                // Permissions for local notification
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
+                    
+                    if error == nil && success {
+                        self.createLocalNotification()
+                    } else {
+                        print("something went wrong or we don't have permission")
+                    }
+                }
+            case .authorized:
+                self.createLocalNotification()
+            case .denied:
+                print("Application Not Allowed to Display Notifications")
+            case .provisional:
+                self.createLocalNotification()
+
+            case .ephemeral:
+                break
+            @unknown default:
+                break
+            }
+        }
+    }
+    
+    func createLocalNotification() {
+        let defaults = UserDefaults.standard
+        var identifier = ""
+        if let previousIdentifier = defaults.value(forKey: "notification_identifier") as? String {
+            identifier = previousIdentifier
+        } else {
+            identifier = UUID().uuidString
+            defaults.set(identifier, forKey: "notification_identifier")
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Reminder"
+        content.body = "Make it to $1000 before the prize pool runs out."
+        
+        // Configure the recurring date.
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+
+        dateComponents.minute = 1
+           
+        // Create the trigger as a repeating event.
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+       // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        // Create the request
+        let request = UNNotificationRequest(identifier: identifier,
+                    content: content, trigger: trigger)
+
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+           if error != nil {
+              // Handle any errors.
+           }
+        }
+    }
 
 }
 

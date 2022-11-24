@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "WhiteSquareIcon.png",
       "idiom" : "universal",
-      "filename" : "White Square Icon.png",
       "scale" : "1x"
     },
     {
+      "filename" : "WhiteSquareIcon@2x.png",
       "idiom" : "universal",
-      "filename" : "White Square Icon@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "WhiteSquareIcon@3x.png",
       "idiom" : "universal",
-      "filename" : "White Square Icon@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

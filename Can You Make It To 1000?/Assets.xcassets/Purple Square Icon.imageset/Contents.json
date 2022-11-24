@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "PurpleSquareIcon.png",
       "idiom" : "universal",
-      "filename" : "Purple Square Icon.png",
       "scale" : "1x"
     },
     {
+      "filename" : "PurpleSquareIcon@2x.png",
       "idiom" : "universal",
-      "filename" : "Purple Square Icon@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "PurpleSquareIcon@3x.png",
       "idiom" : "universal",
-      "filename" : "Purple Square Icon@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

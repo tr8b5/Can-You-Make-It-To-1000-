@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import GoogleMobileAds
+import GameKit
 
 class ViewController: UIViewController {
     
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet var fxLabel: UILabel!
     @IBOutlet var soundLabel: UILabel!
     @IBOutlet weak var Tutorial: UIButton!
-    @IBOutlet weak var soundButtonOn: UIImageView!
+    @IBOutlet weak var fxButton: UIButton!
     @IBOutlet weak var tutorialButtonOn: UIImageView!
     
     @IBOutlet var videoLayer: UIView!
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
     var tutorialOn: Bool!
     var soundOn: Bool!
     var shouldShowGameScreen =  false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,22 +46,7 @@ class ViewController: UIViewController {
         
         //This is the stroke color
         let color1 = hexStringToUIColor(hex: "#000000")
-        
-        //This adds stroke to the Title Text
-        let attrString = NSAttributedString(
-            string: titleLabel.text!,
-            attributes: [
-                //bbe1fa
-                NSAttributedString.Key.strokeColor: color1,
-                NSAttributedString.Key.strokeWidth: -6.0,
-            ]
-        )
-        titleLabel.attributedText = attrString
-        
-        //Sets transparancy on button holders
-        //soundButton.alpha = 0.25
-        //Tutorial.alpha = 0.25
-        
+                
         //Load game number
         let defaults: UserDefaults = UserDefaults.standard
         gameNumber = defaults.value(forKey: "gameNumber") as? Int ?? 0
@@ -67,17 +54,19 @@ class ViewController: UIViewController {
         
         sound.loadSound()
         sound.loadFx()
-        
-        print("Game number: ", gameNumber)
+                
+        if (sound.sound == false) {
+            soundButton.setImage(nil, for: .normal)
+        } else {
+            soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "CanYouMake1kBeat")
+            MusicPlayer.shared.speedUpBackgroundMusic()
+        }
         
         if (sound.fx == false) {
-            tutorialButtonOn.alpha = 0
-        }
-        if (sound.sound == false) {
-            soundButtonOn.alpha = 0
+            fxButton.setImage(nil, for: .normal)
         } else {
-            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
-            MusicPlayer.shared.speedUpBackgroundMusic()
+            fxButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
         }
         
         if shouldShowGameScreen{
@@ -87,7 +76,23 @@ class ViewController: UIViewController {
         
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try? AVAudioSession.sharedInstance().setActive(true)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let defaults: UserDefaults = UserDefaults.standard
+
+        // Check if the user had accepted the disclaimer
+        guard let accepted = defaults.value(forKey: Constants.disclaimerAccepted) as? String,
+              accepted == "1"
+        else {
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "DisclaimerViewController") as? DisclaimerViewController {
+                controller.modalPresentationStyle = .fullScreen
+                self.present(controller, animated: true)
+            }
+            return
+        }
+        authenticatePlayer()
     }
     
     func assignbackground(){
@@ -124,10 +129,7 @@ class ViewController: UIViewController {
         self.videoLayer.layer.addSublayer(playerLayer)
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         player.seek(to: CMTime.zero)
-        
         player.play()
-        
-        
     }
     
     @objc func playerItemDidReachEnd() {
@@ -141,56 +143,63 @@ class ViewController: UIViewController {
         rankGameButton.removeFromSuperview()
     }
     
-    @IBAction func Tutorial(_ sender: Any) {
+    @IBAction func fx(_ sender: Any) {
         
         if (sound.fx == false) {
             sound.fx = true;
-            tutorialButtonOn.alpha = 1
+            fxButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveFx()
             return
         }
         if (sound.fx == true) {
             sound.fx = false;
-            tutorialButtonOn.alpha = 0
+            fxButton.setImage(nil, for: .normal)
             sound.saveFx()
             return
         }
-        
     }
     
     @IBAction func soundButton(_ sender: Any) {
         
         if (sound.sound == false) {
             sound.sound = true;
-            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "APPSBYWILL2")
+            MusicPlayer.shared.startBackgroundMusics(backgroundMusicFileName: "CanYouMake1kBeat")
             MusicPlayer.shared.speedUpBackgroundMusic()
-            soundButtonOn.alpha = 1
+            soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveSound()
             return
         }
         if (sound.sound == true) {
             sound.sound = false;
             MusicPlayer.shared.stopBackgroundMusic()
-            soundButtonOn.alpha = 0
+            soundButton.setImage(nil, for: .normal)
             sound.saveSound()
             return
         }
-        
     }
     
     @IBAction func playButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToGame", sender: self)
     }
     
     @IBAction func tutorialButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToTutorial", sender: self)
     }
     
     @IBAction func rankGameButtonClicked(_ sender: Any) {
-        removeTitleMenu()
         self.performSegue(withIdentifier: "goToTutorial", sender: self)
+    }
+    
+    @IBAction func shareButtonClicked(_ sender: Any) {
+        openShare(applink: "https://github.com/tr8b5/Can-You-Make-It-To-1000-", message: "join thousand of other players in this challenge")
+    }
+    
+    @IBAction func leaderboardButtonClicked(_ sender: Any) {
+        if Constants.gcEnabled {
+            openLeaderboard()
+        } else {
+            UIAlertController.show("Please wait while leaderboard is being prepared", from: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -222,5 +231,12 @@ class ViewController: UIViewController {
         )
     }
 
+    func openShare(applink: String, message: String) {
+        let appLink = NSURL(string: applink)
+        let shareAll = [appLink] as [Any]
+        let activityViewController = UIActivityViewController(activityItems: shareAll as [Any], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 
