@@ -12,6 +12,8 @@ import SpriteKit
 import AVFoundation
 import GoogleMobileAds
 import Lottie
+import ReplayKit
+
 class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
     //private var interstitialAd: GADInterstitial? Not needed here
@@ -123,6 +125,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
 
             timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
         }
+        
+        startRecording()
     }
     
     
@@ -308,14 +312,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func gameOver(timeUp: Bool) {
-        timer.invalidate()
-        timerBar.progress = 1.0
-        didTimeUp = timeUp
-
-        game.loadGamesTillAd()
-
-        self.performSegue(withIdentifier: "gotToGameOver", sender: self)
-        game.updateGamesTillAd()
+        stopRecording(timeUp: timeUp)
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -488,6 +485,43 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
 extension GameViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
+    }
+}
+
+extension GameViewController: RPPreviewViewControllerDelegate {
+    func startRecording() {
+        let recorder = RPScreenRecorder.shared()
+        
+        recorder.startRecording{ [unowned self] (error) in
+            if let unwrappedError = error {
+
+            } else {
+
+            }
+        }
+    }
+    
+    func stopRecording(timeUp: Bool) {
+        let recorder = RPScreenRecorder.shared()
+        recorder.stopRecording { preview, error in
+            guard let preview = preview else { print("no preview window"); return }
+            AppDelegate.shared().rpPreviewViewControler = preview
+            
+            self.timer.invalidate()
+            self.timerBar.progress = 1.0
+            self.didTimeUp = timeUp
+
+            self.game.loadGamesTillAd()
+
+            self.performSegue(withIdentifier: "gotToGameOver", sender: self)
+            self.game.updateGamesTillAd()
+        }
+    }
+    
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        previewController.dismiss(animated: true) { [weak self] in
+            //reset the UI and show the recording controls
+        }
     }
 }
 

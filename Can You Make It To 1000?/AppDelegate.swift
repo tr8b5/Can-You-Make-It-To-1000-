@@ -8,12 +8,14 @@
 
 import UIKit
 import GoogleMobileAds
+import ReplayKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var interstitialAd: GADInterstitial?
     var rewardedAd: GADRewardedAd?
-
+    var rpPreviewViewControler: RPPreviewViewController!
+    
     class func shared() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -30,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // To show the dialog box permission
+        startRecording()
         
         let defaults: UserDefaults = UserDefaults.standard
         defaults.set(4, forKey: "gamesTillAd")
@@ -98,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = "Make it to $1000 before the prize pool runs out."
-        
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("Dook.mp3"))
         // Configure the recurring date.
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current
@@ -121,5 +126,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // This is just for showing the permission dialog box. Actual recording ll take place in game view
+    func startRecording() {
+        let recorder = RPScreenRecorder.shared()
+        
+        recorder.startRecording{ [weak self] (error) in
+            self?.stopRecording()
+        }
+    }
+    
+    func stopRecording() {
+        let recorder = RPScreenRecorder.shared()
+        recorder.stopRecording { preview, error in }
+    }
 }
 

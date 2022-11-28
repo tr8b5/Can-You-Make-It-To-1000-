@@ -9,8 +9,9 @@
 import UIKit
 import AVFoundation
 import GoogleMobileAds
+import ReplayKit
 
-class GameOverViewController: UIViewController {
+class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate {
 
     @IBOutlet weak var btnRevive: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -110,6 +111,12 @@ class GameOverViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        previewController.dismiss(animated: true) { [weak self] in
+            //reset the UI and show the recording controls
+        }
+    }
+    
     func assignbackground(){
             let background = UIImage(named: "Background")
 
@@ -201,6 +208,14 @@ class GameOverViewController: UIViewController {
             }
         } else {
             rewardedAd?.present(fromRootViewController: self, delegate:self)
+        }
+    }
+    
+    @IBAction func shareVideo() {
+        if AppDelegate.shared().rpPreviewViewControler != nil {
+            AppDelegate.shared().rpPreviewViewControler.modalPresentationStyle = .overFullScreen
+            AppDelegate.shared().rpPreviewViewControler.previewControllerDelegate = self
+            self.present(AppDelegate.shared().rpPreviewViewControler, animated: true)
         }
     }
     

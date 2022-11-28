@@ -544,7 +544,7 @@
                                         <rect key="frame" x="0.0" y="302" width="414" height="410"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="kjy-3w-G7a">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="237"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="303"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSZ-u6-v6a">
                                                         <rect key="frame" x="177" y="0.0" width="237" height="77"/>
@@ -586,6 +586,20 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="revive:" destination="4FU-Hu-UEh" eventType="touchUpInside" id="0gB-cp-fYz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRZ-UW-EId">
+                                                        <rect key="frame" x="244" y="237" width="170" height="66"/>
+                                                        <color key="backgroundColor" red="0.34196592180000002" green="0.81628543809999998" blue="0.086291147250000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="66" id="8AJ-zn-qpP"/>
+                                                            <constraint firstAttribute="width" constant="170" id="q9E-wS-KxN"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Share Video"/>
+                                                        <connections>
+                                                            <action selector="shareVideo" destination="4FU-Hu-UEh" eventType="touchUpInside" id="BNs-Eh-kd4"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
