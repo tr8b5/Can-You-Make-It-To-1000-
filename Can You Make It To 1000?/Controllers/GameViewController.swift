@@ -126,7 +126,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
         }
         
-        startRecording()
+        // In case the icons were hidden when user reaches past the 500 score then unhide those icons
+        circleIcon.isHidden = false
+        squareIcon.isHidden = false
+        triangleIcon.isHidden = false
+
+        //startRecording()
     }
     
     
@@ -163,9 +168,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     @objc func updateScene() {
         
         if game.score == 500 {
-//            circleIcon.removeFromSuperview()
-//            squareIcon.removeFromSuperview()
-//            triangleIcon.removeFromSuperview()
             circleIcon.isHidden = true
             squareIcon.isHidden = true
             triangleIcon.isHidden = true
@@ -312,7 +314,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func gameOver(timeUp: Bool) {
-        stopRecording(timeUp: timeUp)
+        //stopRecording(timeUp: timeUp)
+        self.timer.invalidate()
+        self.timerBar.progress = 1.0
+        self.didTimeUp = timeUp
+
+        self.game.loadGamesTillAd()
+
+        self.performSegue(withIdentifier: "gotToGameOver", sender: self)
+        self.game.updateGamesTillAd()
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -506,15 +516,6 @@ extension GameViewController: RPPreviewViewControllerDelegate {
         recorder.stopRecording { preview, error in
             guard let preview = preview else { print("no preview window"); return }
             AppDelegate.shared().rpPreviewViewControler = preview
-            
-            self.timer.invalidate()
-            self.timerBar.progress = 1.0
-            self.didTimeUp = timeUp
-
-            self.game.loadGamesTillAd()
-
-            self.performSegue(withIdentifier: "gotToGameOver", sender: self)
-            self.game.updateGamesTillAd()
         }
     }
     

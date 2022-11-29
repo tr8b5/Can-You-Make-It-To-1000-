@@ -167,6 +167,8 @@ class ViewController: UIViewController {
             MusicPlayer.shared.speedUpBackgroundMusic()
             soundButton.setImage(UIImage(named: "plain_white_button"), for: .normal)
             sound.saveSound()
+            GADMobileAds.sharedInstance().applicationVolume = 1
+
             return
         }
         if (sound.sound == true) {
@@ -174,6 +176,8 @@ class ViewController: UIViewController {
             MusicPlayer.shared.stopBackgroundMusic()
             soundButton.setImage(nil, for: .normal)
             sound.saveSound()
+            GADMobileAds.sharedInstance().applicationVolume = 0.0
+
             return
         }
     }

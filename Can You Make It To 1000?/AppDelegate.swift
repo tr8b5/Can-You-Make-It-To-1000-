@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // To show the dialog box permission
-        startRecording()
+       // startRecording()
         
         let defaults: UserDefaults = UserDefaults.standard
         defaults.set(4, forKey: "gamesTillAd")
@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = "Make it to $1000 before the prize pool runs out."
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("Dook.mp3"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("Wrong.mp3"))
         // Configure the recurring date.
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current

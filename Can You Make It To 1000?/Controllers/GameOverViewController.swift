@@ -18,9 +18,8 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
     @IBOutlet weak var highScoreLabel: UILabel!
     @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-   // @IBOutlet weak var gameOverLabel: UILabel!
-    
     @IBOutlet var videoLayer: UIView!
+    
     var player: AVPlayer!
     
     var gameView = GameViewController()
@@ -31,10 +30,12 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
     var didTimeUp: Bool = false
     var attemptsLeft: Int = 0
     
+    var sound = Sound()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //playVideo()
+        sound.loadSound()
+
         assignbackground()
         
         btnRevive.isHidden = !Constants.canRevive
@@ -235,7 +236,9 @@ extension GameOverViewController : GADInterstitialDelegate{
         //print(error.localizedDescription)
     }
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        MusicPlayer.shared.playBackgroundMusic()
+        if sound.sound {
+            MusicPlayer.shared.playBackgroundMusic()
+        }
     }
 }
 
@@ -249,7 +252,9 @@ extension GameOverViewController : GADRewardedAdDelegate{
         print("Failed to load add\(error)")
     }
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
-        MusicPlayer.shared.playBackgroundMusic()
+        if sound.sound {
+            MusicPlayer.shared.playBackgroundMusic()
+        }
         if Constants.didRevive {
             self.dismiss(animated: true, completion: nil)
         }
