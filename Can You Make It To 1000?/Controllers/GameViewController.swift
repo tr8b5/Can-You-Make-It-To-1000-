@@ -13,6 +13,9 @@ import AVFoundation
 import GoogleMobileAds
 import Lottie
 import ReplayKit
+import AVKit
+import MobileCoreServices
+import DPVideoMerger_Swift
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
@@ -51,10 +54,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     var timer = Timer()
     var randomNumber: Int = 0
     var didTimeUp: Bool = false
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.backgroundColor = UIColor.black
         
         assignbackground()
@@ -76,6 +79,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         timerBar.layer.cornerRadius = 5
         timerBar.clipsToBounds = true
+        
+        VideoRecording.shared.imagePickerController.view.frame = self.view.bounds
+        self.view.insertSubview(VideoRecording.shared.imagePickerController.view, at: 0)
+        self.addChild(VideoRecording.shared.imagePickerController)
+        VideoRecording.shared.imagePickerController.didMove(toParent: self)
+        VideoRecording.shared.imagePickerController.delegate = self
     }
     
     func assignbackground(){
@@ -130,10 +139,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         circleIcon.isHidden = false
         squareIcon.isHidden = false
         triangleIcon.isHidden = false
-
-        //startRecording()
+        
+        if VideoRecording.shared.allowRecording {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.startVideoCapture()
+                self.startRecording()
+            }
+        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -314,15 +332,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func gameOver(timeUp: Bool) {
-        //stopRecording(timeUp: timeUp)
-        self.timer.invalidate()
-        self.timerBar.progress = 1.0
-        self.didTimeUp = timeUp
-
-        self.game.loadGamesTillAd()
-
-        self.performSegue(withIdentifier: "gotToGameOver", sender: self)
-        self.game.updateGamesTillAd()
+        stopVideoCapture()
+        stopRecording(timeUp: timeUp)
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -502,26 +513,36 @@ extension GameViewController: RPPreviewViewControllerDelegate {
     func startRecording() {
         let recorder = RPScreenRecorder.shared()
         
-        recorder.startRecording{ [unowned self] (error) in
-            if let unwrappedError = error {
-
-            } else {
-
-            }
+        recorder.startRecording{ (error) in
         }
     }
     
     func stopRecording(timeUp: Bool) {
         let recorder = RPScreenRecorder.shared()
-        recorder.stopRecording { preview, error in
-            guard let preview = preview else { print("no preview window"); return }
-            AppDelegate.shared().rpPreviewViewControler = preview
-        }
-    }
-    
-    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-        previewController.dismiss(animated: true) { [weak self] in
-            //reset the UI and show the recording controls
+        var fileURL: URL?
+        
+        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+            if #available(iOS 16.0, *) {
+                fileURL = directory.appending(components: "screen_recording.mov")
+                
+            } else {
+                fileURL = directory.appendingPathComponent("screen_recording.mov")
+            }
+            
+            try? FileManager.default.removeItem(at: fileURL!)
+            
+            if let fileURL = fileURL {
+                recorder.stopRecording(withOutput: fileURL)
+                print("User recording was saved to \(fileURL)")
+            }
+            
+            self.timer.invalidate()
+            self.timerBar.progress = 1.0
+            self.didTimeUp = timeUp
+            
+            self.game.loadGamesTillAd()
+            self.performSegue(withIdentifier: "gotToGameOver", sender: self)
+            self.game.updateGamesTillAd()
         }
     }
 }
@@ -583,4 +604,62 @@ func hexStringToUIColor (hex:String) -> UIColor {
         blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
         alpha: CGFloat(0.3)
     )
+}
+
+extension GameViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    func startVideoCapture() {
+        VideoRecording.shared.imagePickerController.startVideoCapture()
+    }
+    
+    func stopVideoCapture() {
+        VideoRecording.shared.imagePickerController.stopVideoCapture()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        let mediaType:AnyObject? = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as AnyObject?
+                        
+        if let type:AnyObject = mediaType {
+            if type is String {
+                let stringType = type as! String
+                if stringType == kUTTypeMovie as String {
+                    let urlOfVideo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL
+                    var fileURL: URL?
+                    
+                    if let url = urlOfVideo {
+                        do {
+                            if let documentsDirectoryURL = try VideoRecording.shared.getDocumentsDirectory() {
+                                let movieData = try Data(contentsOf: url)
+                                
+                                
+                                if #available(iOS 16.0, *) {
+                                    fileURL = documentsDirectoryURL.appending(components: "user_recording.mov")
+                                    
+                                } else {
+                                    fileURL = documentsDirectoryURL.appendingPathComponent("user_recording.mov")
+                                }
+                                
+                                if let fileURL = fileURL {
+                                    try movieData.write(to: fileURL)
+                                    print("User video written to \(fileURL)")
+                                }
+                            }
+
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    }
+
+    // Helper function inserted by Swift migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+        return input.rawValue
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import GoogleMobileAds
 import GameKit
+import MobileCoreServices
 
 class ViewController: UIViewController {
     
@@ -73,7 +74,6 @@ class ViewController: UIViewController {
             playButtonClicked("")
             
         }
-        
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try? AVAudioSession.sharedInstance().setActive(true)
     }
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         authenticatePlayer()
     }
     
-    func assignbackground(){
+    func assignbackground() {
             let background = UIImage(named: "Background")
 
             var imageView : UIImageView!
@@ -206,6 +206,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func allowScreenRecording() {
+        VideoRecording.shared.allowRecording = true
+        userPermissions()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "goToGame" {
@@ -242,5 +247,71 @@ class ViewController: UIViewController {
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    func userPermissions() {
+        AppDelegate.shared().startRecording()
+        askMicrophonePermissionIfNeeded()
+        askVideoPermissions()
+    }
+    
+    func askMicrophonePermissionIfNeeded() {
+        switch AVAudioSession.sharedInstance().recordPermission {
+           case .granted:
+               print("Permission granted")
+           case .denied:
+            UIAlertController.show("Please allow microphone permission from settings", from: self)
+           case .undetermined:
+               AVAudioSession.sharedInstance().requestRecordPermission({ granted in
+                   // Handle granted
+               })
+           @unknown default:
+               break
+           }
+    }
+    
+    func askVideoPermissions() {
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        if status == AVAuthorizationStatus.authorized {
+            // Show camera
+        } else if status == AVAuthorizationStatus.notDetermined {
+            // Request permission
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) -> Void in
+                if granted {
+                    // Show camera
+                }
+            })
+        } else {
+            UIAlertController.show("Please allow video permission from settings", from: self)
+        }
+    }
 }
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        let mediaType:AnyObject? = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as AnyObject?
+                        
+        if let type:AnyObject = mediaType {
+            if type is String {
+                let stringType = type as! String
+                if stringType == kUTTypeMovie as String {
+                    let urlOfVideo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL
+                    
+                    if let url = urlOfVideo {
+                        print("URL OF VIDEO------- \(url)")
+                    }
+                }
+            }
+        }
+        picker.dismiss(animated: true)
+    }
+    
+    fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    }
+
+    // Helper function inserted by Swift migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+        return input.rawValue
+    }
+}

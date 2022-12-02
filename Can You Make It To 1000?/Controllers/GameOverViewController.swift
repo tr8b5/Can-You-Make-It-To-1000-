@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import GoogleMobileAds
 import ReplayKit
+import AVKit
+import DPVideoMerger_Swift
 
 class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate {
 
@@ -213,11 +215,73 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
     }
     
     @IBAction func shareVideo() {
-        if AppDelegate.shared().rpPreviewViewControler != nil {
-            AppDelegate.shared().rpPreviewViewControler.modalPresentationStyle = .overFullScreen
-            AppDelegate.shared().rpPreviewViewControler.previewControllerDelegate = self
-            self.present(AppDelegate.shared().rpPreviewViewControler, animated: true)
+        var fileURL1: URL?
+        var fileURL2: URL?
+        
+        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+            if #available(iOS 16.0, *) {
+                fileURL1 = directory.appending(components: "screen_recording.mov")
+                
+            } else {
+                fileURL1 = directory.appendingPathComponent("screen_recording.mov")
+            }
         }
+        
+        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+            if #available(iOS 16.0, *) {
+                fileURL2 = directory.appending(components: "user_recording.mov")
+                
+            } else {
+                fileURL2 = directory.appendingPathComponent("user_recording.mov")
+            }
+        }
+        DPVideoMerger().parallelMergeVideos(withFileURLs: [fileURL1!, fileURL2!], videoResolution: CGSize(width: 500, height: 500)) { mergedVideoURL, error in
+            if error != nil {
+                    let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                    let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (a) in
+                    }))
+                    self.present(alert, animated: true) {() -> Void in }
+                    return
+                }
+                let objAVPlayerVC = AVPlayerViewController()
+                objAVPlayerVC.player = AVPlayer(url: mergedVideoURL!)
+                self.present(objAVPlayerVC, animated: true, completion: {() -> Void in
+                    objAVPlayerVC.player?.play()
+                })
+        }
+        
+     /*   DPVideoMerger().gridMergeVideos(withFileURLs: [fileURL1!, fileURL2!], videoResolution: CGSize(width: 500, height: 500)) { mergedVideoURL, error in
+            if error != nil {
+                    let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                    let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (a) in
+                    }))
+                    self.present(alert, animated: true) {() -> Void in }
+                    return
+                }
+                let objAVPlayerVC = AVPlayerViewController()
+                objAVPlayerVC.player = AVPlayer(url: mergedVideoURL!)
+                self.present(objAVPlayerVC, animated: true, completion: {() -> Void in
+                    objAVPlayerVC.player?.play()
+                })
+        }*/
+        
+        /*DPVideoMerger().mergeVideos(withFileURLs: [fileURL1!, fileURL2!]) { mergedVideoURL, error in
+            if error != nil {
+                    let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                    let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (a) in
+                    }))
+                    self.present(alert, animated: true) {() -> Void in }
+                    return
+                }
+                let objAVPlayerVC = AVPlayerViewController()
+                objAVPlayerVC.player = AVPlayer(url: mergedVideoURL!)
+                self.present(objAVPlayerVC, animated: true, completion: {() -> Void in
+                    objAVPlayerVC.player?.play()
+                })
+        }*/
     }
     
     func showAlert(message: String) {

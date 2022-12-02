@@ -22,6 +22,10 @@
 	<string>ca-app-pub-3526204639815359~2812085738</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>App would like to record the video</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App would like to access microphone</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

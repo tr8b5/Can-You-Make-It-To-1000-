@@ -41,6 +41,7 @@
 		0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04D23FCC17500EDC9CC /* Shape.swift */; };
 		0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04F23FCC49900EDC9CC /* Sprite.swift */; };
 		9C1DC9BD292CBDCC006C3802 /* logo_flux_fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */; };
+		9C2FA50B2937B35400411589 /* RecordingUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FA50A2937B35400411589 /* RecordingUtility.swift */; };
 		9C38F7F329141B7A00580067 /* DisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */; };
 		9C6B3A992919459700B73F77 /* will_coins.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B3A982919459700B73F77 /* will_coins.json */; };
 		9C839AE12912E1B20081EB4D /* GameViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */; };
@@ -467,6 +468,7 @@
 		8B4C455E5768A40521524C8A /* Pods_Can_You_Make_It_To_1000_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Can_You_Make_It_To_1000_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC9A8CE905AD17B3D06145B /* Pods-Can You Make It To 1000?.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Can You Make It To 1000?.debug.xcconfig"; path = "Target Support Files/Pods-Can You Make It To 1000?/Pods-Can You Make It To 1000?.debug.xcconfig"; sourceTree = "<group>"; };
 		9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_flux_fire.png; sourceTree = "<group>"; };
+		9C2FA50A2937B35400411589 /* RecordingUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingUtility.swift; sourceTree = "<group>"; };
 		9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerViewController.swift; sourceTree = "<group>"; };
 		9C6B3A982919459700B73F77 /* will_coins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = will_coins.json; sourceTree = "<group>"; };
 		9C839AE02912E1B20081EB4D /* GameViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 		0BDD39B223F4909100BD40EB /* Can You Make It To 1000? */ = {
 			isa = PBXGroup;
 			children = (
+				9C2FA5092937B2F600411589 /* Game Recording */,
 				9C839AE22912E3CE0081EB4D /* Extensions */,
 				9CC5070F29129BE800C26971 /* Can You Make It To 1000?.entitlements */,
 				0BDD39B323F4909100BD40EB /* AppDelegate.swift */,
@@ -975,6 +978,14 @@
 				0B63C63625A6C503004D6118 /* Sound.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9C2FA5092937B2F600411589 /* Game Recording */ = {
+			isa = PBXGroup;
+			children = (
+				9C2FA50A2937B35400411589 /* RecordingUtility.swift */,
+			);
+			path = "Game Recording";
 			sourceTree = "<group>";
 		};
 		9C839AE22912E3CE0081EB4D /* Extensions */ = {
@@ -1962,6 +1973,7 @@
 				0BD123C223FBF42C0097F68C /* GameViewController.swift in Sources */,
 				0BDD39B823F4909100BD40EB /* ViewController.swift in Sources */,
 				0B4C05E62581D085004BA86B /* MusicPlayer.swift in Sources */,
+				9C2FA50B2937B35400411589 /* RecordingUtility.swift in Sources */,
 				0B5E12A92403605800B6B4EE /* Icon.swift in Sources */,
 				0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */,
 				0B8BD17D249E81170044C0B4 /* Tutorial.swift in Sources */,
