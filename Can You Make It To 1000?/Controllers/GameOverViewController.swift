@@ -235,7 +235,7 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
                 fileURL2 = directory.appendingPathComponent("user_recording.mov")
             }
         }
-        DPVideoMerger().parallelMergeVideos(withFileURLs: [fileURL1!, fileURL2!], videoResolution: CGSize(width: 500, height: 500)) { mergedVideoURL, error in
+        DPVideoMerger().parallelMergeVideos(withFileURLs: [fileURL2!, fileURL1!], videoResolution: CGSize(width: 500, height: 500)) { mergedVideoURL, error in
             if error != nil {
                     let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
                     let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)

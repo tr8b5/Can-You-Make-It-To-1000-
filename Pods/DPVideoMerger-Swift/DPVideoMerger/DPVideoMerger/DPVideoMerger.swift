@@ -276,6 +276,8 @@ extension DPVideoMerger : VideoMerger {
 
         var arrAVMutableVideoCompositionLayerInstruction: [AVMutableVideoCompositionLayerInstruction] = []
         for i in 0 ..< videoFileURLs.count {
+            var maxTime = AVURLAsset(url: videoFileURLs[i], options: nil).duration
+
             let videoFileURL = videoFileURLs[i]
             let asset = AVURLAsset(url: videoFileURL, options: nil)
             guard let videoTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) else {
