@@ -40,6 +40,7 @@
 		0BF1F04C23FCC0DC00EDC9CC /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04B23FCC0DC00EDC9CC /* GameLogic.swift */; };
 		0BF1F04E23FCC17500EDC9CC /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04D23FCC17500EDC9CC /* Shape.swift */; };
 		0BF1F05023FCC49900EDC9CC /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1F04F23FCC49900EDC9CC /* Sprite.swift */; };
+		9C10B329293B22DB00345ACE /* ShareVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C10B328293B22DB00345ACE /* ShareVideoViewController.swift */; };
 		9C1DC9BD292CBDCC006C3802 /* logo_flux_fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */; };
 		9C2FA50B2937B35400411589 /* RecordingUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FA50A2937B35400411589 /* RecordingUtility.swift */; };
 		9C38F7F329141B7A00580067 /* DisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */; };
@@ -467,6 +468,7 @@
 		0BF1F04F23FCC49900EDC9CC /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		8B4C455E5768A40521524C8A /* Pods_Can_You_Make_It_To_1000_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Can_You_Make_It_To_1000_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC9A8CE905AD17B3D06145B /* Pods-Can You Make It To 1000?.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Can You Make It To 1000?.debug.xcconfig"; path = "Target Support Files/Pods-Can You Make It To 1000?/Pods-Can You Make It To 1000?.debug.xcconfig"; sourceTree = "<group>"; };
+		9C10B328293B22DB00345ACE /* ShareVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoViewController.swift; sourceTree = "<group>"; };
 		9C1DC9BC292CBDCC006C3802 /* logo_flux_fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_flux_fire.png; sourceTree = "<group>"; };
 		9C2FA50A2937B35400411589 /* RecordingUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingUtility.swift; sourceTree = "<group>"; };
 		9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerViewController.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 				0BD123C123FBF42C0097F68C /* GameViewController.swift */,
 				0B8BD17A249E568D0044C0B4 /* TutorialViewController.swift */,
 				9C38F7F229141B7A00580067 /* DisclaimerViewController.swift */,
+				9C10B328293B22DB00345ACE /* ShareVideoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1972,6 +1975,7 @@
 				9C839AE12912E1B20081EB4D /* GameViewController+Extensions.swift in Sources */,
 				0BD123C223FBF42C0097F68C /* GameViewController.swift in Sources */,
 				0BDD39B823F4909100BD40EB /* ViewController.swift in Sources */,
+				9C10B329293B22DB00345ACE /* ShareVideoViewController.swift in Sources */,
 				0B4C05E62581D085004BA86B /* MusicPlayer.swift in Sources */,
 				9C2FA50B2937B35400411589 /* RecordingUtility.swift in Sources */,
 				0B5E12A92403605800B6B4EE /* Icon.swift in Sources */,
