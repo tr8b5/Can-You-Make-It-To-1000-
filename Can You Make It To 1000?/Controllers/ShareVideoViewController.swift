@@ -59,7 +59,7 @@ class ShareVideoViewController: UIViewController {
             let player = AVPlayer(url: url)
             var playerLayer: AVPlayerLayer?
             playerLayer = AVPlayerLayer(player: player)
-            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
             playerLayer!.frame = self.videoContainer.frame
             self.videoContainer.layer.addSublayer(playerLayer!)
             
