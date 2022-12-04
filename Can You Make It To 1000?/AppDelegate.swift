@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = "Make it to $1000 before the prize pool runs out."
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("Wrong.mp3"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("Point.mp3"))
         // Configure the recurring date.
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current

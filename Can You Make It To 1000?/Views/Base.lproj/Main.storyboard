@@ -143,7 +143,7 @@
                                         <rect key="frame" x="0.0" y="302" width="414" height="490"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="mAO-4f-xtf">
-                                                <rect key="frame" x="144" y="0.0" width="270" height="313"/>
+                                                <rect key="frame" x="144" y="0.0" width="270" height="279"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGg-UX-xlC">
                                                         <rect key="frame" x="117" y="0.0" width="153" height="83"/>
@@ -191,18 +191,6 @@
                                                         <state key="normal" backgroundImage="share_button"/>
                                                         <connections>
                                                             <action selector="shareButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oii-lf-Up7"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="073-aj-Ope">
-                                                        <rect key="frame" x="64" y="269" width="206" height="44"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Lemon-Days" family="Lemon Days" pointSize="24"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Allow Recording">
-                                                            <color key="titleColor" red="0.34196592180000002" green="0.81628543809999998" blue="0.086291147250000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="allowScreenRecording" destination="BYZ-38-t0r" eventType="touchUpInside" id="i1e-ef-EDL"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -556,7 +544,7 @@
                                         <rect key="frame" x="0.0" y="302" width="414" height="410"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="kjy-3w-G7a">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="281"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="237"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSZ-u6-v6a">
                                                         <rect key="frame" x="177" y="0.0" width="237" height="77"/>
@@ -598,18 +586,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="revive:" destination="4FU-Hu-UEh" eventType="touchUpInside" id="0gB-cp-fYz"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdd-Ec-P6Q">
-                                                        <rect key="frame" x="213" y="237" width="201" height="44"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Lemon-Days" family="Lemon Days" pointSize="24"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Share Recording">
-                                                            <color key="titleColor" red="0.34196592180000002" green="0.81628543809999998" blue="0.086291147250000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <segue destination="Qnh-Zs-RRt" kind="presentation" id="err-uG-ZKm"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -721,15 +697,15 @@
             <objects>
                 <viewController id="Qnh-Zs-RRt" customClass="ShareVideoViewController" customModule="Can_You_Make_It_To_1000_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QE8-Tb-Fke">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JH0-ph-NpY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="711"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45n-0n-pTM">
-                                <rect key="frame" x="0.0" y="792" width="182" height="45"/>
+                                <rect key="frame" x="0.0" y="816" width="182" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="182" id="HPz-7x-I5C"/>
                                 </constraints>
@@ -744,7 +720,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKg-2C-CW7">
-                                <rect key="frame" x="244" y="792" width="170" height="45"/>
+                                <rect key="frame" x="244" y="816" width="170" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="HJz-Gb-eH4"/>
                                 </constraints>

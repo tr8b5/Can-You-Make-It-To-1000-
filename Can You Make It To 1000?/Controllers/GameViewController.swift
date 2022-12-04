@@ -80,11 +80,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         timerBar.layer.cornerRadius = 5
         timerBar.clipsToBounds = true
         
-        VideoRecording.shared.imagePickerController.view.frame = self.view.bounds
+        /**
+         This was for opening the camera behind the scene for video recording of the user
+         */
+        /*VideoRecording.shared.imagePickerController.view.frame = self.view.bounds
         self.view.insertSubview(VideoRecording.shared.imagePickerController.view, at: 0)
         self.addChild(VideoRecording.shared.imagePickerController)
         VideoRecording.shared.imagePickerController.didMove(toParent: self)
-        VideoRecording.shared.imagePickerController.delegate = self
+        VideoRecording.shared.imagePickerController.delegate = self*/
     }
     
     func assignbackground(){
@@ -140,12 +143,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         squareIcon.isHidden = false
         triangleIcon.isHidden = false
         
-        if VideoRecording.shared.allowRecording {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.startVideoCapture()
-                self.startRecording()
-            }
-        }
+        /**
+         if VideoRecording.shared.allowRecording {
+             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                 self.startVideoCapture()
+                 self.startRecording()
+             }
+         }
+         */
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -195,79 +201,26 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             timer.invalidate()
             self.gameOver(timeUp: false)
         } else {
-        
-        timer.invalidate()
-        timerBar.progress = 1.0
-        
-        shape.image = game.pickShape()
-        game.selectDiamonds()
-        
-        UIView.animate(withDuration: 0) {
-            self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.shape.transform = CGAffineTransform(scaleX: 0, y: 0)
+            
+            timer.invalidate()
+            timerBar.progress = 1.0
+            
+            shape.image = game.pickShape()
+            game.selectDiamonds()
+            
+            UIView.animate(withDuration: 0) {
+                self.shape.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.shape.transform = CGAffineTransform(scaleX: 0, y: 0)
+            }
+            UIView.animate(withDuration: 0) {
+                self.leftWall.transform = CGAffineTransform(translationX: 0, y: -1000)
+                self.rightWall.transform = CGAffineTransform(translationX: 0, y: -1000)
+                self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: -1000)
+                self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: -1000)
+                self.bottomWall.transform = CGAffineTransform(translationX: -1000, y: 0)
+                self.bottomDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
+            }
         }
-        UIView.animate(withDuration: 0) {
-            self.leftWall.transform = CGAffineTransform(translationX: 0, y: -1000)
-            self.rightWall.transform = CGAffineTransform(translationX: 0, y: -1000)
-            self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: -1000)
-            self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: -1000)
-            self.bottomWall.transform = CGAffineTransform(translationX: -1000, y: 0)
-            self.bottomDiamond.transform = CGAffineTransform(translationX: -1000, y: 0)
-        }
-        
-       /* UIView.animate(withDuration: 0.5) {
-            self.shape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        }
-        UIView.animate(withDuration: 0.5) {
-            self.shape.transform = CGAffineTransform(scaleX: 1, y: 1)
-        }
-        UIView.animate(withDuration: 0.5) {
-            self.leftWall.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.rightWall.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.leftDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.rightDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.bottomWall.transform = CGAffineTransform(translationX: 0, y: 0)
-            self.bottomDiamond.transform = CGAffineTransform(translationX: 0, y: 0)
-        }
-        
-        game.difficulty()
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(game.time), target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
-        
-        leftDiamond.image = game.sprites[game.shapeValue].diamond[game.leftDiamondValue]
-        rightDiamond.image = game.sprites[game.shapeValue].diamond[game.rightDiamondValue]
-        bottomDiamond.image = game.sprites[game.shapeValue].diamond[game.bottomDiamondValue]
-        
-        game.resetwallcount()
-        
-        leftWall.image = game.pickWalls()[0]
-        rightWall.image = game.pickWalls()[1]
-        bottomWall.image = game.pickWalls()[2]
-        
-//        rightGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])-1.png")!)
-//        rightGlass.frame = CGRect(x: 10, y: -75, width: 700, height: 700)
-//        rightGlass.layer.zPosition = -1
-//        rightGlass.alpha = 0
-//        wallView.addSubview(rightGlass)
-//
-//        leftGlass = UIImageView(image: UIImage(named: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])-1.png")!)
-//        leftGlass.frame = CGRect(x: -310, y: -75, width: 700, height: 700)
-//        leftGlass.layer.zPosition = -1
-//        leftGlass.alpha = 0
-//        wallView.addSubview(leftGlass)
-//
-//        bottomGlass = UIImageView(image: UIImage(named: "Shatter1-\(game.sprites[0].color[game.wallColorArray[2]])-0.png"))
-//        bottomGlass.frame = CGRect(x: -140, y: -297, width: 700, height: 700)
-//        bottomGlass.layer.zPosition = -1
-//        bottomGlass.alpha = 0
-//        bottomWallView.addSubview(bottomGlass)
-        
-        shatterImages = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[1]])") //right
-        
-        shatter2Images = createImagesArray(total: 26, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[0]])") //left
-        
-        shatter1Images = createImagesArray(total: 23, imagePrefix: "Shatter-\(game.sprites[0].color[game.wallColorArray[2]])") //Bottom*/
-        }
-    
     }
     
     func updateSceneStepTwo() {
@@ -332,8 +285,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func gameOver(timeUp: Bool) {
-        stopVideoCapture()
-        stopRecording(timeUp: timeUp)
+        self.timer.invalidate()
+        self.timerBar.progress = 1.0
+        self.didTimeUp = timeUp
+        
+        self.game.loadGamesTillAd()
+        self.performSegue(withIdentifier: "gotToGameOver", sender: self)
+        self.game.updateGamesTillAd()
+        
+       /* stopVideoCapture()
+        stopRecording(timeUp: timeUp)*/
     }
     
     func createImagesArray(total: Int, imagePrefix: String) -> [UIImage] {
@@ -466,23 +427,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
             destinationVC.attemptsLeft = game.gamesTillAd
         }
     }
-    
-  /*  func displayAd() { Not needed here now
-        if interstitialAd?.isReady == true {
-            interstitialAd?.present(fromRootViewController: self)
-        } else {
-            print("Ad Not Ready")
-        }
-    }
-    
-    private func createAd() -> GADInterstitial {
-        let ad = GADInterstitial(adUnitID: Constants.interstitialAdId)
-        ad.delegate = self
-        ad.load(GADRequest())
-        return ad
-    }
-    */
-    
+        
     private func updateScoreBoard(score: String) {
         let color1 = hexStringToUIColor(hex: "#000000")
 
@@ -546,13 +491,6 @@ extension GameViewController: RPPreviewViewControllerDelegate {
         }
     }
 }
-
-//extension GameViewController:  GADInterstitialDelegate {
-//    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-//        interstitialAd = createAd()
-//        gameOver(timeUp: false)
-//    }
-//}
 
 extension UIImage {
     func imageWithColor(_ color: UIColor) -> UIImage? {
