@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Black  Circle.png",
+      "filename" : "Black Circle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Black  Circle@2x.png",
+      "filename" : "Black Circle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Black  Circle@3x.png",
+      "filename" : "Black Circle@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

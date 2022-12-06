@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "Gray Circle.png",
       "idiom" : "universal",
-      "filename" : "Grey  Circle.png",
       "scale" : "1x"
     },
     {
+      "filename" : "Gray Circle@2x.png",
       "idiom" : "universal",
-      "filename" : "Grey  Circle@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "Gray Circle@3x.png",
       "idiom" : "universal",
-      "filename" : "Grey  Circle@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

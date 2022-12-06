@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "Red Circle.png",
       "idiom" : "universal",
-      "filename" : "Red  Circle.png",
       "scale" : "1x"
     },
     {
+      "filename" : "Red Circle@2x.png",
       "idiom" : "universal",
-      "filename" : "Red  Circle@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "Red Circle@3x.png",
       "idiom" : "universal",
-      "filename" : "Red  Circle@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
