@@ -207,7 +207,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allowScreenRecording() {
-        VideoRecording.shared.allowRecording = true
+        RecordingUtility.shared.allowRecording = true
         userPermissions()
     }
     

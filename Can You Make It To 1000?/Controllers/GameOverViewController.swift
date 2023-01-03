@@ -21,6 +21,7 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
     @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet var videoLayer: UIView!
+    @IBOutlet var timeTakenLabel: UILabel!
     
     var player: AVPlayer!
     
@@ -108,6 +109,9 @@ class GameOverViewController: UIViewController, RPPreviewViewControllerDelegate 
             ]
         )
         scoreLabel.attributedText = attrString2
+        
+        // Update Time Taken Label
+        timeTakenLabel.text = RecordingUtility.shared.loggedTime
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -181,3 +181,7 @@ struct GameLogic {
         defaults.synchronize()
     }
 }
+
+extension GameLogic {
+    
+}

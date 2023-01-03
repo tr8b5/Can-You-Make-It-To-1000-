@@ -19,7 +19,7 @@ class ShareVideoViewController: UIViewController {
         var fileURL1: URL?
         var fileURL2: URL?
         
-        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+        if let directory =  try? RecordingUtility.shared.getDocumentsDirectory() {
             if #available(iOS 16.0, *) {
                 fileURL1 = directory.appending(components: "screen_recording.mov")
                 
@@ -28,7 +28,7 @@ class ShareVideoViewController: UIViewController {
             }
         }
         
-        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+        if let directory =  try? RecordingUtility.shared.getDocumentsDirectory() {
             if #available(iOS 16.0, *) {
                 fileURL2 = directory.appending(components: "user_recording.mov")
                 

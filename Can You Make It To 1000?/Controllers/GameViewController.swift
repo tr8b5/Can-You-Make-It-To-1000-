@@ -143,6 +143,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
         squareIcon.isHidden = false
         triangleIcon.isHidden = false
         
+        // Start recording the user time
+        RecordingUtility.shared.startRecordingTime()
+        
         /**
          if VideoRecording.shared.allowRecording {
              DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -285,6 +288,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
     
     func gameOver(timeUp: Bool) {
+        /*
+         Stop recording the time */
+        RecordingUtility.shared.stopRecordingTime()
+        //
+        
         self.timer.invalidate()
         self.timerBar.progress = 1.0
         self.didTimeUp = timeUp
@@ -466,7 +474,7 @@ extension GameViewController: RPPreviewViewControllerDelegate {
         let recorder = RPScreenRecorder.shared()
         var fileURL: URL?
         
-        if let directory =  try? VideoRecording.shared.getDocumentsDirectory() {
+        if let directory =  try? RecordingUtility.shared.getDocumentsDirectory() {
             if #available(iOS 16.0, *) {
                 fileURL = directory.appending(components: "screen_recording.mov")
                 
@@ -520,6 +528,8 @@ struct Constants {
     // Game Center
     static var gcEnabled = Bool() // Check if the user has Game Center enabled
     static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    
+    static let loggedTime = "LOGGED_TIME"
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {
@@ -546,11 +556,11 @@ func hexStringToUIColor (hex:String) -> UIColor {
 
 extension GameViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     func startVideoCapture() {
-        VideoRecording.shared.imagePickerController.startVideoCapture()
+        RecordingUtility.shared.imagePickerController.startVideoCapture()
     }
     
     func stopVideoCapture() {
-        VideoRecording.shared.imagePickerController.stopVideoCapture()
+        RecordingUtility.shared.imagePickerController.stopVideoCapture()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -566,7 +576,7 @@ extension GameViewController: UIImagePickerControllerDelegate , UINavigationCont
                     
                     if let url = urlOfVideo {
                         do {
-                            if let documentsDirectoryURL = try VideoRecording.shared.getDocumentsDirectory() {
+                            if let documentsDirectoryURL = try RecordingUtility.shared.getDocumentsDirectory() {
                                 let movieData = try Data(contentsOf: url)
                                 
                                 
